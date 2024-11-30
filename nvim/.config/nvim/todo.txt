@@ -1,0 +1,7 @@
+- Add redo last search to telescope
+- Configure so that new line after comment doesn't automatically make that a comment line too.
+- Trim file path in harpun.
+- Some keywords are still bold in kanagawa theme.
+- Fix go to symbols (telescope) so that preview is enabled and so that it isn't truncated.
+- Add indent all parameters keymap for csharp development
+- Try out blink-cmp
