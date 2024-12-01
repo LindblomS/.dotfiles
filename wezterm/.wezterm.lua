@@ -36,4 +36,52 @@ config.colors = {
     }
 }
 
+config.keys = {
+    {
+        key = "w",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.CloseCurrentPane { confirm = false }
+    },
+    {
+        key = "v",
+        mods = "CTRL|SHIFT|SUPER",
+        action = wezterm.action.SplitHorizontal
+    },
+    {
+        key = "s",
+        mods = "CTRL|SHIFT|SUPER",
+        action = wezterm.action.SplitVertical
+    },
+    {
+        key = "h",
+        mods = "CTRL|SHIFT|SUPER",
+        action = wezterm.action.AdjustPaneSize { "Left", 3 }
+    },
+    {
+        key = "l",
+        mods = "CTRL|SHIFT|SUPER",
+        action = wezterm.action.AdjustPaneSize { "Right", 3 }
+    },
+    {
+        key = "UpArrow",
+        mods = "CTRL",
+        action = wezterm.action.ScrollByLine(-3),
+    },
+    {
+        key = "DownArrow",
+        mods = "CTRL",
+        action = wezterm.action.ScrollByLine(3),
+    },
+    {
+        key = "DownArrow",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.ScrollByPage(0.5),
+    },
+    {
+        key = "UpArrow",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.ScrollByPage(-0.5),
+    }
+}
+
 return config
