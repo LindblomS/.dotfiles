@@ -10,6 +10,8 @@ config.font = wezterm.font {
     family = 'JetBrains Mono',
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 }
+config.font_size = 10.0
+
 config.colors = {
     foreground = "#dcd7ba",
     background = "#1f1f28",
@@ -53,13 +55,13 @@ config.keys = {
         action = wezterm.action.SplitVertical
     },
     {
-        key = "h",
-        mods = "CTRL|SHIFT|SUPER",
+        key = "LeftArrow",
+        mods = "CTRL|SHIFT|SUPER|ALT",
         action = wezterm.action.AdjustPaneSize { "Left", 3 }
     },
     {
-        key = "l",
-        mods = "CTRL|SHIFT|SUPER",
+        key = "RightArrow",
+        mods = "CTRL|SHIFT|SUPER|ALT",
         action = wezterm.action.AdjustPaneSize { "Right", 3 }
     },
     {
