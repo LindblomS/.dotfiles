@@ -12,4 +12,4 @@ nvim
 - Add indent all parameters keymap for csharp development
 - Try out blink-cmp
 - Trim filename in statusline. E.g. The filename sometimes doesn't fit when using splits.
-
+- Add border to cmp item description.
