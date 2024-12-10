@@ -6,6 +6,8 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     config.default_prog = { "C:/Program Files/Git/bin/bash.exe" }
 end
 
+config.window_decorations = "RESIZE"
+
 config.font = wezterm.font {
     family = 'JetBrains Mono',
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
