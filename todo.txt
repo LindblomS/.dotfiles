@@ -14,3 +14,4 @@ nvim
 - Trim filename in statusline. E.g. The filename sometimes doesn't fit when using splits. On windows (maybe linux?) the filename is absolute. It should always be relative.
 - Add border to cmp item description.
 - quickfix list should not have relative numbers
+- Add telescope extension plugin to make searching faster.
