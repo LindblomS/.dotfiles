@@ -3,31 +3,24 @@ local item_factory = require("harpun.item_factory")
 local replace = require("harpun.replace")
 local util = require("harpun.util")
 local M = {}
-M.__index = M
+M.items = {}
+M.menu = {
+    buf = nil,
+    closing = false
+}
 
 function M.setup()
-    local harpun = M.new()
-    vim.keymap.set("n", "<leader>h", function() harpun:add(1, "h") end)
-    vim.keymap.set("n", "<leader>j", function() harpun:add(2, "j") end)
-    vim.keymap.set("n", "<leader>k", function() harpun:add(3, "k") end)
-    vim.keymap.set("n", "<leader>l", function() harpun:add(4, "l") end)
+    vim.keymap.set("n", "<leader>1", function() M:add(1, "1") end)
+    vim.keymap.set("n", "<leader>2", function() M:add(2, "2") end)
+    vim.keymap.set("n", "<leader>3", function() M:add(3, "3") end)
+    vim.keymap.set("n", "<leader>4", function() M:add(4, "4") end)
 
-    vim.keymap.set("n", "<C-h>", function() harpun:select(1) end)
-    vim.keymap.set("n", "<C-j>", function() harpun:select(2) end)
-    vim.keymap.set("n", "<C-k>", function() harpun:select(3) end)
-    vim.keymap.set("n", "<C-l>", function() harpun:select(4) end)
+    vim.keymap.set("n", "<C-1>", function() M:select(1) end)
+    vim.keymap.set("n", "<C-2>", function() M:select(2) end)
+    vim.keymap.set("n", "<C-3>", function() M:select(3) end)
+    vim.keymap.set("n", "<C-4>", function() M:select(4) end)
 
-    vim.keymap.set("n", "<C-f>", function() harpun:open_menu() end)
-end
-
-function M.new()
-    return setmetatable({
-        items = {},
-        menu = {
-            buf = nil,
-            closing = false,
-        }
-    }, M)
+    vim.keymap.set("n", "<C-h>", function() M:open_menu() end)
 end
 
 function M:add(index, key)
