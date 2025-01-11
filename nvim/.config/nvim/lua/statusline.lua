@@ -73,6 +73,15 @@ local function filename()
     local base             = vim.fs.basename(relative_bufname)
     local dir              = vim.fs.dirname(relative_bufname)
     cwd                    = vim.fs.basename(cwd)
+    -- todo: cwd seems to be absolute or something on windows
+    local dir_is_trimmed   = false
+    while #dir > 60 do
+        dir = dir:sub(10)
+        dir_is_trimmed = true
+    end
+    if dir_is_trimmed then
+        dir = "..." .. dir
+    end
     return string.format("%s/%s/%%#CursorLineNr#%s", cwd, dir, base)
 end
 
