@@ -1,7 +1,5 @@
 wezterm
 
-- fix up and down pane navigation
-
 nvim
 
 - Add redo last search to telescope

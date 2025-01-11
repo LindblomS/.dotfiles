@@ -57,6 +57,11 @@ config.keys = {
         action = wezterm.action.SplitVertical
     },
     {
+        key = "p",
+        mods = "CTRL|SHIFT|SUPER",
+        action = wezterm.action.PaneSelect
+    },
+    {
         key = "LeftArrow",
         mods = "CTRL|SHIFT|SUPER|ALT",
         action = wezterm.action.AdjustPaneSize { "Left", 3 }
