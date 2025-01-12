@@ -67,7 +67,7 @@ local function lineinfo()
 end
 
 local function filename()
-    local cwd              = vim.uv.cwd()
+    local cwd              = vim.uv.cwd() -- todo: maybe replace this with vim.fn.cwd?
     local bufname          = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
     local relative_bufname = require("plenary.path"):new(bufname):make_relative(cwd)
     local base             = vim.fs.basename(relative_bufname)
