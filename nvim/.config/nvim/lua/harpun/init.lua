@@ -1,5 +1,6 @@
 --- A file navigation plugin inspired by harpoon
 local item_factory = require("harpun.item_factory")
+local window_factory = require("harpun.window_factory")
 local replace = require("harpun.replace")
 local util = require("harpun.util")
 local M = {}
@@ -33,10 +34,10 @@ function M:add(index, key)
 
     local item = self.items[index]
     if item then
-        replace.display_prompt(item.bufname, key, util.get_bufname(), index, self.items)
+        replace.display_prompt(item, item_factory.create(util.get_buf_name(), key), self.items, index)
         return
     else
-        item = item_factory.create(util.get_bufname(), key)
+        item = item_factory.create(util.get_buf_name(), key)
         self.items[index] = item
     end
 end
@@ -51,9 +52,9 @@ function M:select(index)
         return
     end
 
-    local buf = vim.fn.bufnr(item.bufname)
+    local buf = vim.fn.bufnr(item.buf_name)
     if buf == -1 then
-        buf = vim.fn.bufadd(item.bufname)
+        buf = vim.fn.bufadd(item.buf_name)
     end
 
     if not vim.api.nvim_buf_is_loaded(buf) then
@@ -71,31 +72,8 @@ end
 -- should be able to rearrange items
 
 function M:open_menu()
-    local height = 8
-    local width = 0 -- todo: get the length of the longest bufname and use that as a base for width
-    local longest_bufname
-
-    for _, value in pairs(self.items) do
-        if #value.bufname > width then
-            width = #value.bufname
-            longest_bufname = value.bufname
-        end
-    end
-    print(longest_bufname)
-    print(width)
-
     local buf = vim.api.nvim_create_buf(false, true)
-    local win = vim.api.nvim_open_win(buf, true, {
-        relative = "editor",
-        title = "harpun",
-        title_pos = "left",
-        row = math.floor(((vim.o.lines - height) / 2) - 1),
-        col = math.floor((vim.o.columns - width) / 2),
-        width = width + 5,
-        height = height,
-        style = "minimal",
-        border = "single",
-    })
+    local win = window_factory.create(buf, "harpun", self.items)
     self.menu = {
         buf = buf,
         closing = false,
@@ -118,7 +96,7 @@ function M:open_menu()
 
     local items = {}
     for i, item in ipairs(self.items) do
-        items[i] = item.bufname
+        items[i] = item.display_name
     end
     vim.api.nvim_buf_set_lines(self.menu.buf, 0, -1, false, items)
 end
@@ -129,7 +107,6 @@ function M:close_menu()
     end
     self.menu.closing = true
     if vim.api.nvim_buf_is_valid(self.menu.buf) then
-        print("delete buf")
         vim.api.nvim_buf_delete(self.menu.buf, { force = true })
     end
 
