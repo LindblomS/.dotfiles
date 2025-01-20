@@ -70,6 +70,7 @@ return {
             set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
             set("n", "<leader>fw", builtin.live_grep, { desc = "Find word" })
             set({ "n", "v" }, "<leader>fW", builtin.grep_string, { desc = "Find word under cursor or selection" })
+            set("n", "<leader>q", builtin.quickfix, { desc = "Quickfix list" })
         end,
     },
 }
