@@ -2,6 +2,7 @@ return {
     {
         'rebelot/kanagawa.nvim',
         lazy = false,
+        commit = "988082eb00b845e4afbcaa4fd8e903da8a3ab3b9",
         priority = 1000,
         enabled = true,
         config = function()

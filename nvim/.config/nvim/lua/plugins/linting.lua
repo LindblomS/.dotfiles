@@ -1,6 +1,7 @@
 return {
     {
         'mfussenegger/nvim-lint',
+        commit = "6e9dd545a1af204c4022a8fcd99727ea41ffdcc8",
         ft = { 'ts_ls', 'javascript', 'vue' },
         config = function(_, _)
             local lint = require('lint')

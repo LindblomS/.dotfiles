@@ -1,6 +1,7 @@
 return {
     {
         'neovim/nvim-lspconfig',
+        commit = "6c17f8656f667727b27f5f598463afedb7791b18",
         config = function(_, _)
             local lspconfig = require('lspconfig')
 

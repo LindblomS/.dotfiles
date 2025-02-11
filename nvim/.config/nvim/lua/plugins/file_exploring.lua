@@ -1,5 +1,6 @@
 return {
     'stevearc/oil.nvim',
+    commit = "add50252b5e9147c0a09d36480d418c7e2737472",
     opts = {
         buf_options = {
             bufhidden = true,

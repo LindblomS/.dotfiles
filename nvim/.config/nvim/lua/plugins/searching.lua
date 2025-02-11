@@ -1,7 +1,13 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            {
+                "nvim-lua/plenary.nvim",
+                commit = "3707cdb1e43f5cea73afb6037e6494e7ce847a66",
+            },
+        },
+        commit = "415af52339215926d705cccc08145f3782c4d132",
         opts = {
             defaults = {
                 layout_strategy = "vertical",
