@@ -1,4 +1,5 @@
 local keymap = vim.keymap
+keymap.set("n", "<leader>m", "<cmd>messages<cr>")
 keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 keymap.set('n', '<C-d>', '<C-d>zz')

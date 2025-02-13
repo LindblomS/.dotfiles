@@ -1,16 +1,10 @@
 --- A file navigation plugin inspired by harpoon
-local item_factory = require("harpun.item_factory")
-local window_factory = require("harpun.window_factory")
-local replace = require("harpun.replace")
-local util = require("harpun.util")
 local M = {}
-M.items = {}
-M.menu = {
-    buf = nil,
-    closing = false
-}
 
 function M.setup()
+    local repository = require("lua.harpun.repository").new()
+    M._list = require("harpun.list").new(repository)
+
     vim.keymap.set("n", "<leader>1", function() M:add(1, "1") end)
     vim.keymap.set("n", "<leader>2", function() M:add(2, "2") end)
     vim.keymap.set("n", "<leader>3", function() M:add(3, "3") end)
@@ -26,35 +20,38 @@ end
 
 function M:add(index, key)
     if not index or index < 1 then
-        error("Argument error: index cannot be nil or less than 1. index was " .. (index or "nil"))
+        error("index was nil or less than 1")
     end
-    if not key then
-        error("Argument error: key cannot be nil")
+    if not key or key == "" then
+        error("key was nil or empty")
     end
 
-    local item = self.items[index]
-    if item then
-        replace.display_prompt(item, item_factory.create(util.get_buf_name(), key), self.items, index)
+    local entry_factory = require("harpun.entry_factory")
+    local entry = self._list:get()[index]
+    if entry then
+        local entry_updating_prompt = require("harpun.entry_updating_prompt")
+        entry_updating_prompt.prompt(self._list, index, entry_factory.create(key))
         return
     else
-        item = item_factory.create(util.get_buf_name(), key)
-        self.items[index] = item
+        entry = entry_factory.create(key)
+        self._list:add_or_update(index, entry)
     end
 end
 
 function M:select(index)
     if not index or index < 1 then
-        error("Argument error: index cannot be nil or less than 1. index was " .. (index or "nil"))
+        error("index was nil or less than 1")
     end
 
-    local item = self.items[index]
-    if not item then
+    local entry = self._list:get()[index]
+    if not entry then
+        print("Harpun: No file at index")
         return
     end
 
-    local buf = vim.fn.bufnr(item.buf_name)
+    local buf = vim.fn.bufnr(entry.buf_name)
     if buf == -1 then
-        buf = vim.fn.bufadd(item.buf_name)
+        buf = vim.fn.bufadd(entry.buf_name)
     end
 
     if not vim.api.nvim_buf_is_loaded(buf) then
@@ -68,52 +65,8 @@ function M:select(index)
     vim.api.nvim_feedkeys("zz", "n", false)
 end
 
--- todo
--- should be able to rearrange items
-
 function M:open_menu()
-    local buf = vim.api.nvim_create_buf(false, true)
-    local win = window_factory.create(buf, "harpun", self.items)
-    self.menu = {
-        buf = buf,
-        closing = false,
-    }
-
-    vim.keymap.set("n", "<esc>", function()
-        self:close_menu()
-    end, { buffer = self.menu.buf, silent = true })
-
-    vim.keymap.set("n", "<CR>", function()
-        local index = vim.fn.line(".")
-        self:close_menu()
-        self:select(index)
-    end, { buffer = self.menu.buf, silent = true })
-
-    vim.api.nvim_set_option_value("buftype", "acwrite", { buf = self.menu.buf })
-    vim.api.nvim_set_option_value("number", true, {
-        win = win,
-    })
-
-    local items = {}
-    for i, item in ipairs(self.items) do
-        items[i] = item.display_name
-    end
-    vim.api.nvim_buf_set_lines(self.menu.buf, 0, -1, false, items)
-end
-
-function M:close_menu()
-    if self.menu.closing then
-        return
-    end
-    self.menu.closing = true
-    if vim.api.nvim_buf_is_valid(self.menu.buf) then
-        vim.api.nvim_buf_delete(self.menu.buf, { force = true })
-    end
-
-    self.menu = {
-        buf = nil,
-        closing = false
-    }
+    require("harpun.entry_selection_menu"):open(self._list, self)
 end
 
 return M

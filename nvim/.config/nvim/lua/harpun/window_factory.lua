@@ -1,12 +1,22 @@
 local M = {}
 
-function M.create(buf, title, items)
+function M.create(buf, title, list)
+    if not buf then
+        error("buf was nil")
+    end
+    if not list then
+        error("list was nil")
+    end
+
+    local util = require("harpun.util")
     local height = 8
     local width = 0
 
-    for _, value in pairs(items) do
-        if #value.display_name > width then
-            width = #value.display_name
+    -- Set width to the longest display name
+    for _, entry in pairs(list:get()) do
+        local display_name = util.display_name(entry.buf_name)
+        if #display_name > width then
+            width = #display_name
         end
     end
 

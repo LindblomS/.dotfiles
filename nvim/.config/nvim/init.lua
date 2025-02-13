@@ -27,6 +27,15 @@ require('lazy').setup('plugins', {
     }
 })
 
+function Git_branch()
+    local b = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+    if b == "" then
+        return "none"
+    else
+        return b
+    end
+end
+
 require("harpun").setup()
 require("statusline")
 require("oil").setup()
