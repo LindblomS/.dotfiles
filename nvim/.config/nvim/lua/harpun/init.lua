@@ -2,7 +2,7 @@
 local M = {}
 
 function M.setup()
-    local repository = require("lua.harpun.repository").new()
+    local repository = require("harpun.repository").new()
     M._list = require("harpun.list").new(repository)
 
     vim.keymap.set("n", "<leader>1", function() M:add(1, "1") end)

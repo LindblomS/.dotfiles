@@ -19,11 +19,11 @@ local function get_data_path()
 end
 
 local function fullpath()
-    return string.format("%s/%s.json", get_data_path(), Git_branch())
+    return string.format("%s/%s.json", get_data_path(), Git_branch_or_cwd())
 end
 
 local function write_data(data)
-    Path:new(fullpath()):write(vim.json.encode(data), "w")
+    Path:new(fullpath())(vim.json.encode(data), "w")
 end
 
 local function read_data()
