@@ -15,7 +15,7 @@ function M.setup()
     vim.keymap.set("n", "<C-3>", function() M:select(3) end)
     vim.keymap.set("n", "<C-4>", function() M:select(4) end)
 
-    vim.keymap.set("n", "<C-h>", function() M:open_menu() end)
+    vim.keymap.set("n", "<C-h>", function() M:open_selection_menu() end)
 end
 
 function M:add(index, key)
@@ -44,7 +44,7 @@ function M:select(index)
     end
 
     local entry = self._list:get()[index]
-    if not entry then
+    if not entry or entry.file_name == "" then
         print("Harpun: No file at index")
         return
     end
@@ -65,7 +65,7 @@ function M:select(index)
     vim.api.nvim_feedkeys("zz", "n", false)
 end
 
-function M:open_menu()
+function M:open_selection_menu()
     require("harpun.entry_selection_menu"):open(self._list, self)
 end
 

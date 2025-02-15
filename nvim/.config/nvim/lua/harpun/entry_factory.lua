@@ -20,4 +20,11 @@ function M.create(key)
     }
 end
 
+function M.create_placeholder()
+    return {
+        file_name = "",
+        key = "",
+    }
+end
+
 return M

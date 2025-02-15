@@ -1,5 +1,5 @@
 local M = {
-    _inner_list = {},
+    _list = {},
     _repository = {},
 }
 
@@ -9,7 +9,7 @@ function M.new(repository)
     end
 
     M._repository = repository
-    M._inner_list = repository:get()
+    M._list = repository:get()
     return M
 end
 
@@ -22,12 +22,21 @@ function M:add_or_update(index, entry)
         error("entry was nil")
     end
 
-    self._inner_list[index] = entry
-    self._repository:add_or_update(index, entry)
+    local factory = require("harpun.entry_factory")
+
+    -- Replace preceding nil entries will placeholders: lua will stop iteration on nil entries
+    for i = 1, index - 1 do
+        if not self._list[i] then
+            self._list[i] = factory.create_placeholder()
+        end
+    end
+
+    self._list[index] = entry
+    self._repository:add_or_update(self._list)
 end
 
 function M:get()
-    return self._inner_list
+    return self._list
 end
 
 return M

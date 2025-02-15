@@ -62,15 +62,11 @@ function M:get()
     return self._entries
 end
 
-function M:add_or_update(index, entry)
+function M:add_or_update(entries)
     if self._err then
         error("Harpun: Error reading the data file, cannot write data")
     end
 
-
-    self._entries[index] = entry
-    -- todo: Maybe we shouldn't write every time we update an entry.
-    -- Or, maybe it's fine...
     write_data(self._entries)
 end
 
