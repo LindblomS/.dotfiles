@@ -1,8 +1,8 @@
-local function normalize_path(buf_name, root)
-    return require("plenary.path"):new(buf_name):make_relative(root)
+local function normalize_path(file_name, root)
+    return require("plenary.path"):new(file_name):make_relative(root)
 end
 
-local function get_buf_name()
+local function get_file_name()
     return normalize_path(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), vim.fn.getcwd())
 end
 
@@ -13,9 +13,9 @@ function M.create(key)
         error("key was nil or empty")
     end
 
-    local buf_name = get_buf_name()
+    local file_name = get_file_name()
     return {
-        buf_name = buf_name,
+        file_name = file_name,
         key = key,
     }
 end

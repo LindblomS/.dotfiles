@@ -34,7 +34,7 @@ function M.prompt(list, index, new_entry)
     local buf = vim.api.nvim_create_buf(false, true)
     local win = window_factory.create(buf, "File exists at index", list)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, {
-        string.format("Replace file %s?", util.display_name(list:get()[index].buf_name)),
+        string.format("Replace file %s?", util.display_name(list:get()[index].file_name)),
         "y (yes), n (no)"
     })
     vim.api.nvim_set_option_value("modifiable", false, { buf = buf })

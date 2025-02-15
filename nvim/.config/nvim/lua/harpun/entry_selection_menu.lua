@@ -2,7 +2,7 @@ local function get_entry_names(list)
     local entry_names = {}
     local util = require("harpun.util")
     for i, entry in ipairs(list:get()) do
-        entry_names[i] = util.display_name(entry.buf_name)
+        entry_names[i] = util.display_name(entry.file_name)
     end
     return entry_names
 end

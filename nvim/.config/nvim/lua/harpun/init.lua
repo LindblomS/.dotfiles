@@ -49,9 +49,9 @@ function M:select(index)
         return
     end
 
-    local buf = vim.fn.bufnr(entry.buf_name)
+    local buf = vim.fn.bufnr(entry.file_name)
     if buf == -1 then
-        buf = vim.fn.bufadd(entry.buf_name)
+        buf = vim.fn.bufadd(entry.file_name)
     end
 
     if not vim.api.nvim_buf_is_loaded(buf) then

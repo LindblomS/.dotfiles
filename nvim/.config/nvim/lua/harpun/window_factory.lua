@@ -14,7 +14,7 @@ function M.create(buf, title, list)
 
     -- Set width to the longest display name
     for _, entry in pairs(list:get()) do
-        local display_name = util.display_name(entry.buf_name)
+        local display_name = util.display_name(entry.file_name)
         if #display_name > width then
             width = #display_name
         end
