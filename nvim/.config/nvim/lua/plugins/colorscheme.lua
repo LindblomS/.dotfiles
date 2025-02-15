@@ -37,4 +37,14 @@ return {
             vim.cmd('colorscheme kanagawa')
         end
     },
+    {
+        "rjshkhr/shadow.nvim",
+        enabled = false,
+        priority = 1000,
+        commit = "6ec2d2d4c103b2e72256fd26390752216ab7774d",
+        config = function()
+            vim.opt.termguicolors = true
+            vim.cmd.colorscheme("shadow")
+        end,
+    }
 }
