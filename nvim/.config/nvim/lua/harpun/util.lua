@@ -5,7 +5,6 @@ function M.get_file_name()
 end
 
 function M.normalize_path(file_name, root)
-    -- is plenary really necessary?
     return require("plenary.path"):new(file_name):make_relative(root)
 end
 

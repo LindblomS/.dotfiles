@@ -13,9 +13,8 @@ function M.create(key)
         error("key was nil or empty")
     end
 
-    local file_name = get_file_name()
     return {
-        file_name = file_name,
+        file_name = get_file_name(),
         key = key,
     }
 end

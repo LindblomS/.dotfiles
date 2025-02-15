@@ -1,21 +1,25 @@
 local Path = require("plenary.path")
-local data_path = string.format("%s/harpun", vim.fn.stdpath("data"))
-local ensured_data_path = false
-local function ensure_data_path()
-    if ensured_data_path then
-        return
-    end
 
+local data_path = string.format("%s/harpun", vim.fn.stdpath("data"))
+local data_path_exists = false
+
+local function create_data_path()
     local path = Path:new(data_path)
     if not path:exists() then
         path:mkdir()
     end
+    data_path_exists = true
+end
 
-    ensured_data_path = true
+local function get_data_path()
+    if not data_path_exists then
+        create_data_path()
+    end
+    return data_path
 end
 
 local function fullpath()
-    return string.format("%s/%s.json", data_path, Git_branch())
+    return string.format("%s/%s.json", get_data_path(), Git_branch())
 end
 
 local function write_data(data)
@@ -23,7 +27,6 @@ local function write_data(data)
 end
 
 local function read_data()
-    ensure_data_path()
     local path = Path:new(fullpath())
 
     if not path:exists() then
@@ -31,14 +34,6 @@ local function read_data()
     end
 
     local data = path:read()
-
-    -- Why is this necessary when we write the data just before
-    -- if the file doesn't exist?
-    -- if not data or data == "" then
-    --     write_data({})
-    --     data = {}
-    -- end
-
     return vim.json.decode(data)
 end
 
