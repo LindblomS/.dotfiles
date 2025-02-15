@@ -23,7 +23,7 @@ local function fullpath()
 end
 
 local function write_data(data)
-    Path:new(fullpath())(vim.json.encode(data), "w")
+    Path:new(fullpath()):write(vim.json.encode(data), "w")
 end
 
 local function read_data()
@@ -62,6 +62,7 @@ function M:add_or_update(entries)
         error("Harpun: Error reading the data file, cannot write data")
     end
 
+    self._entries = entries
     write_data(self._entries)
 end
 
