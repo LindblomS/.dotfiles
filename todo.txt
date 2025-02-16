@@ -8,7 +8,6 @@ nvim
 - Fix go to symbols (telescope) so that preview is enabled and so that it isn't truncated.
 - Add indent all parameters keymap for csharp development
 - Try out blink-cmp
-- Add border to cmp item description.
 - Add telescope extension plugin to make searching faster.
 - telescope: write a live grep extension that allows you to search for a word in a certain directory. The directory will be the first input, and the word to search for the second input. The directory 
 will by default the current directory of the current buffer. 
