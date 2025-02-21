@@ -51,7 +51,8 @@ end
 
 function M:get()
     if self._err then
-        error("Harpun: Error reading the data file, cannot read data: %s")
+        print("Harpun: Error reading the data file, cannot read data")
+        return {}
     end
 
     return self._entries
@@ -59,7 +60,8 @@ end
 
 function M:add_or_update(entries)
     if self._err then
-        error("Harpun: Error reading the data file, cannot write data")
+        print("Harpun: Error reading the data file, cannot write data")
+        return
     end
 
     self._entries = entries
