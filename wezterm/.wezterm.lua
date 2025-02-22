@@ -9,10 +9,12 @@ end
 config.window_decorations = "RESIZE"
 
 config.font = wezterm.font {
-    family = 'JetBrains Mono',
-    harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+    family = "CommitMono",
+    -- family = "JetBrains Mono",
+    -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
 }
-config.font_size = 10.0
+-- config.font_size = 10.0
+config.line_height = 1.2
 
 config.colors = {
     foreground = "#dcd7ba",
