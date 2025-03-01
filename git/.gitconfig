@@ -1,0 +1,20 @@
+[core]
+	editor = nvim
+[difftool]
+    prompt = true
+[diff]
+    tool = nvimdiff
+    algorithm = histogram
+    colorMoved = plain
+    renames = true
+    mnemonicPrefix = true
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$BASE\" \"$REMOTE\""
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[init]
+    defaultBranch = main
+[commit]
+    verbose = true
