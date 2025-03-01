@@ -3,8 +3,6 @@ wezterm
 nvim
 
 - Add redo last search to telescope
-- Some keywords are still bold in kanagawa theme.
-- kanagawa doesn't properly highlight classes in c#. E.g. "SomeClass.Query()" where "SomeClass" isn't correct. 
 - Fix go to symbols (telescope) so that preview is enabled and so that it isn't truncated.
 - Add indent all parameters keymap for csharp development
 - Try out blink-cmp
