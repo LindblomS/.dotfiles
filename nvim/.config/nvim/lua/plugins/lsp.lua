@@ -11,6 +11,7 @@ return {
                 lspconfig[server].setup({})
             end
 
+
             local vue_language_server_path =
             "C:/Users/samuel.lindblom/Appdata/Roaming/npm/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin"
             lspconfig.ts_ls.setup({
@@ -26,7 +27,6 @@ return {
                 filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "vue" },
             })
 
-
             lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
@@ -41,7 +41,7 @@ return {
                 on_attach = function(_, bufnr)
                     vim.api.nvim_create_autocmd('BufWritePre', {
                         buffer = bufnr,
-                        command = 'EslintFixAll',
+                        command = "EslintFixAll",
                     })
                 end
             })
@@ -78,11 +78,9 @@ return {
                     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, lsp_opts)
                     vim.keymap.set('n', '<leader>fm', function() vim.lsp.buf.format() end, lsp_opts)
 
-                    -- remove semantic tokens for ts_ls because it looks like shit.
+                    -- Remove semantic tokens
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client.name == "ts_ls" then
-                        client.server_capabilities.semanticTokensProvider = nil
-                    end
+                    client.server_capabilities.semanticTokensProvider = nil
 
                     local rounded = "rounded"
 
