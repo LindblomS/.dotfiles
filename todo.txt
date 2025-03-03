@@ -9,3 +9,4 @@ nvim
 - Add telescope extension plugin to make searching faster.
 - telescope: write a live grep extension that allows you to search for a word in a certain directory. The directory will be the first input, and the word to search for the second input. The directory 
 will by default the current directory of the current buffer. 
+- Harpun error reading and writing to file. Migth have to do with branch names containing "/".
