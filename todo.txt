@@ -14,3 +14,4 @@ will by default the current directory of the current buffer.
     - static classes: SomeStaticClass.Do()
     - enums
     - classes in nameof(SomeClass.Name)
+- statusline truncates filename instead of directorypath. E.g. root/somedir/<tyConfig.cs
