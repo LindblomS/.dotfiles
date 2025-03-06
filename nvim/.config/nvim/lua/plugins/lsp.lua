@@ -78,10 +78,6 @@ return {
                     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, lsp_opts)
                     vim.keymap.set('n', '<leader>fm', function() vim.lsp.buf.format() end, lsp_opts)
 
-                    -- Remove semantic tokens
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    client.server_capabilities.semanticTokensProvider = nil
-
                     local rounded = "rounded"
 
                     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(

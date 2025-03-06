@@ -28,31 +28,56 @@ return {
                     local special = colors.palette.springViolet1
                     -- return, throw etc
                     local very_special = colors.palette.waveRed
-                    local comments = colors.palette.fujiGrey
-                    local types = colors.palette.waveAqua2
+                    local comment = colors.palette.fujiGrey
+                    local type = colors.palette.waveAqua2
+                    local functions = colors.palette.carpYellow
+                    local boolean = colors.palette.surimiOrange
+                    local number = colors.palette.sakuraPink
+
+                    -- lsp semantic tokens takes priority over treesitter.
+                    -- This disables highlighting for given tokens
+                    local function disable_lsp_semantic_token(tokens_by_lsp_client)
+                        vim.api.nvim_create_autocmd("LspAttach", {
+                            callback = function(args)
+                                local client = vim.lsp.get_client_by_id(args.data.client_id)
+                                local tokens = tokens_by_lsp_client[client.name]
+                                if tokens then
+                                    for _, token in pairs(tokens) do
+                                        vim.api.nvim_set_hl(0, token, {})
+                                    end
+                                end
+                            end
+                        })
+                    end
+
+                    disable_lsp_semantic_token({
+                        lua_ls = {
+                            "@lsp.type.property.lua",
+                        },
+                    })
 
                     return {
                         FloatBorder = { bg = "none" },
                         NormalFloat = { bg = "none" },
                         FloatTitle = { bg = "none" },
                         -- syntax
-                        Boolean = { fg = colors.palette.carpYellow, bold = false },
-                        Number = { fg = colors.palette.sakuraPink },
+                        Boolean = { fg = boolean, bold = false },
+                        Number = { fg = number },
                         Constant = { fg = normal },
                         Identifier = { fg = normal },
-                        Function = { fg = colors.theme.syn.fun },
+                        Function = { fg = functions },
                         Statement = { fg = normal },
                         Operator = { fg = normal },
                         Keyword = { fg = special },
                         Exception = { fg = very_special },
                         PreProc = { fg = normal },
-                        Type = { fg = types },
+                        Type = { fg = type },
                         Special = { fg = special },
                         Delimiter = { fg = normal },
                         Underlined = { fg = normal },
                         Bold = { bold = false },
                         Italic = { italic = false },
-                        Comment = { fg = comments },
+                        Comment = { fg = comment },
                         String = { fg = colors.palette.springGreen },
 
                         -- treesitter
@@ -62,7 +87,7 @@ return {
                         ["@variable.member"] = { fg = normal },
                         ["@string.special.symbol"] = { fg = normal },
                         ["@attribute"] = { fg = normal },
-                        ["@constructor"] = { fg = types },
+                        ["@constructor"] = { fg = type },
                         ["@operator"] = { fg = normal },
                         ["@keyword.operator"] = { fg = special, bold = false },
                         ["@keyword.return"] = { fg = special },
@@ -76,6 +101,7 @@ return {
                         ["@keyword.operator.c_sharp"] = { link = "Special" },
                         ["@variable.builtin.c_sharp"] = { link = "Special" },
                         ["@keyword.return.c_sharp"] = { link = "Exception" },
+                        ["@attribute.c_sharp"] = { link = "Type" },
 
                         -- lua
                         ["@keyword.operator.lua"] = { link = "Special" },

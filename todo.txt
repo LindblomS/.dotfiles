@@ -10,8 +10,4 @@ nvim
 - telescope: write a live grep extension that allows you to search for a word in a certain directory. The directory will be the first input, and the word to search for the second input. The directory 
 will by default the current directory of the current buffer. 
 - Harpun error reading and writing to file. Migth have to do with branch names containing "/".
-- c#, some highlights are wrong
-    - static classes: SomeStaticClass.Do()
-    - enums
-    - classes in nameof(SomeClass.Name)
 - statusline truncates filename instead of directorypath. E.g. root/somedir/<tyConfig.cs
