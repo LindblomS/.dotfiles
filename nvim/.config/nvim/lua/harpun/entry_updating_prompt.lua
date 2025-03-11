@@ -1,3 +1,5 @@
+local logger = require("harpun.logger")
+
 local function set_keymaps(list, index, new_entry, buf, win_id)
     vim.keymap.set("n", "y", function()
         list:add_or_update(index, new_entry)
@@ -17,15 +19,15 @@ local M = {}
 
 function M.prompt(list, index, new_entry)
     if not list then
-        error("list was nil")
+        logger.error("list was nil")
     end
 
     if not index or index < 1 then
-        error("index was nil or less than 1")
+        logger.error("index was nil or less than 1")
     end
 
     if not new_entry then
-        error("new_entry was nil")
+        logger.error("new_entry was nil")
     end
 
     local window_factory = require("harpun.window_factory")

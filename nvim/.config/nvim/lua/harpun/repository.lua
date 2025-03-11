@@ -1,4 +1,5 @@
 local Path = require("plenary.path")
+local logger = require("harpun.logger")
 
 local data_path = string.format("%s/harpun", vim.fn.stdpath("data"))
 local data_path_exists = false
@@ -44,6 +45,9 @@ local M = {
 
 function M.new()
     local ok, data = pcall(read_data)
+    if not ok then
+        logger.error(data)
+    end
     M._entries = data
     M._err = not ok
     return M
@@ -51,7 +55,6 @@ end
 
 function M:get()
     if self._err then
-        print("Harpun: Error reading the data file, cannot read data")
         return {}
     end
 
@@ -60,7 +63,6 @@ end
 
 function M:add_or_update(entries)
     if self._err then
-        print("Harpun: Error reading the data file, cannot write data")
         return
     end
 

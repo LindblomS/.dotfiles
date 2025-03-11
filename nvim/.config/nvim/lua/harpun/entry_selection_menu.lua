@@ -1,3 +1,5 @@
+local logger = require("harpun.logger")
+
 local function get_entry_names(list)
     local entry_names = {}
     local util = require("harpun.util")
@@ -25,10 +27,10 @@ end
 
 function M:open(list, harpun)
     if not list then
-        error("list was nil")
+        logger.error("list was nil")
     end
     if not harpun then
-        error("harpun was nil")
+        logger.error("harpun was nil")
     end
 
     local buf = vim.api.nvim_create_buf(false, true)

@@ -2,10 +2,11 @@ local M = {
     _list = {},
     _repository = {},
 }
+local logger = require("harpun.logger")
 
 function M.new(repository)
     if not repository then
-        error("repository was nil")
+        logger.error("repository was nil")
     end
 
     M._repository = repository
@@ -15,11 +16,11 @@ end
 
 function M:add_or_update(index, entry)
     if not index or index < 1 then
-        error("index was nil or empty")
+        logger.error("index was nil or empty")
     end
 
     if not entry then
-        error("entry was nil")
+        logger.error("entry was nil")
     end
 
     local factory = require("harpun.entry_factory")

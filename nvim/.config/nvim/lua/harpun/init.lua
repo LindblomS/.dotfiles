@@ -1,5 +1,6 @@
 --- A file navigation plugin inspired by harpoon
 local M = {}
+local logger = require("harpun.logger")
 
 function M.setup()
     local repository = require("harpun.repository").new()
@@ -20,10 +21,10 @@ end
 
 function M:add(index, key)
     if not index or index < 1 then
-        error("index was nil or less than 1")
+        logger.error("index was nil or less than 1")
     end
     if not key or key == "" then
-        error("key was nil or empty")
+        logger.error("key was nil or empty")
     end
 
     local entry_factory = require("harpun.entry_factory")
@@ -40,7 +41,7 @@ end
 
 function M:select(index)
     if not index or index < 1 then
-        error("index was nil or less than 1")
+        logger.error("index was nil or less than 1")
     end
 
     local entry = self._list:get()[index]

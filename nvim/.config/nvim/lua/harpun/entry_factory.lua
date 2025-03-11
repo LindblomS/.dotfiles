@@ -1,3 +1,5 @@
+local logger = require("harpun.logger")
+
 local function normalize_path(file_name, root)
     return require("plenary.path"):new(file_name):make_relative(root)
 end
@@ -10,7 +12,7 @@ local M = {}
 
 function M.create(key)
     if not key or key == "" then
-        error("key was nil or empty")
+        logger.error("key was nil or empty")
     end
 
     return {

@@ -1,11 +1,12 @@
 local M = {}
+local logger = require("harpun.logger")
 
 function M.create(buf, title, list)
     if not buf then
-        error("buf was nil")
+        logger.error("buf was nil")
     end
     if not list then
-        error("list was nil")
+        logger.error("list was nil")
     end
 
     local util = require("harpun.util")

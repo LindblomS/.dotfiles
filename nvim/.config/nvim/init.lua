@@ -43,3 +43,4 @@ end
 require("harpun").setup()
 require("statusline")
 require("oil").setup()
+Logger = require("logger")
