@@ -96,10 +96,16 @@ return {
                         float = { border = rounded },
                     }
 
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
                     vim.api.nvim_create_autocmd('BufWritePre', {
                         pattern = { '*.{cs,rs,lua}' },
                         callback = function()
                             vim.lsp.buf.format()
+
+                            -- Hack to keep diagnostics after format in lua_ls.
+                            if client.name == "lua_ls" then
+                                vim.diagnostic.enable(args.buf)
+                            end
                         end
                     })
                 end
