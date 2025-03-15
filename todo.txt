@@ -1,4 +1,5 @@
 wezterm
+- Match nvim colorscheme
 
 nvim
 
