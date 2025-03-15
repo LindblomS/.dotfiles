@@ -74,15 +74,21 @@ local function filename()
     local dir              = vim.fs.dirname(relative_bufname)
     cwd                    = vim.fs.basename(cwd)
     -- todo: cwd seems to be absolute or something on windows
+    dir                    = cwd .. "/" .. dir
+
+    -- trim start of path
+    local win_width        = vim.api.nvim_win_get_width(0)
+    local min_width        = math.floor(win_width / 7)
     local dir_is_trimmed   = false
-    while #dir > 60 do
+    while #dir > min_width do
         dir = dir:sub(10)
         dir_is_trimmed = true
     end
     if dir_is_trimmed then
         dir = "..." .. dir
     end
-    return string.format("%s/%s/%%#CursorLineNr#%s", cwd, dir, base)
+
+    return string.format("%s/%%#CursorLineNr#%s", dir, base)
 end
 
 Statusline = {}
