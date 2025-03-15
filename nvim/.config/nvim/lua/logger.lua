@@ -35,6 +35,7 @@ end
 
 local function create_log_entry(message, level)
     message = string.format("%s - %s: %s", os.date(), level, message)
+    return message
 end
 
 function M.info(message)

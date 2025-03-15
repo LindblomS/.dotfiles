@@ -20,7 +20,10 @@ local function get_data_path()
 end
 
 local function fullpath()
-    return string.format("%s/%s.json", get_data_path(), Git_branch_or_cwd())
+    local name = Git_branch_or_cwd()
+    -- Hash the name to avoid special characters in the git branch name, e.g. dev/master.
+    name = vim.fn.sha256(name)
+    return string.format("%s/%s.json", get_data_path(), name)
 end
 
 local function write_data(data)
