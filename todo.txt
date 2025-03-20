@@ -11,3 +11,4 @@ nvim
 - telescope: write a live grep extension that allows you to search for a word in a certain directory. The directory will be the first input, and the word to search for the second input. The directory 
 will by default the current directory of the current buffer. 
 - remap q to do nothing, I never use this.
+- statusline: make it so the filepath can grow an push row/column stuff to the right.
