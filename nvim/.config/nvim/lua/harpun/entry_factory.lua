@@ -10,21 +10,9 @@ end
 
 local M = {}
 
-function M.create(key)
-    if not key or key == "" then
-        logger.error("key was nil or empty")
-    end
-
+function M.create()
     return {
         file_name = get_file_name(),
-        key = key,
-    }
-end
-
-function M.create_placeholder()
-    return {
-        file_name = "",
-        key = "",
     }
 end
 

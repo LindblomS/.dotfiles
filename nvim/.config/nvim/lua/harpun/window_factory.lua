@@ -1,6 +1,7 @@
 local M = {}
 local logger = require("harpun.logger")
 
+-- todo: should just get a width instead of list
 function M.create(buf, title, list)
     if not buf then
         logger.error("buf was nil")

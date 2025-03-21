@@ -39,6 +39,7 @@ function Git_branch_or_cwd()
 end
 
 Logger = require("logger")
-require("harpun").setup()
+-- require("harpun").setup()
+require("harpun.harpunv2").setup()
 require("statusline")
 require("oil").setup()
