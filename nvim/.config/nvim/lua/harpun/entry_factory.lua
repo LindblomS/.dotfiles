@@ -1,5 +1,3 @@
-local logger = require("harpun.logger")
-
 local function normalize_path(file_name, root)
     return require("plenary.path"):new(file_name):make_relative(root)
 end

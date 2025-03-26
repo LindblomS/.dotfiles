@@ -1,3 +1,5 @@
+-- todo: rewrite M.arst = function to function M.arst(...) for all places
+local logger = require("harpun.logger")
 local list = {}
 list.new = function(repository)
     if not repository then
@@ -9,27 +11,43 @@ list.new = function(repository)
 end
 
 list.add = function(self, entry)
-    if not self then
-        error("self was nil")
-    end
     if not entry then
         error("entry was nil")
     end
     table.insert(self._list, entry)
-    self._repository:add_or_update(self._list)
+    -- self._repository:add_or_update(self._list)
 end
 
 list.remove = function(self, index)
-    if not self then
-        error("self was nil")
-    end
     table.remove(self._list, index)
-    self._repository:add_or_update(self._list)
+    -- self._repository:add_or_update(self._list)
 end
 
--- list.move = function(self, index, new_index)
---     error("not implemented")
--- end
+list.move = function(self, index, new_index)
+    if index < 1 then
+        error("index was less than 1")
+    end
+
+    -- Out of bounds
+    if new_index < 1 then
+        return
+    end
+    if new_index > #self._list then
+        return
+    end
+
+    local entry = table.remove(self._list, index)
+    if not entry then
+        -- todo: Maybe this should be a warn since it shouldn't happen.
+        logger.info("Could not move entry. Entry was nil")
+        return
+    end
+    table.insert(self._list, new_index, entry)
+end
+
+list.save = function(self)
+    self._repository:add_or_update(self._list)
+end
 
 list.get = function(self)
     return self._list
@@ -51,7 +69,7 @@ M.add = function(self)
 end
 
 M.open_selection_menu = function(self)
-    require("harpun.entry_selection_menu"):open(self._list)
+    require("harpun.entry_selection_menu"):new(self._list):open()
 end
 
 return M

@@ -31,10 +31,10 @@ function M:add(index, key)
     local entry = self._list:get()[index]
     if entry then
         local entry_updating_prompt = require("harpun.entry_updating_prompt")
-        entry_updating_prompt.prompt(self._list, index, entry_factory.create(key))
+        entry_updating_prompt.prompt(self._list, index, entry_factory.create())
         return
     else
-        entry = entry_factory.create(key)
+        entry = entry_factory.create()
         self._list:add_or_update(index, entry)
     end
 end
@@ -67,7 +67,7 @@ function M:select(index)
 end
 
 function M:open_selection_menu()
-    require("harpun.entry_selection_menu"):open(self._list, self)
+    require("harpun.entry_selection_menu"):open(self._list)
 end
 
 return M
