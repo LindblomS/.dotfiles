@@ -1,6 +1,3 @@
-wezterm
-- Match nvim colorscheme
-
 nvim
 
 - Add redo last search to telescope
