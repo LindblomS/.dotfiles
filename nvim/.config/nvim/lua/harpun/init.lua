@@ -1,73 +1,55 @@
---- A file navigation plugin inspired by harpoon
 local M = {}
-local logger = require("harpun.logger")
 
-function M.setup()
-    local repository = require("harpun.repository").new()
-    M._list = require("harpun.list").new(repository)
+function M.setup(self)
+    M._list = require("harpun.list").new()
+    M._util = require("harpun.util")
+    M._selection_menu = require("lua.harpun.selection_menu"):new(self)
 
-    vim.keymap.set("n", "<leader>1", function() M:add(1, "1") end)
-    vim.keymap.set("n", "<leader>2", function() M:add(2, "2") end)
-    vim.keymap.set("n", "<leader>3", function() M:add(3, "3") end)
-    vim.keymap.set("n", "<leader>4", function() M:add(4, "4") end)
-
-    vim.keymap.set("n", "<C-1>", function() M:select(1) end)
-    vim.keymap.set("n", "<C-2>", function() M:select(2) end)
-    vim.keymap.set("n", "<C-3>", function() M:select(3) end)
-    vim.keymap.set("n", "<C-4>", function() M:select(4) end)
-
+    vim.keymap.set("n", "<leader>h", function() M:add() end)
     vim.keymap.set("n", "<C-h>", function() M:open_selection_menu() end)
 end
 
-function M:add(index, key)
-    if not index or index < 1 then
-        logger.error("index was nil or less than 1")
-    end
-    if not key or key == "" then
-        logger.error("key was nil or empty")
-    end
-
-    local entry_factory = require("harpun.entry_factory")
-    local entry = self._list:get()[index]
-    if entry then
-        local entry_updating_prompt = require("harpun.entry_updating_prompt")
-        entry_updating_prompt.prompt(self._list, index, entry_factory.create(key))
-        return
-    else
-        entry = entry_factory.create(key)
-        self._list:add_or_update(index, entry)
-    end
+function M.add(self)
+    self._list:add(self._util.get_file())
 end
 
-function M:select(index)
-    if not index or index < 1 then
-        logger.error("index was nil or less than 1")
-    end
+function M.get(self)
+    return self._list:get()
+end
 
-    local entry = self._list:get()[index]
-    if not entry or entry.file_name == "" then
-        print("Harpun: No file at index")
-        return
-    end
+function M.select(file)
+    assert(file)
+    local buf = vim.fn.bufnr(file)
 
-    local buf = vim.fn.bufnr(entry.file_name)
     if buf == -1 then
-        buf = vim.fn.bufadd(entry.file_name)
+        buf = vim.fn.bufadd(file)
     end
-
     if not vim.api.nvim_buf_is_loaded(buf) then
         vim.fn.bufload(buf)
         vim.api.nvim_set_option_value("buflisted", true, {
             buf = buf,
         })
     end
-
     vim.api.nvim_set_current_buf(buf)
     vim.api.nvim_feedkeys("zz", "n", false)
 end
 
-function M:open_selection_menu()
-    require("harpun.entry_selection_menu"):open(self._list, self)
+function M.move(self, index, new_index)
+    assert(index > 0)
+    assert(new_index)
+    self._list:move(index, new_index)
+end
+
+function M.remove(self, index)
+    self._list:remove(index)
+end
+
+function M.save(self)
+    self._list:save()
+end
+
+function M.open_selection_menu(self)
+    self._selection_menu:open()
 end
 
 return M

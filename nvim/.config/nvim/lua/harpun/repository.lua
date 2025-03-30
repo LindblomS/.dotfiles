@@ -41,17 +41,14 @@ local function read_data()
     return vim.json.decode(data)
 end
 
-local M = {
-    _entries = {},
-    _err = false,
-}
+local M = {}
 
 function M.new()
     local ok, data = pcall(read_data)
     if not ok then
         logger.error(data)
     end
-    M._entries = data
+    M._data = data
     M._err = not ok
     return M
 end
@@ -61,16 +58,16 @@ function M:get()
         return {}
     end
 
-    return self._entries
+    return self._data
 end
 
-function M:add_or_update(entries)
+function M:add_or_update(data)
     if self._err then
         return
     end
 
-    self._entries = entries
-    write_data(self._entries)
+    self._data = data
+    write_data(self._data)
 end
 
 return M
