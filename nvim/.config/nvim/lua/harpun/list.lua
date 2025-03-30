@@ -1,42 +1,48 @@
-local M = {
-    _list = {},
-    _repository = {},
-}
-local logger = require("harpun.logger")
+local M = {}
 
-function M.new(repository)
-    if not repository then
-        logger.error("repository was nil")
-    end
-
+function M.new()
+    local repository = require("harpun.repository").new()
     M._repository = repository
     M._list = repository:get()
+    M._logger = require("harpun.logger")
     return M
 end
 
-function M:add_or_update(index, entry)
-    if not index or index < 1 then
-        logger.error("index was nil or empty")
+function M.add(self, file)
+    assert(file)
+    table.insert(self._list, file)
+end
+
+function M.remove(self, index)
+    assert(index)
+    table.remove(self._list, index)
+end
+
+function M.move(self, index, new_index)
+    assert(index > 0)
+    assert(new_index)
+
+    -- When out of bounds, do nothing and just return.
+    if new_index < 1 then
+        return
+    end
+    if new_index > #self._list then
+        return
     end
 
-    if not entry then
-        logger.error("entry was nil")
+    local file = table.remove(self._list, index)
+    if not file then
+        self._logger.warning("Could not move file. File was nil")
+        return
     end
+    table.insert(self._list, new_index, file)
+end
 
-    local factory = require("harpun.entry_factory")
-
-    -- Replace preceding nil entries will placeholders: lua will stop iteration on nil entries
-    for i = 1, index - 1 do
-        if not self._list[i] then
-            self._list[i] = factory.create_placeholder()
-        end
-    end
-
-    self._list[index] = entry
+function M.save(self)
     self._repository:add_or_update(self._list)
 end
 
-function M:get()
+function M.get(self)
     return self._list
 end
 

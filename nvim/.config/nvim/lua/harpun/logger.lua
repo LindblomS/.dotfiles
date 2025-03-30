@@ -4,11 +4,18 @@ local function format(message)
     return string.format("%s - %s", "harpun", message)
 end
 
-M.info = function(message)
+function M.info(message)
+    assert(message)
     Logger.info(format(message))
 end
 
-M.error = function(message)
+function M.warning(message)
+    assert(message)
+    Logger.warning(format(message))
+end
+
+function M.orror(message)
+    assert(message)
     Logger.error(format(message))
 end
 

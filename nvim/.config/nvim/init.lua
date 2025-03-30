@@ -40,6 +40,6 @@ end
 
 Logger = require("logger")
 -- require("harpun").setup()
-require("harpun.harpunv2").setup()
+require("harpun"):setup()
 require("statusline")
 require("oil").setup()
