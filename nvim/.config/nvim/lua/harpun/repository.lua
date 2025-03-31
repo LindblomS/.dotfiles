@@ -20,9 +20,13 @@ local function get_data_path()
 end
 
 local function fullpath()
-    local name = Git_branch_or_cwd()
+    local name = Git_branch() or ""
+
+    -- Avoid branch name conflicts between different repositories.
+    name = vim.fn.getcwd() .. name
     -- Hash the name to avoid special characters in the git branch name, e.g. dev/master.
     name = vim.fn.sha256(name)
+
     return string.format("%s/%s.json", get_data_path(), name)
 end
 

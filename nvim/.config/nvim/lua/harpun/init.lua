@@ -3,7 +3,7 @@ local M = {}
 function M.setup(self)
     M._list = require("harpun.list").new()
     M._util = require("harpun.util")
-    M._selection_menu = require("lua.harpun.selection_menu"):new(self)
+    M._selection_menu = require("harpun.selection_menu"):new(self)
 
     vim.keymap.set("n", "<leader>h", function() M:add() end)
     vim.keymap.set("n", "<C-h>", function() M:open_selection_menu() end)
