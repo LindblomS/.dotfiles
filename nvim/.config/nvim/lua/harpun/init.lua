@@ -24,6 +24,7 @@ function M.select(file)
     if buf == -1 then
         buf = vim.fn.bufadd(file)
     end
+
     if not vim.api.nvim_buf_is_loaded(buf) then
         vim.fn.bufload(buf)
         vim.api.nvim_set_option_value("buflisted", true, {

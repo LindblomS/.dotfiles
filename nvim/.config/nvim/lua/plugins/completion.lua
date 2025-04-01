@@ -56,6 +56,7 @@ return {
         commit = "3d02855468f94bf435db41b661b58ec4f48a06b7",
         event = "InsertEnter",
         dependencies = { "hrsh7th/nvim-cmp" },
+        enabled = false,
         config = function(_, _)
             require("nvim-autopairs").setup({})
             local autopairs_cmp = require("nvim-autopairs.completion.cmp")

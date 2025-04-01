@@ -1,7 +1,7 @@
 return {
     {
         'neovim/nvim-lspconfig',
-        commit = "6c17f8656f667727b27f5f598463afedb7791b18",
+        commit = "ff6471d4f837354d8257dfa326b031dd8858b16e",
         config = function(_, _)
             local lspconfig = require('lspconfig')
 
@@ -34,7 +34,7 @@ return {
                             globals = { 'vim' }
                         }
                     }
-                },
+                }
             })
 
             lspconfig.eslint.setup({
@@ -73,29 +73,10 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(args)
                     local lsp_opts = { buffer = args.buf }
-                    vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, lsp_opts) -- todo: Maybe remove this one?
-                    vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, lsp_opts)
+                    vim.keymap.set({ "n", "i" }, "<C-s>", vim.lsp.buf.signature_help, lsp_opts)
                     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, lsp_opts)
                     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, lsp_opts)
                     vim.keymap.set('n', '<leader>fm', function() vim.lsp.buf.format() end, lsp_opts)
-
-                    local rounded = "rounded"
-
-                    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                        vim.lsp.handlers.hover, {
-                            border = rounded,
-                        }
-                    )
-
-                    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-                        vim.lsp.handlers.signature_help, {
-                            border = rounded,
-                        }
-                    )
-
-                    vim.diagnostic.config {
-                        float = { border = rounded },
-                    }
 
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
                     vim.api.nvim_create_autocmd('BufWritePre', {
