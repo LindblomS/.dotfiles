@@ -42,6 +42,7 @@ Logger = require("logger")
 require("harpun"):setup()
 require("statusline")
 require("oil").setup()
+require("lsp")
 
 vim.diagnostic.config({
     virtual_text = true,

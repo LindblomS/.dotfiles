@@ -40,15 +40,15 @@ return {
             }
         end,
         config = function(_, opts)
-            require("cmp").setup(opts)
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local lspconfig = require("lspconfig")
-            local servers = { "lua_ls", "volar", "html" }
-            for _, server in ipairs(servers) do
-                lspconfig[server].setup({
-                    capabilities = capabilities
-                })
-            end
+            -- require("cmp").setup(opts)
+            -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            -- local lspconfig = require("lspconfig")
+            -- local servers = { "lua_ls", "volar", "html" }
+            -- for _, server in ipairs(servers) do
+            --     lspconfig[server].setup({
+            --         capabilities = capabilities
+            --     })
+            -- end
         end,
     },
     {
@@ -56,7 +56,7 @@ return {
         commit = "3d02855468f94bf435db41b661b58ec4f48a06b7",
         event = "InsertEnter",
         dependencies = { "hrsh7th/nvim-cmp" },
-        enabled = false,
+        enabled = true,
         config = function(_, _)
             require("nvim-autopairs").setup({})
             local autopairs_cmp = require("nvim-autopairs.completion.cmp")
