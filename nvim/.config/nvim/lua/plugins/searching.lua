@@ -72,11 +72,16 @@ return {
             set("n", "<leader>faf", function()
                 builtin.find_files({ no_ignore = true })
             end, { desc = "Find all files" })
-            set("n", "<leader>fd", builtin.diagnostics, { desc = "Find diagnostics" })
             set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
             set("n", "<leader>fw", builtin.live_grep, { desc = "Find word" })
             set({ "n", "v" }, "<leader>fW", builtin.grep_string, { desc = "Find word under cursor or selection" })
             set("n", "<leader>q", builtin.quickfix, { desc = "Quickfix list" })
+            set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [d]iagnostics" })
+            set("n", "<leader>fld", function()
+                builtin.diagnostics({ bufnr = 0 })
+            end, {
+                desc = "[F]ind [l]ocal [d]iagnostics (in current buffer)",
+            })
         end,
     },
 }

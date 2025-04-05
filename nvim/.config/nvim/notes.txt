@@ -3,3 +3,4 @@
 - Set virtual_text to true in vim.diagnostic.config
 - Migrated all lsp configs from lspconfig to new vim.lsp.config 
 - Added plugin blink.cmp. 
+- Added local diagnostics keymap for telescope. 
