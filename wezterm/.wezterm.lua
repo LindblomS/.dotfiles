@@ -14,6 +14,16 @@ config.line_height = 1.1
 
 config.keys = {
     {
+        key = "n",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+        key = "e",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
         key = "w",
         mods = "CTRL|SHIFT",
         action = wezterm.action.CloseCurrentPane { confirm = false }

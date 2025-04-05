@@ -13,8 +13,9 @@ return {
         opts = {
             keymap = {
                 preset = 'default',
-                ["<CR>"] = { "accept", "fallback" },
                 ["<ESC>"] = { "cancel", "fallback" },
+                ["<M-Up>"] = { "scroll_documentation_up" },
+                ["<M-Down>"] = { "scroll_documentation_down" },
             },
             completion = {
                 documentation = {
