@@ -10,6 +10,9 @@ return {
         commit = "415af52339215926d705cccc08145f3782c4d132",
         opts = {
             defaults = {
+                -- Telescope needs to be updated with the new vim.o.winborder = "rounded" from nvim 0.11
+                -- Setting border to false seems to be a nice temporary fix.
+                border = false,
                 layout_strategy = "vertical",
                 layout_config = {
                     width = 0.9,
