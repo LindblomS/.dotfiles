@@ -5,6 +5,8 @@ nvim
 - Add indent all parameters keymap for csharp development
 - Try out blink-cmp
 - Add telescope extension plugin to make searching faster.
+- telescope: add local diagnostics.
+- telescope: fix issue with multiple borders. 
 - telescope: write a live grep extension that allows you to search for a word in a certain directory. The directory will be the first input, and the word to search for the second input. The directory 
 will by default the current directory of the current buffer. 
 - statusline: make it so the filepath can grow an push row/column stuff to the right.
