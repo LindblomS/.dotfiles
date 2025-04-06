@@ -31,7 +31,7 @@ return {
             },
             signature = { enabled = true },
             appearance = {
-                nerd_font_variant = 'mono'
+                nerd_font_variant = 'mono',
             },
 
             sources = {
@@ -40,5 +40,5 @@ return {
             fuzzy = { implementation = "rust" }
         },
         opts_extend = { "sources.default" },
-    }
+    },
 }

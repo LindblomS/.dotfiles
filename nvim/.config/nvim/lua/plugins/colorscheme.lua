@@ -33,6 +33,7 @@ return {
                     local functions = colors.palette.carpYellow
                     local boolean = colors.palette.surimiOrange
                     local number = colors.palette.sakuraPink
+                    local bg = colors.palette.dragonBlack3
 
                     -- lsp semantic tokens takes priority over treesitter.
                     -- This disables highlighting for given tokens
@@ -57,64 +58,73 @@ return {
                     })
 
                     return {
-                        FloatBorder = { bg = "none" },
-                        NormalFloat = { bg = "none" },
-                        FloatTitle = { bg = "none" },
+                        FloatBorder                   = { bg = "none" },
+                        NormalFloat                   = { bg = "none" },
+                        FloatTitle                    = { bg = "none" },
+
+                        -- blink (completion)
+                        BlinkCmpMenu                  = { bg = bg, },
+                        BlinkCmpMenuBorder            = { bg = "none", },
+                        BlinkCmpMenuSelection         = { bg = comment },
+                        BlinkCmpLabel                 = { bg = bg, },
+                        BlinkCmpDoc                   = { bg = "none", },
+                        BlinkCmpDocBorder             = { bg = "none", },
+
                         -- syntax
-                        Boolean = { fg = boolean, bold = false },
-                        Number = { fg = number },
-                        Constant = { fg = normal },
-                        Identifier = { fg = normal },
-                        Function = { fg = functions },
-                        Statement = { fg = normal },
-                        Operator = { fg = normal },
-                        Keyword = { fg = special },
-                        Exception = { fg = very_special },
-                        PreProc = { fg = normal },
-                        Type = { fg = type },
-                        Special = { fg = special },
-                        Delimiter = { fg = normal },
-                        Underlined = { fg = normal },
-                        Bold = { bold = false },
-                        Italic = { italic = false },
-                        Comment = { fg = comment },
-                        String = { fg = colors.palette.springGreen },
+                        Boolean                       = { fg = boolean, bold = false },
+                        Number                        = { fg = number },
+                        Constant                      = { fg = normal },
+                        Identifier                    = { fg = normal },
+                        Function                      = { fg = functions },
+                        Statement                     = { fg = normal },
+                        Operator                      = { fg = normal },
+                        Keyword                       = { fg = special },
+                        Exception                     = { fg = very_special },
+                        PreProc                       = { fg = normal },
+                        Type                          = { fg = type },
+                        Special                       = { fg = special },
+                        Delimiter                     = { fg = normal },
+                        Underlined                    = { fg = normal },
+                        Bold                          = { bold = false },
+                        Italic                        = { italic = false },
+                        Comment                       = { fg = comment },
+                        String                        = { fg = colors.palette.springGreen },
 
                         -- treesitter
-                        ["@variable"] = { fg = normal },
-                        ["@variable.builtin"] = { fg = normal, italic = false },
-                        ["@variable.parameter"] = { fg = normal },
-                        ["@variable.member"] = { fg = normal },
-                        ["@string.special.symbol"] = { fg = normal },
-                        ["@attribute"] = { fg = normal },
-                        ["@constructor"] = { fg = type },
-                        ["@operator"] = { fg = normal },
-                        ["@keyword.operator"] = { fg = special, bold = false },
-                        ["@keyword.return"] = { fg = special },
-                        ["@keyword.import"] = { fg = special },
-                        ["@keyword.exception"] = { fg = special },
-                        ["@punctuation.delimiter"] = { fg = normal },
-                        ["@punctuation.bracket"] = { fg = normal },
-                        ["@punctuation.special"] = { fg = normal },
+                        ["@variable"]                 = { fg = normal },
+                        ["@variable.builtin"]         = { fg = normal, italic = false },
+                        ["@variable.parameter"]       = { fg = normal },
+                        ["@variable.member"]          = { fg = normal },
+                        ["@string.special.symbol"]    = { fg = normal },
+                        ["@attribute"]                = { fg = normal },
+                        ["@constructor"]              = { fg = type },
+                        ["@operator"]                 = { fg = normal },
+                        ["@keyword.operator"]         = { fg = special, bold = false },
+                        ["@keyword.return"]           = { fg = special },
+                        ["@keyword.import"]           = { fg = special },
+                        ["@keyword.exception"]        = { fg = special },
+                        ["@punctuation.delimiter"]    = { fg = normal },
+                        ["@punctuation.bracket"]      = { fg = normal },
+                        ["@punctuation.special"]      = { fg = normal },
 
                         -- c#
                         ["@keyword.operator.c_sharp"] = { link = "Special" },
                         ["@variable.builtin.c_sharp"] = { link = "Special" },
-                        ["@keyword.return.c_sharp"] = { link = "Exception" },
-                        ["@attribute.c_sharp"] = { link = "Type" },
+                        ["@keyword.return.c_sharp"]   = { link = "Exception" },
+                        ["@attribute.c_sharp"]        = { link = "Type" },
 
                         -- lua
-                        ["@keyword.operator.lua"] = { link = "Special" },
-                        ["@keyword.return.lua"] = { link = "Exception" },
-                        ["@keyword.import.c_sharp"] = { link = "Special" },
-                        ["@constructor.lua"] = { fg = normal },
+                        ["@keyword.operator.lua"]     = { link = "Special" },
+                        ["@keyword.return.lua"]       = { link = "Exception" },
+                        ["@keyword.import.c_sharp"]   = { link = "Special" },
+                        ["@constructor.lua"]          = { fg = normal },
 
                         -- rust
-                        ["@keyword.return.rust"] = { link = "Exception" },
-                        ["@keyword.import.rust"] = { link = "Special" },
+                        ["@keyword.return.rust"]      = { link = "Exception" },
+                        ["@keyword.import.rust"]      = { link = "Special" },
 
                         -- vim
-                        ["@function.macro.vim"] = { link = "String" },
+                        ["@function.macro.vim"]       = { link = "String" },
                     }
                 end,
             }
