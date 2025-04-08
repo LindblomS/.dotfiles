@@ -17,6 +17,9 @@ return {
                 ["<M-Up>"] = { "scroll_documentation_up" },
                 ["<M-Down>"] = { "scroll_documentation_down" },
             },
+            cmdline = {
+                enabled = false,
+            },
             completion = {
                 documentation = {
                     auto_show = true,
