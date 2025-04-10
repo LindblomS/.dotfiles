@@ -4,9 +4,7 @@ return {
     init_options = {
         provideFormatter = true,
     },
-    root_dir = function(fname)
-        return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    end,
+    root_marker = { ".git" },
     docs = {
         -- this language server config is in VSCode built-in package.json
         description = [[
