@@ -67,28 +67,7 @@ local function lineinfo()
 end
 
 local function filename()
-    local cwd              = vim.uv.cwd()
-    local bufname          = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-    local relative_bufname = require("plenary.path"):new(bufname):make_relative(cwd)
-    local base             = vim.fs.basename(relative_bufname)
-    local dir              = vim.fs.dirname(relative_bufname)
-    cwd                    = vim.fs.basename(cwd)
-    -- todo: cwd seems to be absolute or something on windows
-    dir                    = cwd .. "/" .. dir
-
-    -- trim start of path
-    local win_width        = vim.api.nvim_win_get_width(0)
-    local min_width        = math.floor(win_width / 7)
-    local dir_is_trimmed   = false
-    while #dir > min_width do
-        dir = dir:sub(10)
-        dir_is_trimmed = true
-    end
-    if dir_is_trimmed then
-        dir = "..." .. dir
-    end
-
-    return string.format("%s/%%#CursorLineNr#%s", dir, base)
+    return "%f/%#CursorLineNr#%t"
 end
 
 Statusline = {}
@@ -99,7 +78,7 @@ Statusline.active = function()
         filename(),
         " " .. lsp(),
         "%#Statusline#",
-        " " .. lineinfo(),
+        "%=" .. lineinfo(),
     })
 end
 
