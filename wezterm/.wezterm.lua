@@ -7,6 +7,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 end
 
 config.window_decorations = "RESIZE"
+config.audible_bell = "Disabled"
 
 config.font = wezterm.font("IBM Plex Mono", {})
 config.font_size = 13
