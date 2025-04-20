@@ -2,6 +2,7 @@ vim.g.mapleader = ' '
 vim.g.netrw_banner = 0
 
 local o = vim.o
+vim.o.winborder = "rounded"
 o.nu = true
 o.relativenumber = true
 o.wrap = false

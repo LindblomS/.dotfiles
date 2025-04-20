@@ -39,7 +39,11 @@ function Git_branch()
 end
 
 Logger = require("logger")
--- require("harpun").setup()
 require("harpun"):setup()
 require("statusline")
 require("oil").setup()
+require("lsp")
+
+vim.diagnostic.config({
+    virtual_text = true,
+})

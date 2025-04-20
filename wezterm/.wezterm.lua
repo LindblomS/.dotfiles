@@ -7,12 +7,23 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 end
 
 config.window_decorations = "RESIZE"
+config.audible_bell = "Disabled"
 
 config.font = wezterm.font("IBM Plex Mono", {})
 config.font_size = 13
 config.line_height = 1.1
 
 config.keys = {
+    {
+        key = "n",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+        key = "e",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.DisableDefaultAssignment,
+    },
     {
         key = "w",
         mods = "CTRL|SHIFT",
