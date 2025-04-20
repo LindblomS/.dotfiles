@@ -1,6 +1,0 @@
-- Added vim.o.winborder = "rounded" and removed all other border logic for hover windows. 
-- Replaced lsp signature normal keymap <leader>ls with <C-s> (the same one in insert mode).
-- Set virtual_text to true in vim.diagnostic.config
-- Migrated all lsp configs from lspconfig to new vim.lsp.config 
-- Added plugin blink.cmp. 
-- Added local diagnostics keymap for telescope. 
