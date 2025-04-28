@@ -132,6 +132,7 @@ return {
 
                         -- typescript
                         ["@lsp.typemod.function.readonly.typescript"] = { fg = functions },
+                        ["@lsp.typemod.function.readonly.vue"]        = { fg = functions },
 
                         -- vim
                         ["@function.macro.vim"]                       = { link = "String" },
