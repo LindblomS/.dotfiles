@@ -132,6 +132,7 @@ return {
 
                         -- typescript
                         ["@lsp.typemod.function.readonly.typescript"] = { fg = functions },
+                        ["@lsp.typemod.function.readonly.javascript"] = { fg = functions },
                         ["@lsp.typemod.function.readonly.vue"]        = { fg = functions },
                         ["@lsp.typemod.variable.defaultLibrary.vue"]  = { fg = normal },
                         ["@keyword.return.typescript"]                = { fg = very_special },
