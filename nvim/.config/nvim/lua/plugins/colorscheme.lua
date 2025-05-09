@@ -128,7 +128,9 @@ return {
                         ["@lsp.type.enumMember.rust"]                 = { fg = type },
                         ["@lsp.type.macro.rust"]                      = { fg = functions },
                         ["@lsp.typemod.method.defaultLibrary.rust"]   = { fg = functions },
+                        ["@lsp.typemod.function.defaultLibrary.rust"] = { fg = functions },
                         ["@character.special.rust"]                   = { fg = normal },
+                        ["@lsp.type.decorator.rust"]                  = { fg = functions },
 
                         -- typescript
                         ["@lsp.typemod.function.readonly.typescript"] = { fg = functions },
