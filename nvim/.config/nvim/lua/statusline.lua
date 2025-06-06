@@ -67,7 +67,7 @@ local function lineinfo()
 end
 
 local function filename()
-    return "%f/%#CursorLineNr#%t"
+    return "%f"
 end
 
 Statusline = {}
