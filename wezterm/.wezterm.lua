@@ -10,7 +10,7 @@ config.window_decorations = "RESIZE"
 config.audible_bell = "Disabled"
 
 config.font = wezterm.font("IBM Plex Mono", {})
-config.font_size = 13
+config.font_size = 15
 config.line_height = 1.1
 
 config.keys = {
