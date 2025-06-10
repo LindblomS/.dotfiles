@@ -8,3 +8,4 @@ nvim
 will by default the current directory of the current buffer. 
 - Roslyn: disable unnecessary printing. 
 - Fix hover (<C-k>) escaping . (\.) and things like that. 
+- Add local diagnostics (diagnostic for current buffer).
