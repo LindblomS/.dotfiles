@@ -55,9 +55,27 @@ vim.api.nvim_create_user_command('Roslyn',
                 }
             },
         })
+
+        -- WIP
+        -- Convenience command for testing in dotnet
+        vim.api.nvim_create_user_command("Test",
+            -- todo search upwards for the first .csproj file
+            -- We should be able to use that to set cwd for the term.
+            function()
+                local word = vim.F.if_nil(nil, vim.fn.expand("<cword>"))
+
+                vim.cmd(":term")
+                local channel = vim.bo.channel
+                if word then
+                    vim.api.nvim_chan_send(channel, string.format("dotnet test --filter=\"%s\"", word))
+                else
+                    vim.api.nvim_chan_send(channel, string.format("dotnet test", word))
+                end
+            end, {})
     end,
     {}
 )
+
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local lsp_opts = { buffer = args.buf }
