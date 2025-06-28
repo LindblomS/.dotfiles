@@ -85,6 +85,10 @@ return {
             end, {
                 desc = "[F]ind [l]ocal [d]iagnostics (in current buffer)",
             })
+
+            vim.api.nvim_create_user_command("Helpt", function()
+                builtin.help_tags()
+            end, { desc = "Search for help tags" })
         end,
     },
 }
