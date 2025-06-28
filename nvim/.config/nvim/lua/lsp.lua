@@ -34,47 +34,7 @@ vim.lsp.enable("ts_ls")
 vim.lsp.config.eslint = require("lsp.eslint")
 vim.lsp.enable("eslint")
 
-vim.api.nvim_create_user_command('Roslyn',
-    function()
-        require("roslyn").setup({
-            filewatching = false,
-            config = {
-                ["csharp|completion"] = {
-                    dotnet_provide_regex_completions = false,
-                    dotnet_show_completion_items_from_unimported_namespaces = true,
-                    dotnet_show_name_completion_suggestions = false,
-                },
-                ["csharp|code_lens"] = {
-                    dotnet_enable_references_code_lens = false,
-                    dotnet_enable_tests_code_lens = false,
-                },
-                ["csharp|background_analysis"] = {
-                    -- change to openFiles if performance is slow
-                    dotnet_analyzer_diagnostics_scope = "fullSolution",
-                    dotnet_compiler_diagnostics_scope = "fullSolution"
-                }
-            },
-        })
-
-        -- WIP
-        -- Convenience command for testing in dotnet
-        vim.api.nvim_create_user_command("Test",
-            -- todo search upwards for the first .csproj file
-            -- We should be able to use that to set cwd for the term.
-            function()
-                local word = vim.F.if_nil(nil, vim.fn.expand("<cword>"))
-
-                vim.cmd(":term")
-                local channel = vim.bo.channel
-                if word then
-                    vim.api.nvim_chan_send(channel, string.format("dotnet test --filter=\"%s\"", word))
-                else
-                    vim.api.nvim_chan_send(channel, string.format("dotnet test", word))
-                end
-            end, {})
-    end,
-    {}
-)
+require("lsp.dotnet")
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
