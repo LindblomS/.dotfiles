@@ -1,3 +1,6 @@
+bash
+- Set nvim as the default editor in bash.
+
 nvim
 
 - Add redo last search to telescope
