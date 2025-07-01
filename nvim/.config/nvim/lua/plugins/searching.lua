@@ -27,7 +27,7 @@ return {
                     "--smart-case",
                     "--trim"
                 },
-                preview = false,
+                preview = true,
                 path_display = {
                     "filename_first",
                     "truncate"
@@ -44,17 +44,6 @@ return {
                         ["q"] = "send_selected_to_qflist",
                     },
                 },
-            },
-            pickers = {
-                live_grep = {
-                    preview = true,
-                },
-                lsp_document_symbols = {
-                    preview = true,
-                },
-                lsp_references = {
-                    preview = true,
-                }
             },
         },
         keys = {
