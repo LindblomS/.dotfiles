@@ -74,6 +74,7 @@ return {
             end, {
                 desc = "[F]ind [l]ocal [d]iagnostics (in current buffer)",
             })
+            set("n", "<leader>j", builtin.jumplist, { desc = "[J]umplist" })
 
             vim.api.nvim_create_user_command("Helpt", function()
                 builtin.help_tags()
