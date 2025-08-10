@@ -7,5 +7,9 @@ return {
     {
         "nvim-tree/nvim-web-devicons",
         commit = "4c3a5848ee0b09ecdea73adcd2a689190aeb728c",
-    }
+    },
+    {
+        "nvim-lua/plenary.nvim",
+        commit = "3707cdb1e43f5cea73afb6037e6494e7ce847a66",
+    },
 }

@@ -1,84 +1,38 @@
 return {
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            {
-                "nvim-lua/plenary.nvim",
-                commit = "3707cdb1e43f5cea73afb6037e6494e7ce847a66",
-            },
-        },
-        commit = "415af52339215926d705cccc08145f3782c4d132",
-        opts = {
-            defaults = {
-                -- Telescope needs to be updated with the new vim.o.winborder = "rounded" from nvim 0.11
-                -- Setting border to false seems to be a nice temporary fix.
-                border = false,
-                layout_strategy = "vertical",
-                layout_config = {
-                    width = 0.9,
-                },
-                vimgrep_arguments = {
-                    "rg",
-                    "--color=never",
-                    "--no-heading",
-                    "--with-filename",
-                    "--line-number",
-                    "--column",
-                    "--smart-case",
-                    "--trim"
-                },
-                preview = true,
-                path_display = {
-                    "filename_first",
-                    "truncate"
-                },
-                mappings = {
-                    i = {
-                        ["<C-j>"] = "move_selection_next",
-                        ["<C-k>"] = "move_selection_previous",
-                    },
-                    n = {
-                        ["d"] = "delete_buffer",
-                        ["a"] = "add_selection",
-                        ["r"] = "remove_selection",
-                        ["q"] = "send_selected_to_qflist",
-                    },
-                },
-            },
-        },
-        keys = {
-            { "<leader>ff" },
-            { "<leader>fw" },
-        },
-        config = function(_, opts)
-            local telescope = require("telescope")
-            telescope.setup(opts)
-            local builtin = require("telescope.builtin")
-            local set = vim.keymap.set
-            set("n", "gr", builtin.lsp_references, { desc = "Go to reference" })
-            set("n", "gs", builtin.lsp_document_symbols, { desc = "Go to document symbol" })
-            set("n", "gd", builtin.lsp_definitions, { desc = "Go to definition" })
-            set("n", "gD", builtin.lsp_type_definitions, { desc = "Go to type definition" })
-            set("n", "gi", builtin.lsp_implementations, { desc = "Go to implementation" })
-            set("n", "<leader>ff", builtin.find_files, { desc = "Find files, respects .gitignore" })
-            set("n", "<leader>faf", function()
-                builtin.find_files({ no_ignore = true })
-            end, { desc = "Find all files" })
-            set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
-            set("n", "<leader>fw", builtin.live_grep, { desc = "Find word" })
-            set({ "n", "v" }, "<leader>fW", builtin.grep_string, { desc = "Find word under cursor or selection" })
-            set("n", "<leader>q", builtin.quickfix, { desc = "Quickfix list" })
-            set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [d]iagnostics" })
-            set("n", "<leader>fld", function()
-                builtin.diagnostics({ bufnr = 0 })
-            end, {
-                desc = "[F]ind [l]ocal [d]iagnostics (in current buffer)",
-            })
-            set("n", "<leader>j", builtin.jumplist, { desc = "[J]umplist" })
-
-            vim.api.nvim_create_user_command("Helpt", function()
-                builtin.help_tags()
-            end, { desc = "Search for help tags" })
-        end,
+    "ibhagwan/fzf-lua",
+    commit = "edf3524164c0878e64968cb1d4a24ba695b1ee12",
+    opts = {
+        keymap = {
+            fzf = {
+                ["ctrl-q"] = "select-all+accept",
+            }
+        }
     },
+    config = function(_, opts)
+        local f = require("fzf-lua")
+        f.setup(opts)
+        local s = vim.keymap.set
+
+        s("n", "<leader>ff", f.files, { desc = "[F]ind [f]iles" })
+        s("n", "<leader>fb", f.buffers, { desc = "[F]ind [b]uffers" })
+        s("n", "<leader>fw", f.live_grep, { desc = "[F]ind [w]ord" })
+        s({ "n", "v" }, "<leader>fW", f.grep_cword, { desc = "[F]ind [w]ord under cursor or selection" })
+        s("n", "<leader>faf", function()
+            f.files({ no_ignore = true })
+        end, { desc = "[F]ind [a]ll [f]iles" })
+        s("n", "<leader>q", f.quickfix, { desc = "Quickfix list" })
+        s("n", "<leader>j", f.jumps, { desc = "[J]umplist" })
+
+        s("n", "gr", f.lsp_references, { desc = "Go to reference" })
+        s("n", "gs", f.lsp_document_symbols, { desc = "Go to document symbol" })
+        s("n", "gd", f.lsp_definitions, { desc = "Go to definition" })
+        s("n", "gD", f.lsp_typedefs, { desc = "Go to type definition" })
+        s("n", "gi", f.lsp_implementations, { desc = "Go to implementation" })
+        s("n", "<leader>fd", f.lsp_workspace_diagnostics, { desc = "[F]ind [d]iagnostics" })
+        s("n", "<leader>fld", f.lsp_document_diagnostics, { desc = "[F]ind [l]ocal [d]iagnostics" })
+
+        vim.api.nvim_create_user_command("Helpt", function()
+            f.helptags()
+        end, { desc = "Search for help tags" })
+    end
 }
