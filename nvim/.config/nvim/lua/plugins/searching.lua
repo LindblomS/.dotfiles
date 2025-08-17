@@ -6,6 +6,11 @@ return {
             fzf = {
                 ["ctrl-q"] = "select-all+accept",
             }
+        },
+        winopts = {
+            preview = {
+                hidden = true,
+            }
         }
     },
     config = function(_, opts)
@@ -30,6 +35,10 @@ return {
         s("n", "gi", f.lsp_implementations, { desc = "Go to implementation" })
         s("n", "<leader>fd", f.lsp_workspace_diagnostics, { desc = "[F]ind [d]iagnostics" })
         s("n", "<leader>fld", f.lsp_document_diagnostics, { desc = "[F]ind [l]ocal [d]iagnostics" })
+        s("n", "<leader>ca", f.lsp_code_actions, { desc = "[C]ode [a]tions" })
+        s("n", "<leader>ca", function()
+            f.lsp_code_actions({ silent = true })
+        end, { desc = "[C]ode [a]tions" })
 
         vim.api.nvim_create_user_command("Helpt", function()
             f.helptags()
