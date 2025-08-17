@@ -1,8 +1,5 @@
-bash
-- Set nvim as the default editor in bash.
-
 nvim
 
 - Add indent all parameters keymap for csharp development
-will by default the current directory of the current buffer. 
 - Roslyn: disable unnecessary printing. 
+- Roslyn: Update code
