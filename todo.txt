@@ -3,3 +3,4 @@ nvim
 - Add indent all parameters keymap for csharp development
 - Roslyn: disable unnecessary printing. 
 - Roslyn: Update code
+- Check if search in files or quickfix in fzf-lua can take regex. E.g. would be nice to filter "\.UT$" in find files.
