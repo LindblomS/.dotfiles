@@ -11,6 +11,9 @@ return {
             preview = {
                 hidden = true,
             }
+        },
+        lsp = {
+            async_or_timeout = 20000,
         }
     },
     config = function(_, opts)

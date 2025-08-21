@@ -1,6 +1,5 @@
 nvim
 
-- Increase lsp timeout in fzf-lua.
 - Add indent all parameters keymap for csharp development
 - Roslyn: disable unnecessary printing. 
 - Roslyn: Update code
