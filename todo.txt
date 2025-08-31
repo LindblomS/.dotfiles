@@ -7,3 +7,4 @@ nvim
 - Trim filepath in fzf-lua. 
 - Have a single .editorconfig for repo.
 - Disable snippets when autocompleting functions.
+- Add code action float at cursor.
