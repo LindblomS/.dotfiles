@@ -27,4 +27,4 @@ end, { desc = "Substitute word under cursor or selection" })
 keymap.set("n", "q", "<Nop>",
     { desc = "I never use complex repeats so it's more convenient to just disable it. Se :h q" })
 
-keymap.set("t", "<M-t>", "<C-\\><C-N>", { desc = "Exit terminal mode"})
+keymap.set("t", "<M-t>", "<C-\\><C-N>", { desc = "Exit terminal mode" })
