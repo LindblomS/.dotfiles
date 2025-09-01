@@ -8,3 +8,4 @@ nvim
 - Have a single .editorconfig for repo.
 - Disable snippets when autocompleting functions.
 - Add code action float at cursor.
+- Harpun: On windows (maybe linux?) filepaths are absolute instead of relative.
