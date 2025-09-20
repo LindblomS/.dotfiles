@@ -36,8 +36,24 @@ return {
         s("n", "gd", f.lsp_definitions, { desc = "Go to definition" })
         s("n", "gD", f.lsp_typedefs, { desc = "Go to type definition" })
         s("n", "gi", f.lsp_implementations, { desc = "Go to implementation" })
-        s("n", "<leader>fd", f.lsp_workspace_diagnostics, { desc = "[F]ind [d]iagnostics" })
         s("n", "<leader>fld", f.lsp_document_diagnostics, { desc = "[F]ind [l]ocal [d]iagnostics" })
+        s("n", "<leader>fgd", f.lsp_workspace_diagnostics, { desc = "[F]ind [g]lobal [d]iagnostics" })
+
+        s("n", "<leader>fgwd",
+            function() f.lsp_workspace_diagnostics({ severity_only = vim.diagnostic.WARN }) end,
+            { desc = "[F]ind [g]lobal [w]arning [d]iagnostics" })
+
+        s("n", "<leader>fged",
+            function() f.lsp_workspace_diagnostics({ severity_only = vim.diagnostic.ERROR }) end,
+            { desc = "[F]ind [g]lobal [e]rror [d]iagnostics" })
+
+        s("n", "<leader>flwd",
+            function() f.lsp_document_diagnostics({ severity_only = vim.diagnostic.severity.WARN }) end,
+            { desc = "[F]ind [l]ocal [w]arning [d]iagnostics" })
+
+        s("n", "<leader>fled",
+            function() f.lsp_document_diagnostics({ severity_only = vim.diagnostic.severity.ERROR }) end,
+            { desc = "[F]ind [l]ocal [e]rror [d]iagnostics" })
 
         vim.api.nvim_create_user_command("Helpt", function()
             f.helptags()
