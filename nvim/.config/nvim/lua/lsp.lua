@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
                 -- Hack to keep diagnostics after format in lua_ls.
                 if client.name == "lua_ls" then
-                    vim.diagnostic.enable(args.buf)
+                    vim.diagnostic.enable()
                 end
             end
         })
