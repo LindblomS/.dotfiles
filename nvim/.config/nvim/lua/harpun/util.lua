@@ -1,11 +1,12 @@
 local M = {}
 
-local function normalize_path(file, root)
-    return require("plenary.path"):new(file):make_relative(root)
-end
-
 function M.get_file()
-    return normalize_path(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), vim.fn.getcwd())
+    local cwd = vim.fn.getcwd()
+    local file_path = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+    local relative_path = string.gsub(file_path, cwd, "")
+    -- Trim any precceding / or \
+    relative_path = string.sub(relative_path, 2)
+    return relative_path
 end
 
 function M.get_file_display_name(file)
