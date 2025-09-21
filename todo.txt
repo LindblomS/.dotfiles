@@ -10,4 +10,3 @@ nvim
 - Add code action float at cursor.
 - Harpun: On windows (maybe linux?) filepaths are absolute instead of relative.
 - Add user command for building the current project in dotnet (if you're in a solution with many projects). 
-- Add UserCommand that will convert \n in visual selection to actual new lines.

@@ -1,2 +1,5 @@
-To fix when treesitter and buffer gets out of sync.
+To fix when treesitter and buffer gets out of sync. 
 :write | edit | TSBufEnable highlight
+
+Substituting by \n will insert a null character, \r will insert a new line. Think of it as pressing Return/Enter.
+Searching will still match newlines by \n however. 
