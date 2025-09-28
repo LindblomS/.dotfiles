@@ -6,6 +6,5 @@ nvim
 - Check if search in files or quickfix in fzf-lua can take regex. E.g. would be nice to filter "\.UT$" in find files.
 - Trim filepath in fzf-lua. 
 - Have a single .editorconfig for repo.
-- Disable snippets when autocompleting functions.
 - Add code action float at cursor.
 - Add user command for building the current project in dotnet (if you're in a solution with many projects). 
