@@ -8,3 +8,4 @@ nvim
 - Have a single .editorconfig for repo.
 - Add code action float at cursor.
 - Add user command for building the current project in dotnet (if you're in a solution with many projects). 
+- Harpun: Fix bug where linux having absolute paths sometimes
