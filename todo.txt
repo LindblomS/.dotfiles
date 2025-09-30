@@ -9,4 +9,4 @@ nvim
 - Add code action float at cursor.
 - Add user command for building the current project in dotnet (if you're in a solution with many projects). 
 - Harpun: Fix bug where linux having absolute paths sometimes
-- Change user command Dotnet so that you don't have to navigate to a .cs file to start the language server.
+- Change user command Dotnet so that you don't have to navigate to a .cs file to start the language server. (Prompt if you want to start the language server? That way the user command could be removed)
