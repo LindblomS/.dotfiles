@@ -67,3 +67,46 @@ vim.api.nvim_create_autocmd('LspAttach', {
         })
     end
 })
+
+Global_var_term_buf = "global_var_term_buf"
+
+-- todo:
+-- Add keymap <leader>t to open terminal if it exists
+-- Setup_test_cmd for rust
+
+-- Setup the Test command which will utilize a reuseable terminal for running test command, e.g. `dotnet test --filter="..."`.
+function Setup_test_cmd(get_cmd)
+    vim.api.nvim_create_user_command("Test", function()
+        local function execute_cmd(buf, cmd)
+            vim.api.nvim_set_current_buf(buf)
+            local chan = vim.bo[buf].channel
+            vim.api.nvim_chan_send(chan, cmd)
+        end
+
+        -- todo: comment about current buffer and getting word under cursor
+        local cmd = get_cmd()
+
+        -- Reuse terminal if it already exists.
+        local ok, buf = pcall(vim.api.nvim_get_var, Global_var_term_buf)
+        if ok and buf then
+            execute_cmd(buf, cmd)
+            return
+        end
+
+        vim.cmd(":term")
+        -- Terminal needs time to initialize before running vim.api.nvim_chan_send.
+        os.execute("sleep " .. tonumber(0.1))
+
+        buf = vim.api.nvim_get_current_buf()
+        vim.api.nvim_set_var(Global_var_term_buf, buf)
+        execute_cmd(buf, cmd)
+
+        -- Reset Global_var_term_buf when this buffer is deleted.
+        vim.api.nvim_create_autocmd("BufDelete", {
+            buffer = buf,
+            callback = function()
+                vim.api.nvim_set_var(Global_var_term_buf, nil)
+            end
+        })
+    end, {})
+end
