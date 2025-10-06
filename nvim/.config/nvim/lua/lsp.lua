@@ -94,8 +94,6 @@ function Setup_test_cmd(get_cmd)
         end
 
         vim.cmd(":term")
-        -- Terminal needs time to initialize before running vim.api.nvim_chan_send.
-        os.execute("sleep " .. tonumber(0.1))
 
         buf = vim.api.nvim_get_current_buf()
         vim.api.nvim_set_var(Global_var_term_buf, buf)
