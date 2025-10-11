@@ -42,14 +42,13 @@ local function sort_last_used_solution(solutions)
     return sorted
 end
 
+--- Hardcoded option to not enable lsp
+M.Continue_without_lsp = "Continue without lsp"
+
 ---@param solutions string[]
 local function choose_solution(solutions)
     if #solutions == 0 then
         return nil
-    end
-
-    if #solutions == 1 then
-        return solutions[1]
     end
 
     local names = {}
@@ -57,13 +56,20 @@ local function choose_solution(solutions)
         names[i] = vim.fs.basename(v)
     end
 
+    table.insert(names, 1, M.Continue_without_lsp)
+
     local selected_index
     vim.ui.select(names, { prompt = "Select solution" },
         function(_, index)
             selected_index = index
         end)
 
-    return solutions[selected_index]
+    if selected_index == 1 then
+        return M.Continue_without_lsp
+    end
+
+    -- -1 Because Continue_without_lsp with offset `names` with 1
+    return solutions[selected_index - 1]
 end
 
 function M.get_solution(buffer)

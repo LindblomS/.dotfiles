@@ -1,27 +1,22 @@
-vim.api.nvim_create_user_command('Dotnet',
-    function()
-        require("roslyn").setup({
-            filewatching = false,
-            config = {
-                ["csharp|completion"] = {
-                    dotnet_provide_regex_completions = false,
-                    dotnet_show_completion_items_from_unimported_namespaces = true,
-                    dotnet_show_name_completion_suggestions = false,
-                },
-                ["csharp|code_lens"] = {
-                    dotnet_enable_references_code_lens = false,
-                    dotnet_enable_tests_code_lens = false,
-                },
-                ["csharp|background_analysis"] = {
-                    -- change to openFiles if performance is slow
-                    dotnet_analyzer_diagnostics_scope = "fullSolution",
-                    dotnet_compiler_diagnostics_scope = "fullSolution"
-                }
-            },
-        })
-    end,
-    {}
-)
+require("roslyn").setup({
+    filewatching = false,
+    config = {
+        ["csharp|completion"] = {
+            dotnet_provide_regex_completions = false,
+            dotnet_show_completion_items_from_unimported_namespaces = true,
+            dotnet_show_name_completion_suggestions = false,
+        },
+        ["csharp|code_lens"] = {
+            dotnet_enable_references_code_lens = false,
+            dotnet_enable_tests_code_lens = false,
+        },
+        ["csharp|background_analysis"] = {
+            -- change to openFiles if performance is slow
+            dotnet_analyzer_diagnostics_scope = "fullSolution",
+            dotnet_compiler_diagnostics_scope = "fullSolution"
+        }
+    },
+})
 
 -- Setup a helper command for testing in dotnet that will open a terminal with the "dotnet test" command with:
 -- - The first project found by traversing upward using the current filepath.

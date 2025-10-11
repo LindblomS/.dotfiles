@@ -237,10 +237,11 @@ function M.setup(config)
             end
 
             local solution = utils.get_solution(opt.buf)
-            if solution then
-                return start_with_solution(cmd, solution, roslyn_config, on_init_solution)
-            else
+
+            if not solution then
                 vim.notify("Unable to start roslyn language server. No solution was found", vim.log.levels.INFO)
+            elseif solution ~= utils.Continue_without_lsp then
+                return start_with_solution(cmd, solution, roslyn_config, on_init_solution)
             end
         end,
     })
