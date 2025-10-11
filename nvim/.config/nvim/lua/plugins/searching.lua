@@ -14,7 +14,8 @@ return {
         },
         lsp = {
             async_or_timeout = 20000,
-        }
+        },
+        fzf_colors = true,
     },
     config = function(_, opts)
         local f = require("fzf-lua")
