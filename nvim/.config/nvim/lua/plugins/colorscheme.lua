@@ -127,6 +127,7 @@ return {
                         Italic                                              = { italic = false },
                         Comment                                             = { fg = comment },
                         String                                              = { fg = normal },
+                        yamlPlainScalar                                     = { fg = normal },
 
                         -- treesitter
                         ["@variable"]                                       = { fg = normal },
