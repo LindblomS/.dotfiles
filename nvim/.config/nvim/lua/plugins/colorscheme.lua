@@ -127,7 +127,15 @@ return {
                         Italic                                              = { italic = false },
                         Comment                                             = { fg = comment },
                         String                                              = { fg = normal },
+
+                        -- syntax yaml
                         yamlPlainScalar                                     = { fg = normal },
+
+                        -- syntax docker
+                        dockerfileShell                                     = { fg = normal },
+                        dockerfileValue                                     = { fg = normal },
+                        dockerfileInstruction                               = { fg = normal },
+                        dockerfileFrom                                      = { fg = normal },
 
                         -- treesitter
                         ["@variable"]                                       = { fg = normal },
