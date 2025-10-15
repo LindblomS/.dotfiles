@@ -69,6 +69,7 @@ return {
                     end
 
                     return {
+                        Normal                                              = { fg = normal },
                         FloatBorder                                         = { bg = "none" },
                         NormalFloat                                         = { bg = "none", fg = normal },
                         FloatTitle                                          = { bg = "none" },
