@@ -64,7 +64,7 @@ local function choose_solution(solutions)
             selected_index = index
         end)
 
-    if selected_index == 1 then
+    if not selected_index or selected_index == 1 then
         return M.Continue_without_lsp
     end
 
