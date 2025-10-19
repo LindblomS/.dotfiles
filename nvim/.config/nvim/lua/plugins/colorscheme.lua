@@ -5,7 +5,8 @@ return {
         commit = "cc3b68b08e6a0cb6e6bf9944932940091e49bb83",
         priority = 1000,
         enabled = true,
-        config = function()
+        compile = false, -- try setting this to true and run :KanagawaCompile and see if it gets faster
+        config = function(config)
             local opts = {
                 colors = {
                     theme = {
@@ -26,16 +27,22 @@ return {
 
                 },
                 overrides = function(colors)
-                    local normal = colors.palette.sumiInk0 -- i.e. regular text
-                    local special = colors.palette.lotusBlue5
-                    -- return, throw etc
-                    local very_special = colors.palette.samuraiRed
-                    local comment = colors.palette.lotusInk1
-                    local type = normal
-                    local functions = normal
-                    local boolean = normal
-                    local number = normal
-                    local bg = colors.palette.lotusWhite3
+                    local p = colors.palette
+                    local bg = p.lotusWhite3
+                    local bg_darker = p.lotusWhite5
+                    local text = p.sumiInk0
+                    local comment = p.lotusInk1
+                    local important = p.samuraiRed
+                    local selection = p.roninYellow
+
+                    local diff_add = p.lotusGreen -- or loturGreen2
+                    local diff_delete = p.samuraiRed
+                    local diff_change = p.roninYellow
+
+                    local diag_error = p.samuraiRed
+                    local diag_warn = p.roninYellow
+                    local diag_info = p.lotusBlue4 -- or lotusBlue5
+                    local diag_hint = p.lotusInk1  -- same as comment
 
                     -- lsp semantic tokens takes priority over treesitter.
                     -- This disables highlighting for given tokens
@@ -69,129 +76,191 @@ return {
                     end
 
                     return {
-                        Normal                                              = { fg = normal },
-                        FloatBorder                                         = { bg = "none" },
-                        NormalFloat                                         = { bg = "none", fg = normal },
-                        FloatTitle                                          = { bg = "none" },
-                        CurSearch                                           = { bg = colors.palette.lotusOrange2, fg = normal, bold = false },
-                        CursorLineNr                                        = { fg = colors.palette.lotusOrange2 },
-                        IncSearch                                           = { fg = normal, bg = colors.palette.lotusOrange2 },
-                        Search                                              = { fg = normal, bg = colors.palette.lotusWhite5 },
-                        Substitute                                          = { fg = normal, bg = colors.palette.lotusOrange2 },
-                        LineNr                                              = { fg = normal },
-                        Visual                                              = { bg = colors.palette.lotusWhite5 },
+                        Normal         = { fg = text },
+                        FloatBorder    = { fg = text, bg = "none" },
+                        FloatTitle     = { fg = text, bg = "none" },
+                        FloatFooter    = { fg = text, bg = "none" },
+                        NormalFloat    = { bg = "none", fg = text },
+                        CurSearch      = { bg = selection, fg = text, bold = false },
+                        CursorLineNr   = { fg = selection },
+                        CursorLine     = { fg = text, bg = bg_darker },
+                        CursorLineFold = { fg = text, bg = "none" },
+                        CursorLineSign = { fg = text, bg = "none" },
+                        IncSearch      = { fg = text, bg = selection },
+                        Search         = { fg = text, bg = bg_darker },
+                        Substitute     = { fg = text, bg = selection },
+                        LineNr         = { fg = text },
+                        Visual         = { bg = bg_darker },
+                        MsgArea        = { fg = text, bg = "none" },
+                        MsgSeparator   = { fg = text, bg = bg_darker },
+
+                        MoreMsg        = { fg = text, bg = "none" },
+                        NoneText       = { fg = text, bg = "none" },
+
+                        Pmenu          = { fg = text, bg = bg_darker },
+                        PmenuSel       = { fg = text, bg = bg_darker },
+                        PmenuKind      = { fg = text, bg = bg_darker },
+                        PmenuKindSel   = { fg = text, bg = bg_darker },
+                        PmenuExtra     = { fg = text, bg = bg_darker },
+                        PmenuExtraSel  = { fg = text, bg = bg_darker },
+                        PmenuSbar      = { fg = text, bg = bg_darker },
+                        PmenuThumb     = { fg = text, bg = bg_darker },
+                        -- Maybe change these
+                        -- PmenuMatch =
+                        -- PmenuMatchSel =
+
+
+                        DiffAdd                                             = { bg = diff_add },
+                        DiffDelete                                          = { bg = diff_delete, fg = text, },
+                        DiffChange                                          = { bg = diff_change },
+                        ErrorMsg                                            = { fg = diag_error },
+
+                        DiagnosticError                                     = { fg = diag_error },
+                        DiagnosticWarn                                      = { fg = diag_warn },
+                        DiagnosticInfo                                      = { fg = diag_info },
+                        DiagnosticHint                                      = { fg = diag_hint },
+                        DiagnosticOk                                        = { fg = text },
+
+                        DiagnosticFloatingError                             = { fg = diag_error },
+                        DiagnosticFloatingWarn                              = { fg = diag_warn },
+                        DiagnosticFloatingInfo                              = { fg = diag_info },
+                        DiagnosticFloatingHint                              = { fg = diag_hint },
+                        DiagnosticFloatingOk                                = { fg = text },
+
+                        -- DiagnosticSignError        = { fg = diag_error, bg = theme.ui.bg_gutter },
+                        DiagnosticSignError                                 = { fg = diag_error, bg = bg },
+                        DiagnosticSignWarn                                  = { fg = diag_warn, bg = bg },
+                        DiagnosticSignInfo                                  = { fg = diag_info, bg = bg },
+                        DiagnosticSignHint                                  = { fg = diag_hint, bg = bg },
+
+                        DiagnosticVirtualTextError                          = { link = "DiagnosticError" },
+                        DiagnosticVirtualTextWarn                           = { link = "DiagnosticWarn" },
+                        DiagnosticVirtualTextInfo                           = { link = "DiagnosticInfo" },
+                        DiagnosticVirtualTextHint                           = { link = "DiagnosticHint" },
+
+                        DiagnosticUnderlineError                            = { undercurl = config.undercurl, underline = not config.undercurl, sp = diag_error },
+                        DiagnosticUnderlineWarn                             = { undercurl = config.undercurl, underline = not config.undercurl, sp = diag_warn },
+                        DiagnosticUnderlineInfo                             = { undercurl = config.undercurl, underline = not config.undercurl, sp = diag_info },
+                        DiagnosticUnderlineHint                             = { undercurl = config.undercurl, underline = not config.undercurl, sp = diag_hint },
+
+                        diffAdded                                           = { fg = diff_add },
+                        diffRemoved                                         = { fg = diff_delete },
+                        diffDeleted                                         = { fg = diff_delete },
+                        diffChanged                                         = { fg = diff_change },
+                        diffOldFile                                         = { fg = diff_delete },
+                        diffNewFile                                         = { fg = diff_add },
 
                         -- blink (completion)
                         BlinkCmpMenu                                        = { bg = bg, },
                         BlinkCmpMenuBorder                                  = { bg = "none", },
-                        BlinkCmpMenuSelection                               = { link = "Visual" },
+                        BlinkCmpMenuSelection                               = { bg = bg_darker },
                         BlinkCmpLabel                                       = { bg = bg, },
                         BlinkCmpDoc                                         = { bg = "none", },
                         BlinkCmpDocBorder                                   = { bg = "none", },
-                        BlinkCmpLabelMatch                                  = { fg = colors.palette.lotusOrange2 },
+                        BlinkCmpLabelMatch                                  = { fg = selection },
 
                         -- fzf
-                        FzfLuaBufLineNr                                     = { fg = normal, bg = "none" },
-                        FzfLuaFzfNormal                                     = { fg = normal, bg = "none" },
-                        FzfLuaNormal                                        = { fg = normal, bg = "none" },
+                        FzfLuaBufLineNr                                     = { fg = text, bg = "none" },
+                        FzfLuaFzfNormal                                     = { fg = text, bg = "none" },
+                        FzfLuaNormal                                        = { fg = text, bg = "none" },
                         FzfLuaSearch                                        = { link = "CurSearch" },
-                        FzfLuaBufName                                       = { fg = normal },
-                        FzfLuaLivePrompt                                    = { fg = normal, bg = "none" },
-                        FzfLuaDirPart                                       = { fg = normal, bg = "none" },
-                        FzfLuaFilePart                                      = { fg = normal, bg = "none" },
-                        FzfLuaFzfMatch                                      = { fg = colors.palette.lotusOrange2 },
-                        FzfLuaFzfPrompt                                     = { fg = normal, bg = "none" },
-                        FzfLuaFzfPointer                                    = { fg = normal, bg = "none" },
-                        FzfLuaFzfInfo                                       = { fg = normal, bg = "none" },
-                        FzfLuaLiveSym                                       = { fg = normal, bg = "none" },
-                        FzfLuaTabTitle                                      = { fg = normal, bg = "none" },
-                        FzfLuaBufNr                                         = { fg = normal, bg = "none" },
-                        FzfLuaCursorLineNr                                  = { fg = normal, bg = "none" },
-                        FzfLuaTitleFlags                                    = { fg = normal, bg = "none" },
+                        FzfLuaBufName                                       = { fg = text },
+                        FzfLuaLivePrompt                                    = { fg = text, bg = "none" },
+                        FzfLuaDirPart                                       = { fg = text, bg = "none" },
+                        FzfLuaFilePart                                      = { fg = text, bg = "none" },
+                        FzfLuaFzfMatch                                      = { fg = selection },
+                        FzfLuaFzfPrompt                                     = { fg = text, bg = "none" },
+                        FzfLuaFzfPointer                                    = { fg = text, bg = "none" },
+                        FzfLuaFzfInfo                                       = { fg = text, bg = "none" },
+                        FzfLuaLiveSym                                       = { fg = text, bg = "none" },
+                        FzfLuaTabTitle                                      = { fg = text, bg = "none" },
+                        FzfLuaBufNr                                         = { fg = text, bg = "none" },
+                        FzfLuaCursorLineNr                                  = { fg = text, bg = "none" },
+                        FzfLuaTitleFlags                                    = { fg = text, bg = "none" },
 
                         -- syntax
-                        Boolean                                             = { fg = boolean, bold = false },
-                        Number                                              = { fg = number },
-                        Constant                                            = { fg = normal },
-                        Identifier                                          = { fg = normal },
-                        Function                                            = { fg = functions, bold = true },
-                        Statement                                           = { fg = normal },
-                        Operator                                            = { fg = normal },
-                        Keyword                                             = { fg = special },
-                        Exception                                           = { fg = very_special },
-                        PreProc                                             = { fg = normal },
-                        Type                                                = { fg = type, bold = false },
-                        Special                                             = { fg = special },
-                        Delimiter                                           = { fg = normal },
-                        Underlined                                          = { fg = normal },
+                        Boolean                                             = { fg = text, bold = false },
+                        Number                                              = { fg = text },
+                        Constant                                            = { fg = text },
+                        Identifier                                          = { fg = text },
+                        Function                                            = { fg = text, bold = false },
+                        Statement                                           = { fg = text },
+                        Operator                                            = { fg = text },
+                        Keyword                                             = { fg = text },
+                        Exception                                           = { fg = important },
+                        PreProc                                             = { fg = text },
+                        Type                                                = { fg = text, bold = false },
+                        Special                                             = { fg = text },
+                        Delimiter                                           = { fg = text },
+                        Underlined                                          = { fg = text },
                         Bold                                                = { bold = false },
                         Italic                                              = { italic = false },
                         Comment                                             = { fg = comment },
-                        String                                              = { fg = normal },
+                        String                                              = { fg = text },
 
                         -- syntax yaml
-                        yamlPlainScalar                                     = { fg = normal },
+                        yamlPlainScalar                                     = { fg = text },
 
                         -- syntax docker
-                        dockerfileShell                                     = { fg = normal },
-                        dockerfileValue                                     = { fg = normal },
-                        dockerfileInstruction                               = { fg = normal },
-                        dockerfileFrom                                      = { fg = normal },
+                        dockerfileShell                                     = { fg = text },
+                        dockerfileValue                                     = { fg = text },
+                        dockerfileInstruction                               = { fg = text },
+                        dockerfileFrom                                      = { fg = text },
 
                         -- treesitter
-                        ["@variable"]                                       = { fg = normal },
-                        ["@variable.builtin"]                               = { fg = normal, italic = false },
-                        ["@variable.parameter"]                             = { fg = normal },
-                        ["@variable.member"]                                = { fg = normal },
-                        ["@string.special.symbol"]                          = { fg = normal },
-                        ["@attribute"]                                      = { fg = normal },
-                        ["@constructor"]                                    = { fg = type },
-                        ["@operator"]                                       = { fg = normal },
-                        ["@keyword.operator"]                               = { fg = special, bold = false },
-                        ["@keyword.return"]                                 = { fg = special },
-                        ["@keyword.import"]                                 = { fg = special },
-                        ["@keyword.exception"]                              = { fg = special },
-                        ["@punctuation.delimiter"]                          = { fg = normal },
-                        ["@punctuation.bracket"]                            = { fg = normal },
-                        ["@punctuation.special"]                            = { fg = normal },
+                        ["@variable"]                                       = { fg = text },
+                        ["@variable.builtin"]                               = { fg = text, italic = false },
+                        ["@variable.parameter"]                             = { fg = text },
+                        ["@variable.member"]                                = { fg = text },
+                        ["@string.special.symbol"]                          = { fg = text },
+                        ["@attribute"]                                      = { fg = text },
+                        ["@constructor"]                                    = { fg = text },
+                        ["@operator"]                                       = { fg = text },
+                        ["@keyword.operator"]                               = { fg = text, bold = false },
+                        ["@keyword.return"]                                 = { fg = important },
+                        ["@keyword.import"]                                 = { fg = text },
+                        ["@keyword.exception"]                              = { fg = important },
+                        ["@punctuation.delimiter"]                          = { fg = text },
+                        ["@punctuation.bracket"]                            = { fg = text },
+                        ["@punctuation.special"]                            = { fg = text },
 
                         -- c#
-                        ["@keyword.operator.c_sharp"]                       = { link = "Special" },
-                        ["@variable.builtin.c_sharp"]                       = { link = "Special" },
-                        ["@keyword.return.c_sharp"]                         = { link = "Exception" },
-                        ["@attribute.c_sharp"]                              = { link = "Type" },
+                        ["@keyword.operator.c_sharp"]                       = { fg = text },
+                        ["@variable.builtin.c_sharp"]                       = { fg = text },
+                        ["@keyword.return.c_sharp"]                         = { fg = important },
+                        ["@attribute.c_sharp"]                              = { fg = text },
 
                         -- lua
-                        ["@keyword.operator.lua"]                           = { link = "Special" },
-                        ["@keyword.return.lua"]                             = { link = "Exception" },
-                        ["@keyword.import.c_sharp"]                         = { link = "Special" },
-                        ["@constructor.lua"]                                = { fg = normal },
-                        ["@string.regexp.lua"]                              = { fg = normal },
-                        ["@string.escape.lua"]                              = { fg = normal },
+                        ["@keyword.operator.lua"]                           = { fg = text },
+                        ["@keyword.return.lua"]                             = { fg = important },
+                        ["@keyword.import.c_sharp"]                         = { fg = text },
+                        ["@constructor.lua"]                                = { fg = text },
+                        ["@string.regexp.lua"]                              = { fg = text },
+                        ["@string.escape.lua"]                              = { fg = text },
 
                         -- rust
-                        ["@keyword.return.rust"]                            = { link = "Exception" },
-                        ["@keyword.import.rust"]                            = { link = "Special" },
-                        ["@lsp.type.enumMember.rust"]                       = { fg = type },
-                        ["@lsp.type.macro.rust"]                            = { fg = functions },
-                        ["@lsp.typemod.method.defaultLibrary.rust"]         = { fg = functions },
-                        ["@lsp.typemod.function.defaultLibrary.rust"]       = { fg = functions },
-                        ["@character.special.rust"]                         = { fg = normal },
-                        ["@lsp.type.decorator.rust"]                        = { fg = functions },
-                        ["@function.call.rust"]                             = { fg = normal },
+                        ["@keyword.return.rust"]                            = { fg = important },
+                        ["@keyword.import.rust"]                            = { fg = text },
+                        ["@lsp.type.enumMember.rust"]                       = { fg = text },
+                        ["@lsp.type.macro.rust"]                            = { fg = text },
+                        ["@lsp.typemod.method.defaultLibrary.rust"]         = { fg = text },
+                        ["@lsp.typemod.function.defaultLibrary.rust"]       = { fg = text },
+                        ["@character.special.rust"]                         = { fg = text },
+                        ["@lsp.type.decorator.rust"]                        = { fg = text },
+                        ["@function.call.rust"]                             = { fg = text },
 
                         -- vue
-                        ["@lsp.typemod.function.readonly.vue"]              = { fg = functions },
-                        ["@lsp.typemod.variable.defaultLibrary.vue"]        = { fg = normal },
+                        ["@lsp.typemod.function.readonly.vue"]              = { fg = text },
+                        ["@lsp.typemod.variable.defaultLibrary.vue"]        = { fg = text },
 
                         -- typescript
-                        ["@lsp.typemod.function.readonly.typescript"]       = { fg = functions },
-                        ["@lsp.typemod.function.readonly.javascript"]       = { fg = functions },
-                        ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = normal },
-                        ["@keyword.return.typescript"]                      = { fg = very_special },
+                        ["@lsp.typemod.function.readonly.typescript"]       = { fg = text },
+                        ["@lsp.typemod.function.readonly.javascript"]       = { fg = text },
+                        ["@lsp.typemod.variable.defaultLibrary.typescript"] = { fg = text },
+                        ["@keyword.return.typescript"]                      = { fg = important },
 
                         -- vim
-                        ["@function.macro.vim"]                             = { link = "String" },
+                        ["@function.macro.vim"]                             = { fg = text },
                     }
                 end,
             }
