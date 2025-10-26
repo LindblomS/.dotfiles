@@ -1,0 +1,1 @@
+require("mycolorscheme").setup()

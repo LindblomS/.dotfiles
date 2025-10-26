@@ -3,6 +3,7 @@ require("options")
 require("vim_keymaps")
 require("autocommands")
 
+
 -- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -47,3 +48,5 @@ require("lsp")
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+vim.cmd("colorscheme mycolorscheme")
