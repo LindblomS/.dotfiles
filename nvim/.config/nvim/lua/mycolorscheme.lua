@@ -31,30 +31,30 @@ return {
             vim.api.nvim_set_hl(0, hl, { fg = palette.black, bg = "none" })
         end
 
-        local term = {
-            palette.black,        -- black
-            palette.red,          -- red
-            palette.green,        -- green
-            palette.orange,       -- yellow
-            palette.blue,         -- blue
-            palette.light_red,    -- magenta
-            palette.light_blue,   -- cyan
-            palette.paper_white,  -- white
-            palette.light_grey,   -- bright black
-            palette.light_red,    -- bright red
-            palette.light_green,  -- bright green
-            palette.light_yellow, -- bright yellow
-            palette.light_blue,   -- bright blue
-            palette.light_red,    -- bright magenta
-            palette.light_blue,   -- bright cyan
-            palette.paper_white,  -- bright white
-            palette.orange,       -- extended color 1
-            palette.red,          -- extended color 2
-        }
-
-        for i, tcolor in ipairs(term) do
-            vim.g["terminal_color_" .. i - 1] = tcolor
-        end
+        -- local term = {
+        --     palette.black,        -- black
+        --     palette.red,          -- red
+        --     palette.green,        -- green
+        --     palette.orange,       -- yellow
+        --     palette.blue,         -- blue
+        --     palette.light_red,    -- magenta
+        --     palette.light_blue,   -- cyan
+        --     palette.paper_white,  -- white
+        --     palette.light_grey,   -- bright black
+        --     palette.light_red,    -- bright red
+        --     palette.light_green,  -- bright green
+        --     palette.light_yellow, -- bright yellow
+        --     palette.light_blue,   -- bright blue
+        --     palette.light_red,    -- bright magenta
+        --     palette.light_blue,   -- bright cyan
+        --     palette.paper_white,  -- bright white
+        --     palette.orange,       -- extended color 1
+        --     palette.red,          -- extended color 2
+        -- }
+        --
+        -- for i, tcolor in ipairs(term) do
+        --     vim.g["terminal_color_" .. i - 1] = tcolor
+        -- end
 
         -- todo: Maybe take some inspiration from github, current selection in yellow and regular in blue?
         local highlights = {
