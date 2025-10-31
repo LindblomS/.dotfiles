@@ -50,3 +50,50 @@ vim.diagnostic.config({
 })
 
 vim.cmd("colorscheme mycolorscheme")
+
+-- filename should have relative path
+-- branch will be destination branch for a merge, e.g. main or master
+-- todo: function name isn't really correct
+function Git_create_diff(filename, branch)
+    -- git show $(git merge-base branch HEAD):filename
+
+    -- todo: make sure folder diff exists
+    -- Maybe create folder in nvim/state/HEAD/filename? This way, we will reuse all the diffs for that commit.
+    -- If we pull in a new commit we're going to have a new HEAD.
+
+    local cmd = string.format("git show $(git merge-base %s HEAD):./%s > diff/%s", branch, filename, filename)
+    vim.print("os.execute cmd is", cmd)
+
+    local exitcode = os.execute(cmd)
+    vim.print("os.execute", exitcode)
+
+    if exitcode > 0 then
+        print("failed creating diff file")
+        return false
+    end
+
+    return true
+end
+
+vim.api.nvim_create_user_command("Gitcreatediff", function()
+    -- Get word under cursor
+    local filename = vim.F.if_nil(nil, vim.fn.expand("<cWORD>"))
+    vim.print("Gitcreatediff filename is", filename)
+    -- todo: check if file exists?
+
+    local succeded = Git_create_diff(filename, "main")
+    if not succeded then
+        return
+    end
+
+    local cmd = string.format("diffs %s diff/%s", filename, filename)
+    vim.print("cmd id ", cmd)
+    vim.cmd(cmd)
+end, {})
+
+
+-- local cmd = string.format("git show $(git merge-base %s HEAD):./%s > diff/%s", branch, filename, filename)
+-- local cmd = "echo $(git merge-base main HEAD)"
+-- local cmd = string.format("echo $(git merge-base %s HEAD)", "main")
+-- vim.print(os.execute(string.format("echo $(git merge-base %s HEAD)", "main")))
+vim.print(os.execute("echo $(git merge-base main HEAD)"))

@@ -1,0 +1,5 @@
+nvim/.config/nvim/colors/mycolorscheme.lua
+nvim/.config/nvim/init.lua
+nvim/.config/nvim/lua/lsp/ts_ls.lua
+nvim/.config/nvim/lua/mycolorscheme.lua
+nvim/.config/nvim/lua/plugins/colorscheme.lua
