@@ -15,7 +15,24 @@ return {
         lsp = {
             async_or_timeout = 20000,
         },
-        fzf_colors = true,
+        fzf_colors = {
+            true, -- inherit fzf colors that aren't specified below from
+            -- the auto-generated theme similar to `fzf_colors=true`
+            ["fg"]      = { "fg", "Normal" },
+            ["bg"]      = { "bg", "Normal" },
+            ["hl"]      = { "fg", "Normal" },
+            ["fg+"]     = { "fg", "Normal" },
+            ["bg+"]     = { "bg", "Visual" },
+            ["hl+"]     = { "fg", "Normal" },
+            ["info"]    = { "fg", "Normal" },
+            ["prompt"]  = { "fg", "Normal" },
+            ["pointer"] = { "fg", "Normal" },
+            ["marker"]  = { "fg", "Normal" },
+            ["spinner"] = { "fg", "Normal" },
+            ["header"]  = { "fg", "Normal" },
+            ["query"]   = { "fg", "Normal" },
+            ["gutter"]  = "-1",
+        },
     },
     config = function(_, opts)
         local f = require("fzf-lua")

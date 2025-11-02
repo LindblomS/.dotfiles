@@ -1,26 +1,23 @@
 local palette = {
     black = "#16161d",
+    black2 = "#54546D",
     paper_white = "#f2ecbc",
     paper_white_dark = "#d5cea3",
     light_grey = "#dcd7ba",
-
     green = "#6aba0a",
     light_green = "#c0e396",
-
     blue = "#3c31b2",
     light_blue = "#c7d7e0",
-
     red = "#e82424",
     light_red = "#d9a594",
-
     orange = "#e98a00",
     light_orange = "#f3c786",
-
     yellow = "#de9800",
     light_yellow = "#f9d791",
 }
 
 return {
+    palette = palette,
     setup = function()
         if vim.g.colors_name then
             vim.cmd("hi clear")
@@ -28,39 +25,14 @@ return {
 
         vim.g.colors_name = "mycolorscheme"
 
+        -- Override defaults so that all highligts are the same.
         for hl, _ in pairs(vim.api.nvim_get_hl(0, {})) do
             vim.api.nvim_set_hl(0, hl, { fg = palette.black, bg = "none" })
         end
 
-        -- local term = {
-        --     palette.black,        -- black
-        --     palette.red,          -- red
-        --     palette.green,        -- green
-        --     palette.orange,       -- yellow
-        --     palette.blue,         -- blue
-        --     palette.light_red,    -- magenta
-        --     palette.light_blue,   -- cyan
-        --     palette.paper_white,  -- white
-        --     palette.light_grey,   -- bright black
-        --     palette.light_red,    -- bright red
-        --     palette.light_green,  -- bright green
-        --     palette.light_yellow, -- bright yellow
-        --     palette.light_blue,   -- bright blue
-        --     palette.light_red,    -- bright magenta
-        --     palette.light_blue,   -- bright cyan
-        --     palette.paper_white,  -- bright white
-        --     palette.orange,       -- extended color 1
-        --     palette.red,          -- extended color 2
-        -- }
-        --
-        -- for i, tcolor in ipairs(term) do
-        --     vim.g["terminal_color_" .. i - 1] = tcolor
-        -- end
-
-        -- todo: Maybe take some inspiration from github, current selection in yellow and regular in blue?
         local highlights = {
             Normal                      = { fg = palette.black, bg = palette.paper_white },
-            Comment                     = { fg = "#54546D" }, -- todo: move this to palette
+            Comment                     = { fg = palette.black2 },
             Visual                      = { fg = palette.black, bg = palette.light_blue },
             IncSearch                   = { bg = palette.light_yellow },
             Search                      = { bg = palette.light_blue },
@@ -95,7 +67,8 @@ return {
             -- c#
             ["@keyword.return.c_sharp"] = { fg = palette.red },
 
-            -- todo: fix fzf
+            -- This is not perfect but good enough.
+            -- See fzf-colors in lua/plugins/searching.lua
             FzfLuaFzfMatch              = { fg = palette.blue, bg = palette.light_blue },
             FzfLuaFzfCursorLine         = { bg = palette.paper_white_dark },
             FzfLuaLivePrompt            = { fg = palette.black },
