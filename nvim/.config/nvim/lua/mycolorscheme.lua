@@ -1,6 +1,7 @@
 local palette = {
     black = "#16161d",
     paper_white = "#f2ecbc",
+    paper_white_dark = "#d5cea3",
     light_grey = "#dcd7ba",
 
     green = "#6aba0a",
@@ -60,13 +61,13 @@ return {
         local highlights = {
             Normal                      = { fg = palette.black, bg = palette.paper_white },
             Comment                     = { fg = "#54546D" }, -- todo: move this to palette
-            Visual                      = { fg = palette.black, bg = palette.light_grey },
-            IncSearch                   = { bg = palette.light_blue },
-            Search                      = { bg = palette.light_grey },
-            CurSearch                   = { bg = palette.light_blue },
+            Visual                      = { fg = palette.black, bg = palette.light_blue },
+            IncSearch                   = { bg = palette.light_yellow },
+            Search                      = { bg = palette.light_blue },
+            CurSearch                   = { bg = palette.light_yellow },
             Substitute                  = { bg = palette.light_blue },
-            StatusLine                  = { fg = palette.black, bg = palette.light_grey },
-            StatusLineNC                = { fg = palette.black, bg = palette.light_grey },
+            StatusLine                  = { fg = palette.black, bg = palette.paper_white_dark },
+            StatusLineNC                = { fg = palette.black, bg = palette.paper_white_dark },
             -- MsgArea                     = { link = 'StatusLine' },
             VertSplit                   = { link = "WinSeparator" },
             MoreMsg                     = { fg = palette.blue },
@@ -96,7 +97,7 @@ return {
 
             -- todo: fix fzf
             FzfLuaFzfMatch              = { fg = palette.blue, bg = palette.light_blue },
-            FzfLuaFzfCursorLine         = { bg = palette.light_grey },
+            FzfLuaFzfCursorLine         = { bg = palette.paper_white_dark },
             FzfLuaLivePrompt            = { fg = palette.black },
             FzfLuaPathColNr             = { fg = palette.black },
             FzfLuaPathLineNr            = { fg = palette.black },
