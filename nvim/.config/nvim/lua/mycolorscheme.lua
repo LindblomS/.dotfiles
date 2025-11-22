@@ -56,6 +56,7 @@ return {
             Exception                   = { fg = palette.red },
             DiagnosticUnnecessary       = { fg = "none", bg = "none" },
 
+            ["@markup.link"]            = { underline = true },
             ["@comment"]                = { link = "Comment" },
             ["@lsp.type.comment"]       = { link = "Comment" },
 
