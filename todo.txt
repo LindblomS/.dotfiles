@@ -15,3 +15,4 @@ nvim
 - Harpun: Fix bug where linux having absolute paths sometimes
 - Add relative numbers in Terminal
 - fix colors for fzf-lua
+- Remove dependency on plenary. It's limited use can be self implemented
