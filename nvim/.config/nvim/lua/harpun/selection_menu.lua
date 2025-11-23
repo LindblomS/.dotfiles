@@ -71,7 +71,9 @@ function M.open(self)
         end
     end
 
-    local buf = vim.api.nvim_create_buf(false, true)
+    local listed = false
+    local scratch = true
+    local buf = vim.api.nvim_create_buf(listed, scratch)
     local win = create_window(buf, "harpun", win_width)
     self._buf = buf
     self._closing = false

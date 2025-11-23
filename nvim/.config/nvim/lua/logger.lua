@@ -46,4 +46,20 @@ function M.error(message)
     write(create_log_entry(message, "error"))
 end
 
+vim.api.nvim_create_user_command("CustomLog", function()
+    local buf = vim.fn.bufadd(_path)
+    vim.fn.bufload(buf)
+    vim.api.nvim_set_option_value("buflisted", true, { buf = buf, })
+    vim.api.nvim_set_option_value("readonly", true, { buf = buf })
+    vim.api.nvim_set_current_buf(buf)
+
+    vim.api.nvim_create_autocmd("BufLeave", {
+        buffer = buf,
+        callback = function(ev)
+            vim.api.nvim_buf_delete(ev.buf, { force = true })
+        end,
+        desc = "Delete buffer when leaving it",
+    })
+end, { desc = "Open the custom logs in the current window" })
+
 return M
