@@ -3,7 +3,6 @@ wezterm
 
 nvim
 
-- Add indent all parameters keymap for csharp development
 - Roslyn: disable unnecessary printing. 
 - Roslyn: Update code
 - Roslyn: Remove the "No solution" alternative. Pressing Enter with no given solution should be enough and it's simpler.
