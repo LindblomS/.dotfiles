@@ -72,5 +72,9 @@ return {
         s("n", "<leader>fled",
             function() f.lsp_document_diagnostics({ severity_only = vim.diagnostic.severity.ERROR }) end,
             { desc = "[F]ind [l]ocal [e]rror [d]iagnostics" })
+
+        vim.api.nvim_create_user_command("Help", function()
+            f.helptags()
+        end, { desc = "Search for help tags" })
     end
 }
