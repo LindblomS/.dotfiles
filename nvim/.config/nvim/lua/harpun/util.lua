@@ -1,12 +1,7 @@
 local M = {}
 
 function M.get_file()
-    local cwd = vim.fn.getcwd()
-    local file_path = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-    local relative_path = string.gsub(file_path, cwd, "")
-    -- Trim any precceding / or \
-    relative_path = string.sub(relative_path, 2)
-    return relative_path
+    return vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
 end
 
 function M.get_file_display_name(file)

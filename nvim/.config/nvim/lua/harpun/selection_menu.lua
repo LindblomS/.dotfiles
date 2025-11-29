@@ -41,7 +41,7 @@ function M.select_by_index(self, index)
     self:close()
     local file = self._harpun:get()[index]
     if file then
-        self._harpun.select(file)
+        self._harpun:select(file)
     end
 end
 
