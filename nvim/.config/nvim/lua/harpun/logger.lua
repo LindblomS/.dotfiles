@@ -14,7 +14,7 @@ function M.warning(message)
     Logger.warning(format(message))
 end
 
-function M.orror(message)
+function M.error(message)
     assert(message)
     Logger.error(format(message))
 end
