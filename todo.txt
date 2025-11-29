@@ -14,3 +14,4 @@ nvim
 - Add relative numbers in Terminal
 - fix colors for fzf-lua
 - Remove dependency on plenary. It's limited use can be self implemented
+- Fix logger file overwrite
