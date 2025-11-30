@@ -2,39 +2,58 @@ local M = {}
 
 local _path = string.format("%s/custom_log.txt", vim.fn.stdpath("log"))
 local _path_exists = false
-local _display_log_message = true
+local _print_log_entry = false
+
+function M.new(options)
+    _print_log_entry = options.print_log_entry
+    return M
+end
 
 local function get_path()
     if not _path_exists then
-        local path = require("plenary.path"):new(_path)
-        if not path:exists() then
-            path:touch()
+        local file = io.open(_path, "a")
+        if file then
+            file:close()
+            _path_exists = true
+            return _path
+        else
+            -- File either didn't exist or we did not have permission
+
+            -- Note that we don't have to check that the directory path exists.
+            -- stdpath("log") is expected to exist.
+            local new_file, err, code = io.open(_path, "a")
+            if not new_file then
+                vim.notify(string.format(
+                        "Error creating custom log file. Error \"%s\", code \"%s\", filepath \"%s\"", err, code, _path),
+                    vim.log.levels.ERROR)
+                return nil
+            else
+                new_file:write()
+                new_file:close()
+            end
         end
-        _path_exists = true
     end
     return _path
 end
 
 local function write(log_entry)
     local path = get_path()
-    local ok, file_or_err = pcall(io.open, path, "w")
-    if not ok then
-        print(file_or_err)
+    if not path then
+        return
     end
-    local file = file_or_err
-    -- Since there wasn't an error, we know file won't be nil. But lua_ls doesn't know this.
+    local file = io.open(_path, "a")
     if file then
         file:write(log_entry)
         file:flush()
         file:close()
-        if _display_log_message then
+        if _print_log_entry then
             print(log_entry)
         end
     end
 end
 
 local function create_log_entry(message, level)
-    message = string.format("%s - %s: %s", os.date(), level, message)
+    message = string.format("%s - %s: %s\n", os.date(), level, message)
     return message
 end
 

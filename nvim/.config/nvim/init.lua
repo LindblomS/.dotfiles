@@ -39,7 +39,7 @@ function Git_branch()
     return b
 end
 
-Logger = require("logger")
+Logger = require("logger").new({ print_log_entry = false })
 require("harpun"):setup()
 require("statusline")
 require("oil").setup()
