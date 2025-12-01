@@ -6,6 +6,7 @@ nvim
 - Roslyn: disable unnecessary printing. 
 - Roslyn: Update code
 - Roslyn: Remove the "No solution" alternative. Pressing Enter with no given solution should be enough and it's simpler.
+- Roslyn: Remember "No solution" selection. At the moment you will be prompted for each new buffer.
 - Check if search in files or quickfix in fzf-lua can take regex. E.g. would be nice to filter "\.UT$" in find files.
 - Trim filepath in fzf-lua. 
 - Have a single .editorconfig for repo.
