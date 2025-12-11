@@ -74,7 +74,8 @@ end
 
 function M.get_solution(buffer)
     local directory = vim.fs.root(buffer, function(name)
-        return name:match("%.sln$") ~= nil
+        -- .gitignore is expected to always exist.
+        return name:match(".gitignore") ~= nil
     end)
 
     if not directory then
