@@ -144,7 +144,7 @@ config.keys = {
 -- https://github.com/rebelot/kanagawa.nvim/pull/177/files#diff-5c0e0fd16bb531f1b19bf0dddbbb5fc6b9a4cca532d7d648125af8fdd58d7c80
 config.colors = {
     foreground = "#16161D",
-    background = "#f2ecbc",
+    background = "#f4f1d9",
 
     cursor_bg = "#43436c",
     cursor_fg = "#43436c",

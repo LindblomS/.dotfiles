@@ -1,8 +1,8 @@
 local palette = {
     black = "#16161d",
     black2 = "#54546D",
-    paper_white = "#f2ecbc",
-    paper_white_dark = "#d5cea3",
+    paper_white = "#f4f1d9",
+    paper_white_dark = "#ddd8b5",
     light_grey = "#dcd7ba",
     green = "#6aba0a",
     light_green = "#c0e396",
