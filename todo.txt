@@ -16,3 +16,4 @@ nvim
 - Add relative numbers in Terminal
 - fix colors for fzf-lua
 - Remove dependency on plenary. It's limited use can be self implemented
+- Include files such as appsettings.* in fzf file searching which are now ignored because of .gitignore.
