@@ -76,73 +76,34 @@ config.keys = {
     }
 }
 
--- kanagawa wave
--- config.colors = {
---     foreground = "#dcd7ba",
---     background = "#1f1f28",
---
---     cursor_bg = "#c8c093",
---     cursor_fg = "#c8c093",
---     cursor_border = "#c8c093",
---
---     selection_fg = "#c8c093",
---     selection_bg = "#2d4f67",
---
---     scrollbar_thumb = "#16161d",
---     split = "#16161d",
---
---     ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
---     brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
---     indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
---     tab_bar = {
---         background = "#1f1f28",
---         active_tab = {
---             fg_color = "#dcd7ba",
---             bg_color = "#1f1f28"
---         },
---     }
--- }
 
--- kanagawa dragon
--- config.colors = {
---     foreground = "#c5c9c5",
---     background = "#181616",
---
---     cursor_bg = "#c8c093",
---     cursor_fg = "#c8c093",
---     cursor_border = "#c8c093",
---
---     selection_fg = "#c8c093",
---     selection_bg = "#2d4f67",
---
---     scrollbar_thumb = "#16161d",
---     split = "#16161d",
---
---     ansi = {
---         "#0d0c0c",
---         "#c4746e",
---         "#8a9a7b",
---         "#c4b28a",
---         "#8ba4b0",
---         "#a292a3",
---         "#8ea4a2",
---         "#c8c093",
---     },
---     brights = {
---         "#a6a69c",
---         "#e46876",
---         "#87a987",
---         "#e6c384",
---         "#7fb4ca",
---         "#938aa9",
---         "#7aa89f",
---         "#c5c9c5",
---     },
--- }
+local colorscheme_kanagawa_wave = {
+    foreground = "#dcd7ba",
+    background = "#1f1f28",
 
--- kanagawa lotus
--- https://github.com/rebelot/kanagawa.nvim/pull/177/files#diff-5c0e0fd16bb531f1b19bf0dddbbb5fc6b9a4cca532d7d648125af8fdd58d7c80
-config.colors = {
+    cursor_bg = "#c8c093",
+    cursor_fg = "#c8c093",
+    cursor_border = "#c8c093",
+
+    selection_fg = "#c8c093",
+    selection_bg = "#2d4f67",
+
+    scrollbar_thumb = "#16161d",
+    split = "#16161d",
+
+    ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
+    brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
+    indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
+    tab_bar = {
+        background = "#1f1f28",
+        active_tab = {
+            fg_color = "#dcd7ba",
+            bg_color = "#1f1f28"
+        },
+    }
+}
+
+local colorscheme_kanagawa_lotus = {
     foreground = "#16161D",
     background = "#f4f1d9",
 
@@ -214,5 +175,22 @@ config.colors = {
         },
     },
 }
+
+local function get_appearance()
+    if wezterm.gui then
+        return wezterm.gui.get_appearance()
+    end
+    return 'Dark'
+end
+
+local function scheme_for_appearance(appearance)
+    if appearance:find 'Dark' then
+        config.colors = colorscheme_kanagawa_wave
+    else
+        config.colors = colorscheme_kanagawa_lotus
+    end
+end
+
+scheme_for_appearance(get_appearance())
 
 return config
