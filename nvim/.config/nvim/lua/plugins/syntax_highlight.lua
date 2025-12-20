@@ -16,8 +16,4 @@ return {
             })
         end
     },
-    -- {
-    --     "rebelot/kanagawa.nvim",
-    --     commit = "aef7f5cec0a40dbe7f3304214850c472e2264b10",
-    -- }
 }
