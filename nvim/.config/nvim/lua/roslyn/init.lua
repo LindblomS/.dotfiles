@@ -240,8 +240,6 @@ function M.setup(config)
             local solution = utils.get_solution(opt.buf)
 
             if not solution then
-                vim.notify("Unable to start roslyn language server. No solution was found", vim.log.levels.INFO)
-            elseif solution == utils.Continue_without_lsp then
                 -- The solution picker won't show up anymore after deleting the autocommand group.
                 vim.api.nvim_del_augroup_by_id(augroup)
             else
