@@ -223,8 +223,9 @@ function M.setup(config)
         end
     end
 
+    local augroup = vim.api.nvim_create_augroup("Roslyn", { clear = true })
     vim.api.nvim_create_autocmd({ "BufEnter" }, {
-        group = vim.api.nvim_create_augroup("Roslyn", { clear = true }),
+        group = augroup,
         pattern = "*.cs",
         callback = function(opt)
             if not valid_buffer(opt.buf) then
@@ -240,7 +241,10 @@ function M.setup(config)
 
             if not solution then
                 vim.notify("Unable to start roslyn language server. No solution was found", vim.log.levels.INFO)
-            elseif solution ~= utils.Continue_without_lsp then
+            elseif solution == utils.Continue_without_lsp then
+                -- The solution picker won't show up anymore after deleting the autocommand group.
+                vim.api.nvim_del_augroup_by_id(augroup)
+            else
                 return start_with_solution(cmd, solution, roslyn_config, on_init_solution)
             end
         end,
