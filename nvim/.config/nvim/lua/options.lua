@@ -28,3 +28,4 @@ o.scrolloff = 8
 
 o.cursorline = true
 o.cursorlineopt = "number"
+o.signcolumn = "no"
