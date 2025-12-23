@@ -80,6 +80,9 @@ local function inner_setup(palette)
         WinBar                      = { fg = palette.fg, bg = palette.fg },
         WinBarNC                    = { fg = palette.fg },
         WildMenu                    = { link = "Pmenu" },
+        LineNrAbove                 = { fg = palette.fg_1 },
+        LineNrBelow                 = { fg = palette.fg_1 },
+        CursorLineNr                = { fg = palette.fg_1 },
 
         -- syntax
         Exception                   = { fg = palette.special },
