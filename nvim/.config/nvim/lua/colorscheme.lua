@@ -28,7 +28,7 @@ local dark_palette = {
     fg_1 = "#C8C093",
 
     bg = "#1F1F28",
-    bg_1 = "#1a1a22",
+    bg_1 = "#2A2A37",
 
     green = "#98BB6C",
     light_green = "#2B3328",
