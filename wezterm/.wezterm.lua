@@ -11,7 +11,7 @@ config.audible_bell = "Disabled"
 
 config.font = wezterm.font("IBM Plex Mono", {})
 config.font_size = 15
-config.line_height = 1.1
+config.line_height = 1.2
 
 config.keys = {
     {
