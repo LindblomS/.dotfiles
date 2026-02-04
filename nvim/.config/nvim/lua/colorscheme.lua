@@ -2,8 +2,8 @@ local light_palette = {
     fg = "#16161d",
     fg_1 = "#54546D",
 
-    bg = "#f4f1d9",
-    bg_1 = "#ddd8b5",
+    bg = "#F4F3F2",
+    bg_1 = "#e5e2d7",
 
     green = "#6aba0a",
     light_green = "#c0e396",
