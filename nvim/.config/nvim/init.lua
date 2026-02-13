@@ -43,6 +43,7 @@ require("harpun"):setup()
 require("statusline")
 require("oil").setup()
 require("lsp")
+require("sqlcmd")
 
 vim.diagnostic.config({
     virtual_text = true,
