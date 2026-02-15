@@ -1,10 +1,10 @@
 local vue_language_server_path = ""
 if vim.uv.os_uname().sysname == "Linux" then
-    print("running ts_ls on os Linux")
+    Logger.info("setup ts_ls on linux")
     vue_language_server_path =
     "/home/samuel-lindblom-stratsys/.nvm/versions/node/v24.13.0/lib/node_modules/@vue/typescript-plugin"
 else
-    print("running ts_ls on os Windows")
+    Logger.info("setup ts_ls on Windows")
     vue_language_server_path =
     "C:/Users/samuel.lindblom/Appdata/Roaming/npm/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin"
 end
