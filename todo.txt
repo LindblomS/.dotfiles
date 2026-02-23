@@ -14,3 +14,6 @@ nvim
 - fix colors for fzf-lua
 - Remove dependency on plenary. It's limited use can be self implemented
 - Include files such as appsettings.* in fzf file searching which are now ignored because of .gitignore.
+- Idea. The issue is that I regularly overwrite my mark (m-a) and can't keep track of different marks. 
+The idea is to keep an appendable log of marks so I can always mark with the same key but still keep any 
+"overwritten" ones. 
