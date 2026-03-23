@@ -115,6 +115,10 @@ local function setup_test_cmd()
             table.insert(cmd_params, string.format("--filter=\"%s\"", word))
         end
 
+        -- Sometimes it's necessary to exclude this param. Inserting it last
+        -- makes it easier to remove.
+        table.insert(cmd_params, "--no-restore")
+
         local cmd = "dotnet test"
         for _, p in pairs(cmd_params) do
             cmd = cmd .. " " .. p
