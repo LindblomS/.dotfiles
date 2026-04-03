@@ -21,9 +21,13 @@ local modes = {
     ["t"] = "TERMINAL",
 }
 
-local function mode()
-    local current_mode = vim.api.nvim_get_mode().mode
-    return string.format(" %s ", modes[current_mode]):upper()
+local function format_mode(mode)
+    return string.format(" %s ", mode:upper())
+end
+
+local function get_mode()
+    local key = vim.api.nvim_get_mode().mode
+    return format_mode(modes[key])
 end
 
 local function lsp()
@@ -66,23 +70,17 @@ local function lineinfo()
     return "%-25(%3l:%-3c %p%%%)"
 end
 
-local function filename()
-    return "%f"
-end
-
-Statusline = {}
-
-Statusline.active = function()
+local function active(mode)
     return table.concat({
-        mode(),
-        filename(),
+        mode,
+        "%f",
         " " .. lsp(),
         "%#Statusline#",
         "%=" .. lineinfo(),
     })
 end
 
-function Statusline.inactive()
+local function inactive()
     return " %f"
 end
 
@@ -91,15 +89,27 @@ local function set_statusline_option(value)
 end
 
 vim.api.nvim_create_augroup("Statusline", {})
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWrite", "InsertLeave" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "BufWrite", "InsertLeave", "TermEnter" }, {
     group = "Statusline",
     callback = function(_)
-        set_statusline_option(Statusline.active())
+        set_statusline_option(active(get_mode()))
     end
 })
-vim.api.nvim_create_autocmd({ "BufLeave" }, {
+
+-- InsertEnter happens before vim enters insert mode. We must therefore manually set the mode.
+vim.api.nvim_create_autocmd({ "InsertEnter" }, {
     group = "Statusline",
     callback = function(_)
-        set_statusline_option(Statusline.inactive())
+        local key = "i"
+        local mode = format_mode(modes[key])
+        mode = string.format("%s%s%s", "%#IncSearch#", mode, "%#StatusLine#")
+        set_statusline_option(active(mode))
+    end
+})
+
+vim.api.nvim_create_autocmd({ "BufLeave", "WinLeave" }, {
+    group = "Statusline",
+    callback = function(_)
+        set_statusline_option(inactive())
     end
 })
