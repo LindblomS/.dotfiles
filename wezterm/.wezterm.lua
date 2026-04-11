@@ -4,12 +4,16 @@ local config = wezterm.config_builder()
 -- set default shell to git bash when on windows
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     config.default_prog = { "C:/Program Files/Git/bin/bash.exe" }
+else
+    config.default_prog = { "/usr/bin/bash" }
 end
+
 
 config.window_decorations = "RESIZE"
 config.audible_bell = "Disabled"
 
-config.font = wezterm.font("IBM Plex Mono", {})
+config.font = wezterm.font("IBM Plex Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.font_size = 15
 config.line_height = 1.2
 
