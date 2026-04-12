@@ -18,13 +18,9 @@ vim.pack.add({
         src = "https://github.com/nvim-tree/nvim-web-devicons",
         version = "4c3a5848ee0b09ecdea73adcd2a689190aeb728c",
     },
-    {
-        src = "https://github.com/nvim-lua/plenary.nvim",
-        version = "3707cdb1e43f5cea73afb6037e6494e7ce847a66",
-    },
 })
 
-Logger = require("logger").new({ print_log_entry = false })
+Logger = require("lua.logger").setup({ minimum_log_level = vim.log.levels.INFO })
 
 require("options")
 require("vim_keymaps")
