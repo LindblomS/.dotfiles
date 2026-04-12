@@ -1,0 +1,44 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "rev": "ea29ab1620de5e61284abc01ae39e56df5a5fe53",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "'456d38d1cd3743926f329204c2340f3e7840aad6'"
+    },
+    "fzf": {
+      "rev": "edf3524164c0878e64968cb1d4a24ba695b1ee12",
+      "src": "https://github.com/ibhagwan/fzf-lua",
+      "version": "'edf3524164c0878e64968cb1d4a24ba695b1ee12'"
+    },
+    "fzf-lua": {
+      "rev": "edf3524164c0878e64968cb1d4a24ba695b1ee12",
+      "src": "https://github.com/ibhagwan/fzf-lua",
+      "version": "'edf3524164c0878e64968cb1d4a24ba695b1ee12'"
+    },
+    "nvim-autopairs": {
+      "rev": "3d02855468f94bf435db41b661b58ec4f48a06b7",
+      "src": "https://github.com/windwp/nvim-autopairs",
+      "version": "'3d02855468f94bf435db41b661b58ec4f48a06b7'"
+    },
+    "nvim-surround": {
+      "rev": "caf6f633d4d77a29b6e265b560c5a035d171a913",
+      "src": "https://github.com/kylechui/nvim-surround",
+      "version": "'caf6f633d4d77a29b6e265b560c5a035d171a913'"
+    },
+    "nvim-web-devicons": {
+      "rev": "4c3a5848ee0b09ecdea73adcd2a689190aeb728c",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons",
+      "version": "'4c3a5848ee0b09ecdea73adcd2a689190aeb728c'"
+    },
+    "oil.nvim": {
+      "rev": "add50252b5e9147c0a09d36480d418c7e2737472",
+      "src": "https://github.com/stevearc/oil.nvim",
+      "version": "'add50252b5e9147c0a09d36480d418c7e2737472'"
+    },
+    "plenary.nvim": {
+      "rev": "3707cdb1e43f5cea73afb6037e6494e7ce847a66",
+      "src": "https://github.com/nvim-lua/plenary.nvim",
+      "version": "'3707cdb1e43f5cea73afb6037e6494e7ce847a66'"
+    }
+  }
+}

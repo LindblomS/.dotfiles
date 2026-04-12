@@ -1,32 +1,3 @@
-require("options")
-require("vim_keymaps")
-require("autocommands")
-
-
--- bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
-        vim.api.nvim_echo({
-            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out,                            "WarningMsg" },
-            { "\nPress any key to exit..." },
-        }, true, {})
-        vim.fn.getchar()
-        os.exit(1)
-    end
-end
-vim.opt.rtp:prepend(lazypath)
-
-require('lazy').setup('plugins', {
-    change_detection = {
-        enabled = true,
-        notify = false,
-    }
-})
-
 function Git_branch()
     local b = vim.fn.system("git branch --show-current")
 
@@ -38,12 +9,35 @@ function Git_branch()
     return b
 end
 
+vim.pack.add({
+    {
+        src = "https://github.com/kylechui/nvim-surround",
+        version = "caf6f633d4d77a29b6e265b560c5a035d171a913",
+    },
+    {
+        src = "https://github.com/nvim-tree/nvim-web-devicons",
+        version = "4c3a5848ee0b09ecdea73adcd2a689190aeb728c",
+    },
+    {
+        src = "https://github.com/nvim-lua/plenary.nvim",
+        version = "3707cdb1e43f5cea73afb6037e6494e7ce847a66",
+    },
+})
+
 Logger = require("logger").new({ print_log_entry = false })
+
+require("options")
+require("vim_keymaps")
+require("autocommands")
 require("harpun"):setup()
 require("statusline")
-require("oil").setup()
+require("file_exploring")
+require("searching")
 require("lsp")
 require("sqlcmd")
+require("completion")
+require("nvim-surround").setup()
+require("nvim-web-devicons").setup()
 
 vim.diagnostic.config({
     virtual_text = true,
