@@ -20,7 +20,7 @@ vim.pack.add({
     },
 })
 
-Logger = require("lua.logger").setup({ minimum_log_level = vim.log.levels.INFO })
+Logger = require("logger").setup({ minimum_log_level = vim.log.levels.INFO })
 
 require("options")
 require("vim_keymaps")
