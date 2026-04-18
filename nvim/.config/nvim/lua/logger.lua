@@ -1,68 +1,43 @@
-local M = {}
-
+local _fs = require("fs")
 local _path = string.format("%s/custom_log.txt", vim.fn.stdpath("log"))
-local _path_exists = false
-local _print_log_entry = false
+local _error_logging_to_file = false
 
-function M.new(options)
-    _print_log_entry = options.print_log_entry
-    return M
-end
+local _opts = {
+    minimum_log_level = vim.log.levels.INFO,
+}
 
-local function get_path()
-    if not _path_exists then
-        local file = io.open(_path, "a")
-        if file then
-            file:close()
-            _path_exists = true
-            return _path
-        else
-            -- File either didn't exist or we did not have permission
+local log_levels = {
+    [vim.log.levels.DEBUG] = "debug",
+    [vim.log.levels.ERROR] = "error",
+    [vim.log.levels.WARN] = "warning",
+    [vim.log.levels.INFO] = "info",
+}
 
-            -- Note that we don't have to check that the directory path exists.
-            -- stdpath("log") is expected to exist.
-            local new_file, err, code = io.open(_path, "a")
-            if not new_file then
-                vim.notify(string.format(
-                        "Error creating custom log file. Error \"%s\", code \"%s\", filepath \"%s\"", err, code, _path),
-                    vim.log.levels.ERROR)
-                return nil
-            else
-                new_file:write()
-                new_file:close()
-            end
-        end
-    end
-    return _path
-end
+local function write(log_entry, only_print)
+    assert(log_entry)
 
-local function write(log_entry)
-    local path = get_path()
-    if not path then
+    if only_print then
+        print(log_entry)
         return
     end
-    local file = io.open(_path, "a")
-    if file then
-        file:write(log_entry)
-        file:flush()
-        file:close()
-        if _print_log_entry then
-            print(log_entry)
-        end
+
+    -- We can't log to file
+    if _error_logging_to_file then
+        return
+    end
+
+    local _, err = _fs.append(_path, log_entry)
+
+    if err then
+        print(string.format("Error writing logs. %s", err))
+        _error_logging_to_file = true
+        return
     end
 end
 
-local function create_log_entry(message, level)
-    message = string.format("%s - %s: %s\n", os.date(), level, message)
+local function create_log_entry(message, log_level)
+    message = string.format("%s - %s: %s\n", os.date(), log_levels[log_level], message)
     return message
-end
-
-function M.info(message)
-    write(create_log_entry(message, "info"))
-end
-
-function M.error(message)
-    write(create_log_entry(message, "error"))
 end
 
 vim.api.nvim_create_user_command("CustomLog", function()
@@ -80,5 +55,34 @@ vim.api.nvim_create_user_command("CustomLog", function()
         desc = "Delete buffer when leaving it",
     })
 end, { desc = "Open the custom logs in the current window" })
+
+local function log(message, log_level, only_print)
+    if log_level >= _opts.minimum_log_level then
+        write(create_log_entry(message, log_level), only_print)
+    end
+end
+
+local M = {}
+
+function M.setup(opts)
+    _opts = vim.tbl_extend("force", _opts, opts)
+    return M
+end
+
+function M.debug(message, only_print)
+    log(message, vim.log.levels.DEBUG, only_print)
+end
+
+function M.info(message, only_print)
+    log(message, vim.log.levels.INFO, only_print)
+end
+
+function M.warning(message, only_print)
+    log(message, vim.log.levels.WARN, only_print)
+end
+
+function M.error(message, only_print)
+    log(message, vim.log.levels.ERROR, only_print)
+end
 
 return M
