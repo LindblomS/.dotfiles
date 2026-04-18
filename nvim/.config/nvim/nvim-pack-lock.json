@@ -1,14 +1,14 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "ea29ab1620de5e61284abc01ae39e56df5a5fe53",
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
-      "version": "'456d38d1cd3743926f329204c2340f3e7840aad6'"
+      "version": "'78336bc89ee5365633bcf754d93df01678b5c08f'"
     },
     "fzf-lua": {
-      "rev": "76535c3c334307002f0013355bcacf4049870697",
+      "rev": "cebf88881a4fab2c20a2a950269953417af1c3e8",
       "src": "https://github.com/ibhagwan/fzf-lua",
-      "version": "'8969c8c2b668502d54478e46745d6647ff346e15'"
+      "version": "'cebf88881a4fab2c20a2a950269953417af1c3e8'"
     },
     "nvim-autopairs": {
       "rev": "3d02855468f94bf435db41b661b58ec4f48a06b7",
@@ -29,11 +29,6 @@
       "rev": "add50252b5e9147c0a09d36480d418c7e2737472",
       "src": "https://github.com/stevearc/oil.nvim",
       "version": "'add50252b5e9147c0a09d36480d418c7e2737472'"
-    },
-    "plenary.nvim": {
-      "rev": "3707cdb1e43f5cea73afb6037e6494e7ce847a66",
-      "src": "https://github.com/nvim-lua/plenary.nvim",
-      "version": "'3707cdb1e43f5cea73afb6037e6494e7ce847a66'"
     }
   }
 }
