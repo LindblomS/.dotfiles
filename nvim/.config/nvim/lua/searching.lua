@@ -1,9 +1,8 @@
 vim.pack.add({
     {
-    src = "https://github.com/ibhagwan/fzf-lua",
-    -- name = "fzf",
-    version = "edf3524164c0878e64968cb1d4a24ba695b1ee12",
-}
+        src = "https://github.com/ibhagwan/fzf-lua",
+        version = "8969c8c2b668502d54478e46745d6647ff346e15",
+    }
 })
 
 local fzf = require("fzf-lua")
@@ -52,9 +51,11 @@ s("n", "<leader>faf", function()
 end, { desc = "[F]ind [a]ll [f]iles" })
 s("n", "<leader>q", fzf.quickfix, { desc = "Quickfix list" })
 s("n", "<leader>j", fzf.jumps, { desc = "[J]umplist" })
+s("n", "<leader>fr", fzf.resume, { desc = "Resumes last fzf search" })
 
 s("n", "gr", fzf.lsp_references, { desc = "Go to reference" })
 s("n", "gs", fzf.lsp_document_symbols, { desc = "Go to document symbol" })
+s("n", "gas", fzf.lsp_workspace_symbols, { desc = "Go to all (workspace) symbol" })
 s("n", "gd", fzf.lsp_definitions, { desc = "Go to definition" })
 s("n", "gD", fzf.lsp_typedefs, { desc = "Go to type definition" })
 s("n", "gi", fzf.lsp_implementations, { desc = "Go to implementation" })
