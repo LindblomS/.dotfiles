@@ -181,14 +181,15 @@ local colorscheme_kanagawa_lotus = {
 }
 
 local function get_appearance()
-    if wezterm.gui then
-        return wezterm.gui.get_appearance()
-    end
-    return 'Dark'
+    return "Dark"
+    -- if wezterm.gui then
+    --     return wezterm.gui.get_appearance()
+    -- end
+    -- return 'Dark'
 end
 
 local function scheme_for_appearance(appearance)
-    if appearance:find 'Dark' then
+    if appearance:find 'Dark' or appearance:find 'dark' then
         config.colors = colorscheme_kanagawa_wave
     else
         config.colors = colorscheme_kanagawa_lotus

@@ -39,5 +39,5 @@ vim.diagnostic.config({
     virtual_text = true,
 })
 
-vim.o.bg = "light"
+vim.o.bg = "dark"
 vim.cmd("colorscheme mycolorscheme")
