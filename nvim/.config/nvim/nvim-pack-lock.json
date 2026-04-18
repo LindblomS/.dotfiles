@@ -5,13 +5,8 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "'456d38d1cd3743926f329204c2340f3e7840aad6'"
     },
-    "fzf": {
-      "rev": "edf3524164c0878e64968cb1d4a24ba695b1ee12",
-      "src": "https://github.com/ibhagwan/fzf-lua",
-      "version": "'edf3524164c0878e64968cb1d4a24ba695b1ee12'"
-    },
     "fzf-lua": {
-      "rev": "edf3524164c0878e64968cb1d4a24ba695b1ee12",
+      "rev": "76535c3c334307002f0013355bcacf4049870697",
       "src": "https://github.com/ibhagwan/fzf-lua",
       "version": "'8969c8c2b668502d54478e46745d6647ff346e15'"
     },
