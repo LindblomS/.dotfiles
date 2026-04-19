@@ -1,6 +1,6 @@
 local logger = require("harpun.logger")
 
-local data_path = string.format("%s/harpun", vim.fn.stdpath("data"))
+local data_path = string.format("%s/harpun", vim.fn.stdpath("state"))
 local _fs = require("fs")
 
 local function fullpath()
@@ -15,15 +15,23 @@ local function fullpath()
 end
 
 local function write_data(data)
+    logger.info(string.format("write_data: fullpath - %s", fullpath()))
     _fs.write(fullpath(), vim.json.encode(data))
 end
 
 local function read_data()
-    local data, err = _fs.read(fullpath())
+    local data = _fs.read(fullpath())
     if data then
         return vim.json.decode(data)
     else
-        return nil, err
+        -- If file does not exist, try creating it first.
+        local _, err = write_data({})
+        if err then
+            logger.warning("Unable to create file")
+            return nil, err
+        end
+
+        return {}
     end
 end
 
