@@ -63,7 +63,7 @@ local function inner_setup(palette)
 
     local highlights = {
         Normal                     = { fg = palette.fg, bg = palette.bg },
-        Comment                    = { fg = palette.fg_1 },
+        Comment                    = { fg = palette.fg },
         Visual                     = { fg = palette.fg, bg = palette.light_blue },
         IncSearch                  = { bg = palette.light_yellow },
         Search                     = { bg = palette.light_blue },
