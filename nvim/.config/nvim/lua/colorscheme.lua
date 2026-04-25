@@ -82,7 +82,7 @@ local function inner_setup(palette)
         WildMenu                   = { link = "Pmenu" },
         LineNrAbove                = { fg = palette.fg_1 },
         LineNrBelow                = { fg = palette.fg_1 },
-        CursorLineNr               = { fg = palette.fg_1, bg = palette.light_blue },
+        CursorLineNr               = { fg = palette.fg_1, bold = true },
 
         -- syntax
         DiagnosticUnnecessary      = { fg = "none", bg = "none" },
