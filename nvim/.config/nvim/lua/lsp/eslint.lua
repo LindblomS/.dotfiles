@@ -47,7 +47,7 @@ local root_files = {
 }
 
 return {
-    cmd = { 'vscode-eslint-language-server', '--stdio' },
+    cmd = { 'eslint_ls', '--stdio' },
     filetypes = {
         'javascript',
         'javascriptreact',
