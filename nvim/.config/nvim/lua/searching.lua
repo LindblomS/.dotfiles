@@ -17,6 +17,10 @@ fzf.setup({
             hidden = true,
         }
     },
+    files = {
+        -- options copied from source but extended with --no-require-git.
+        fd_opts = [[--color=never --type f --type l --exclude .git --exclude .jj --no-require-git]],
+    },
     lsp = {
         async_or_timeout = 20000,
     },
