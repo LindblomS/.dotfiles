@@ -1,3 +1,5 @@
+vim.lsp.inlay_hint.enable(false)
+
 vim.lsp.config.jsonls = require("lsp.jsonls")
 vim.lsp.enable("jsonls")
 
@@ -19,6 +21,8 @@ vim.lsp.config.rust_analyzer = {
     },
 }
 vim.lsp.enable("rust_analyzer")
+
+require("lsp.roslyn")
 
 vim.lsp.config.lua_ls = {
     cmd = { 'lua-language-server' },
@@ -65,6 +69,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 end
             end
         })
+
+        -- vim.api.nvim_create_autocmd("InsertLeave", {
+        --     pattern = { "*.rs" },
+        --     callback = function()
+        --         vim.lsp.buf.format()
+        --     end
+        -- })
     end
 })
 

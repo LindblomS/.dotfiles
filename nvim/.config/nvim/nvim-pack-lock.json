@@ -29,6 +29,11 @@
       "rev": "add50252b5e9147c0a09d36480d418c7e2737472",
       "src": "https://github.com/stevearc/oil.nvim",
       "version": "'add50252b5e9147c0a09d36480d418c7e2737472'"
+    },
+    "roslyn.nvim": {
+      "rev": "b62d1a588765f0aa1b46ed260252c9e456408835",
+      "src": "https://github.com/seblyng/roslyn.nvim",
+      "version": "'b62d1a588765f0aa1b46ed260252c9e456408835'"
     }
   }
 }
