@@ -1,3 +1,27 @@
+vim.pack.add({
+    {
+        src = "https://github.com/nvim-treesitter/nvim-treesitter",
+        version = "4916d6592ede8c07973490d9322f187e07dfefac",
+    }
+})
+
+require("nvim-treesitter").setup()
+require("nvim-treesitter").install({ "c_sharp", "lua" })
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { "cs" },
+    callback = function()
+        vim.treesitter.start()
+    end,
+})
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { "rs" },
+    callback = function()
+        vim.treesitter.start()
+    end,
+})
+
+
 local light_palette = {
     fg = "#16161d",
     fg_1 = "#54546D",
@@ -5,22 +29,18 @@ local light_palette = {
     bg = "#F4F3F2",
     bg_1 = "#e5e2d7",
 
-    green = "#6aba0a",
+    green = "#6f894e",
     light_green = "#c0e396",
 
     blue = "#3c31b2",
     light_blue = "#c7d7e0",
 
     red = "#e82424",
+    red_2 = "#c84053",
     light_red = "#d9a594",
 
     orange = "#e98a00",
     light_orange = "#f3c786",
-
-    yellow = "#de9800",
-    light_yellow = "#f9d791",
-
-    special = "#e82424",
 }
 
 local dark_palette = {
@@ -37,15 +57,11 @@ local dark_palette = {
     light_blue = "#2D4F67",
 
     red = "#E82424",
+    red_2 = "#E46876",
     light_red = "#43242B",
 
     orange = "#FF9E3B",
     light_orange = "#f3c786",
-
-    yellow = "#938056",
-    light_yellow = "#938056",
-
-    special = "#E46876",
 }
 
 local function inner_setup(palette)
@@ -62,34 +78,89 @@ local function inner_setup(palette)
     end
 
     local highlights = {
-        Normal                     = { fg = palette.fg, bg = palette.bg },
-        Comment                    = { fg = palette.fg },
-        Visual                     = { fg = palette.fg, bg = palette.light_blue },
-        IncSearch                  = { bg = palette.light_yellow },
-        Search                     = { bg = palette.light_blue },
-        CurSearch                  = { bg = palette.light_yellow },
-        Substitute                 = { bg = palette.light_blue },
-        StatusLine                 = { fg = palette.fg, bg = palette.bg_1 },
-        StatusLineNC               = { fg = palette.fg, bg = palette.bg_1 },
-        VertSplit                  = { link = "WinSeparator" },
-        MoreMsg                    = { fg = palette.blue },
-        WarningMsg                 = { fg = palette.orange },
-        ErrorMsg                   = { fg = palette.red },
-        Question                   = { link = "MoreMsg" },
-        QuickFixLine               = { bg = palette.light_blue },
-        WinBar                     = { fg = palette.fg, bg = palette.fg },
-        WinBarNC                   = { fg = palette.fg },
-        WildMenu                   = { link = "Pmenu" },
-        LineNrAbove                = { fg = palette.fg_1 },
-        LineNrBelow                = { fg = palette.fg_1 },
-        CursorLineNr               = { fg = palette.fg_1, bold = true },
+        Normal                                    = { fg = palette.fg, bg = palette.bg },
+        Comment                                   = { fg = palette.fg_1 },
+        Visual                                    = { fg = palette.fg, bg = palette.light_blue },
+        IncSearch                                 = { bg = palette.orange, fg = palette.bg },
+        Search                                    = { bg = palette.light_orange },
+        CurSearch                                 = { link = "IncSearch" },
+        Substitute                                = { bg = palette.light_blue },
+        StatusLine                                = { fg = palette.fg, bg = palette.bg_1 },
+        StatusLineNC                              = { fg = palette.fg, bg = palette.bg_1 },
+        VertSplit                                 = { link = "WinSeparator" },
+        MoreMsg                                   = { fg = palette.blue },
+        WarningMsg                                = { fg = palette.orange },
+        ErrorMsg                                  = { fg = palette.red },
+        Question                                  = { link = "MoreMsg" },
+        QuickFixLine                              = { bg = palette.light_blue },
+        WinBar                                    = { fg = palette.fg, bg = palette.fg },
+        WinBarNC                                  = { fg = palette.fg },
+        WildMenu                                  = { link = "Pmenu" },
+        LineNrAbove                               = { fg = palette.fg_1 },
+        LineNrBelow                               = { fg = palette.fg_1 },
+        CursorLineNr                              = { fg = palette.fg_1, bold = true },
+
+        -- language syntax
+        Function                                  = { fg = palette.red_2 },
+        String                                    = { fg = palette.green },
+        Number                                    = { fg = palette.blue },
+        Float                                     = { fg = palette.orange },
+        Boolean                                   = { fg = palette.blue },
+
+        ["@lsp.type.comment"]                     = { link = "Comment" },
+        ["@lsp.type.string"]                      = { link = "String" },
+        ["@lsp.type.number"]                      = { link = "Number" },
+        ["@lsp.type.method"]                      = { link = "Normal" },
+        ["@lsp.type.keyword"]                     = {},
+        ["@lsp.type.variable"]                    = {},
+        ["@lsp.type.function"]                    = { link = "Function" },
+        ["@lsp.mod.declaration"]                  = { link = "Function" },
+        ["@variable.member"]                      = { link = "@lsp.mod.declaration" },
+        ["@number"]                               = { link = "Number" },
+        ["@number.float"]                         = { link = "Number" },
+        ["@boolean"]                              = { link = "Boolean" },
+        ["@function"]                             = { link = "Function" },
+        ["@string.escape"]                        = { link = "String" },
+
+        -- lua
+        ["@lsp.typemod.function.declaration.lua"] = { link = "Function" },
+        ["@function.call.lua"]                    = {},
+        ["@string.lua"]                           = { link = "String" },
+        ["@boolean.lua"]                          = { link = "Boolean" },
+        ["@variable.member.lua"]                  = { link = "Normal" },
+        ["@lsp.type.method.lua"]                  = {},
+        ["@lsp.type.function.lua"]                = {},
+        ["@function.method.call.lua"]             = {},
+        ["@variable.parameter.lua"]               = { link = "@lsp.mod.declaration" },
+
+        -- csharp
+        ["@function.method.c_sharp"]              = { link = "Function" },
+        ["@variable.parameter.c_sharp"]           = { link = "@lsp.mod.declaration" },
+        ["@variable.c_sharp"]                     = {},
+        ["@lsp.type.parameter.cs"]                = {},
+        ["@lsp.typemod.method.static.cs"]         = {},
+        ["@lsp.type.method.cs"]                   = {},
+        ["@lsp.mod.static.cs"]                    = {},
+        ["@function.method.call.c_sharp"]         = {},
+        ["@lsp.type.field.cs"]                    = { link = "@lsp.mod.declaration" },
+        ["@variable.member.c_sharp"]              = {},
+        ["@lsp.type.constant.cs"]                 = { link = "@lsp.mod.declaration" },
+
+
+        -- rust
+        ["@lsp.typemod.struct.declaration.rust"]   = { link = "Normal" },
+        ["@lsp.typemod.enum.declaration.rust"]     = { link = "Normal" },
+        ["@lsp.typemod.function.declaration.rust"] = { link = "Function" },
+        ["@lsp.type.struct.rust"]                  = { link = "Normal" },
+        ["rustFuncCall"]                           = {},
+        ["@lsp.type.function.rust"]                = { link = "Normal" },
+
 
         -- syntax
         DiagnosticUnnecessary      = { fg = "none", bg = "none" },
 
         ["@markup.link"]           = { underline = true },
         ["@comment"]               = { link = "Comment" },
-        ["@lsp.type.comment"]      = { link = "Comment" },
 
         -- This is not perfect but good enough.
         -- See fzf-colors in lua/plugins/searching.lua
@@ -137,18 +208,18 @@ local function inner_setup(palette)
         diffAdded                  = { bg = palette.light_green },
         diffRemoved                = { bg = palette.light_red },
         diffDeleted                = { bg = palette.light_red },
-        diffChanged                = { bg = palette.light_yellow },
+        diffChanged                = { bg = palette.light_orange },
         diffOldFile                = { bg = palette.light_red },
         diffNewFile                = { bg = palette.light_green },
 
         ["@diff.plus"]             = { bg = palette.light_green },
         ["@diff.minus"]            = { bg = palette.light_red },
-        ["@diff.delta"]            = { bg = palette.light_yellow },
+        ["@diff.delta"]            = { bg = palette.light_orange },
 
         DiffAdd                    = { bg = palette.light_green },
-        DiffChange                 = { bg = palette.light_yellow },
+        DiffChange                 = { bg = palette.light_orange },
         DiffDelete                 = { bg = palette.light_red },
-        DiffText                   = { bg = palette.yellow },
+        DiffText                   = { bg = palette.orange },
 
         -- blink (completion)
         BlinkCmpMenuSelection      = { bg = palette.light_blue },

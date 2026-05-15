@@ -1,4 +1,5 @@
 vim.lsp.inlay_hint.enable(false)
+vim.lsp.semantic_tokens.enable(true)
 
 vim.lsp.config.jsonls = require("lsp.jsonls")
 vim.lsp.enable("jsonls")
