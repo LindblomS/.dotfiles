@@ -9,13 +9,7 @@ require("nvim-treesitter").setup()
 require("nvim-treesitter").install({ "c_sharp", "lua" })
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { "cs" },
-    callback = function()
-        vim.treesitter.start()
-    end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { "rs" },
+    pattern = { "cs", "lua" },
     callback = function()
         vim.treesitter.start()
     end,
@@ -40,6 +34,7 @@ local light_palette = {
     light_red = "#d9a594",
 
     orange = "#e98a00",
+    orange_2 = "#cc6d00",
     light_orange = "#f3c786",
 }
 
@@ -61,6 +56,7 @@ local dark_palette = {
     light_red = "#43242B",
 
     orange = "#FF9E3B",
+    orange_2 = "#FFA066",
     light_orange = "#f3c786",
 }
 
@@ -98,10 +94,9 @@ local function inner_setup(palette)
         WildMenu                                  = { link = "Pmenu" },
         LineNrAbove                               = { fg = palette.fg_1 },
         LineNrBelow                               = { fg = palette.fg_1 },
-        CursorLineNr                              = { fg = palette.fg_1, bold = true },
 
         -- language syntax
-        Function                                  = { fg = palette.red_2 },
+        Function                                  = { fg = palette.orange_2 },
         String                                    = { fg = palette.green },
         Number                                    = { fg = palette.blue },
         Float                                     = { fg = palette.orange },
@@ -112,9 +107,11 @@ local function inner_setup(palette)
         ["@lsp.type.number"]                      = { link = "Number" },
         ["@lsp.type.method"]                      = { link = "Normal" },
         ["@lsp.type.keyword"]                     = {},
-        ["@lsp.type.variable"]                    = {},
+        ["@lsp.type.variable"]                    = { fg = palette.red_2 },
         ["@lsp.type.function"]                    = { link = "Function" },
-        ["@lsp.mod.declaration"]                  = { link = "Function" },
+        ["@lsp.mod.declaration"]                  = { link = "Normal" },
+        ["@lsp.type.property"]                    = { link = "Normal" },
+        ["@lsp.type.parameter"]                   = { link = "@lsp.type.variable" },
         ["@variable.member"]                      = { link = "@lsp.mod.declaration" },
         ["@number"]                               = { link = "Number" },
         ["@number.float"]                         = { link = "Number" },
@@ -123,7 +120,11 @@ local function inner_setup(palette)
         ["@string.escape"]                        = { link = "String" },
 
         -- lua
+        ["@lsp.mod.declaration.lua"]              = {},
         ["@lsp.typemod.function.declaration.lua"] = { link = "Function" },
+        ["@lsp.typemod.variable.declaration.lua"] = { link = "@lsp.type.variable" },
+        ["@lsp.typemod.variable.global.lua"]      = { link = "Normal" },
+        ["@lsp.type.property.lua"]                = {},
         ["@function.call.lua"]                    = {},
         ["@string.lua"]                           = { link = "String" },
         ["@boolean.lua"]                          = { link = "Boolean" },
@@ -131,29 +132,32 @@ local function inner_setup(palette)
         ["@lsp.type.method.lua"]                  = {},
         ["@lsp.type.function.lua"]                = {},
         ["@function.method.call.lua"]             = {},
-        ["@variable.parameter.lua"]               = { link = "@lsp.mod.declaration" },
+        ["@variable.parameter.lua"]               = { link = "@lsp.type.variable" },
 
         -- csharp
         ["@function.method.c_sharp"]              = { link = "Function" },
         ["@variable.parameter.c_sharp"]           = { link = "@lsp.mod.declaration" },
-        ["@variable.c_sharp"]                     = {},
-        ["@lsp.type.parameter.cs"]                = {},
+        ["@variable.c_sharp"]                     = { link = "@lsp.type.variable" },
         ["@lsp.typemod.method.static.cs"]         = {},
         ["@lsp.type.method.cs"]                   = {},
         ["@lsp.mod.static.cs"]                    = {},
         ["@function.method.call.c_sharp"]         = {},
         ["@lsp.type.field.cs"]                    = { link = "@lsp.mod.declaration" },
-        ["@variable.member.c_sharp"]              = {},
-        ["@lsp.type.constant.cs"]                 = { link = "@lsp.mod.declaration" },
+        ["@variable.member.c_sharp"]              = { link = "Normal" },
+        ["@lsp.type.constant.cs"]                 = {},
+        ["@lsp.type.parameter.cs"]                = { link = "@lsp.type.variable" },
 
 
         -- rust
-        ["@lsp.typemod.struct.declaration.rust"]   = { link = "Normal" },
-        ["@lsp.typemod.enum.declaration.rust"]     = { link = "Normal" },
-        ["@lsp.typemod.function.declaration.rust"] = { link = "Function" },
-        ["@lsp.type.struct.rust"]                  = { link = "Normal" },
-        ["rustFuncCall"]                           = {},
-        ["@lsp.type.function.rust"]                = { link = "Normal" },
+        ["@lsp.typemod.struct.declaration.rust"]    = { link = "Normal" },
+        ["@lsp.typemod.enum.declaration.rust"]      = { link = "Normal" },
+        ["@lsp.typemod.function.declaration.rust"]  = { link = "Function" },
+        ["@lsp.typemod.variable.declaration.rust"]  = { link = "@lsp.type.variable" },
+        ["@lsp.type.struct.rust"]                   = { link = "Normal" },
+        ["rustFuncCall"]                            = {},
+        ["@lsp.type.function.rust"]                 = { link = "Normal" },
+        ["@lsp.typemod.parameter.declaration.rust"] = { link = "@lsp.type.variable" },
+        ["@lsp.typemod.method.declaration.rust"]    = { link = "Function" },
 
 
         -- syntax
