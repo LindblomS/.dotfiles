@@ -9,7 +9,7 @@ require("nvim-treesitter").setup()
 require("nvim-treesitter").install({ "c_sharp", "lua" })
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { "cs", "lua" },
+    pattern = { "cs", "lua" }, -- Note that we have to use filetypes instead of globstyle pattern on FileType events.
     callback = function()
         vim.treesitter.start()
     end,

@@ -103,7 +103,8 @@ vim.lsp.config("roslyn", {
             vim.notify("Roslyn initialization complete", vim.log.levels.INFO)
             vim.lsp.diagnostic._refresh()
         end,
-    }
+    },
+    commands = require("lsp.roslyn.commands")
 })
 
 
