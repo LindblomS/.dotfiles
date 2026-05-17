@@ -1,6 +1,6 @@
 return {
     -- Install with "npm install -g vscode-json-languageserver"
-    -- https://github.com/microsoft/vscode/blob/main/extensions/json-language-features/server/README.md
+    -- https://github.com/Microsoft/vscode-json-languageservice
     cmd = { "vscode-json-languageserver", "--stdio" },
     filetypes = { 'json', 'jsonc' },
     init_options = {

@@ -5,7 +5,8 @@ vim.lsp.config.jsonls = require("lsp.jsonls")
 vim.lsp.enable("jsonls")
 
 vim.lsp.config.html = require("lsp.html")
-vim.lsp.enable("html")
+-- Does not currently work
+-- vim.lsp.enable("html")
 
 vim.lsp.config.rust_analyzer = {
     cmd = { 'rust-analyzer' },

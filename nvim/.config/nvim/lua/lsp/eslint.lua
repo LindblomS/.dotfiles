@@ -60,12 +60,6 @@ return {
         'astro',
     },
     root_markers = root_files,
-    -- -- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
-    -- root_dir = function(fname)
-    --     root_files = util.insert_package_json(root_files, 'eslintConfig', fname)
-    --     return util.root_pattern(unpack(root_files))(fname)
-    -- end,
-    -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
     settings = {
         validate = 'on',
         packageManager = nil,
@@ -130,35 +124,4 @@ return {
             end
         })
     end,
-    docs = {
-        description = [[
-https://github.com/hrsh7th/vscode-langservers-extracted
-
-`vscode-eslint-language-server` is a linting engine for JavaScript / Typescript.
-It can be installed via `npm`:
-
-```sh
-npm i -g vscode-langservers-extracted
-```
-
-`vscode-eslint-language-server` provides an `EslintFixAll` command that can be used to format a document on save:
-```lua
-lspconfig.eslint.setup({
-  --- ...
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-})
-```
-
-See [vscode-eslint](https://github.com/microsoft/vscode-eslint/blob/55871979d7af184bf09af491b6ea35ebd56822cf/server/src/eslintServer.ts#L216-L229) for configuration options.
-
-Messages handled in lspconfig: `eslint/openDoc`, `eslint/confirmESLintExecution`, `eslint/probeFailed`, `eslint/noLibrary`
-
-Additional messages you can handle: `eslint/noConfig`
-]],
-    },
 }
