@@ -48,8 +48,6 @@ vim.lsp.enable("ts_ls")
 vim.lsp.config.eslint = require("lsp.eslint")
 vim.lsp.enable("eslint")
 
-require("lsp.dotnet")
-
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local lsp_opts = { buffer = args.buf }
@@ -70,13 +68,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 end
             end
         })
-
-        -- vim.api.nvim_create_autocmd("InsertLeave", {
-        --     pattern = { "*.rs" },
-        --     callback = function()
-        --         vim.lsp.buf.format()
-        --     end
-        -- })
     end
 })
 
