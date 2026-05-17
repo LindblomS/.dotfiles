@@ -68,6 +68,7 @@ local function setup_test_cmd()
         -- Find the first project by traversing upward using the current filepath.
         local function find_csproj()
             -- Stop searching when reaching this directory
+            -- Note that stop_path itself will no be searched.
             local stop_path = vim.fn.getcwd()
             -- Start searching from the current file
             local start_path = vim.api.nvim_buf_get_name(0)
@@ -85,7 +86,6 @@ local function setup_test_cmd()
         local cmd_params = {}
 
         local csproj = find_csproj()
-        print("csproj", csproj)
         if csproj then
             table.insert(cmd_params, csproj)
         end
