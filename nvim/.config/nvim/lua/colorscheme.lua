@@ -73,12 +73,20 @@ local function inner_setup(palette)
         vim.api.nvim_set_hl(0, hl, { fg = palette.fg, bg = "none" })
     end
 
+    local function get_search_text_fg()
+        if vim.o.bg == "dark" then
+            return palette.bg
+        else
+            return palette.fg
+        end
+    end
+
     local highlights = {
         Normal                                            = { fg = palette.fg, bg = palette.bg },
         Comment                                           = { fg = palette.fg_1 },
         Visual                                            = { fg = palette.fg, bg = palette.light_blue },
         IncSearch                                         = { bg = palette.orange, fg = palette.bg },
-        Search                                            = { bg = palette.light_orange, fg = palette.fg },
+        Search                                            = { bg = palette.light_orange, fg = get_search_text_fg() },
         CurSearch                                         = { link = "IncSearch" },
         Substitute                                        = { bg = palette.light_blue },
         StatusLine                                        = { fg = palette.fg, bg = palette.bg_1 },
