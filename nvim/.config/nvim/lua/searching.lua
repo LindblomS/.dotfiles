@@ -48,8 +48,9 @@ local s = vim.keymap.set
 
 s("n", "<leader>ff", fzf.files, { desc = "[F]ind [f]iles" })
 s("n", "<leader>fb", fzf.buffers, { desc = "[F]ind [b]uffers" })
-s("n", "<leader>fw", fzf.live_grep, { desc = "[F]ind [w]ord" })
-s({ "n", "v" }, "<leader>fW", fzf.grep_cword, { desc = "[F]ind [w]ord under cursor or selection" })
+s("n", "<leader>fw", fzf.live_grep_native, { desc = "[F]ind [w]ord" })
+s({ "n" }, "<leader>fW", fzf.grep_cword, { desc = "[F]ind [w]ord under cursor" })
+s({ "v" }, "<leader>fw", fzf.grep_visual, { desc = "[F]ind [w]ord under selection" })
 s("n", "<leader>faf", function()
     fzf.files({ no_ignore = true })
 end, { desc = "[F]ind [a]ll [f]iles" })
