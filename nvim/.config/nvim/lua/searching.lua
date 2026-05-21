@@ -13,6 +13,9 @@ fzf.setup({
         }
     },
     winopts = {
+        treesitter = {
+            enabled = false,
+        },
         preview = {
             hidden = true,
         }
