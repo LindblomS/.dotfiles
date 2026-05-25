@@ -137,14 +137,13 @@ vim.lsp.config("roslyn", {
     },
     settings = {
         ["csharp|background_analysis"] = {
-            dotnet_analyzer_diagnostics_scope = "fullSolution",
-            dotnet_compiler_diagnostics_scope = "fullSolution",
+            dotnet_analyzer_diagnostics_scope = "openFiles",
+            dotnet_compiler_diagnostics_scope = "openFiles",
         },
         ["csharp|code_lens"] = {
             dotnet_enable_references_code_lens = false,
             dotnet_enable_tests_code_lens = false
         },
-
         ["csharp|completion"] = {
             dotnet_provide_regex_completions = false,
             dotnet_show_completion_items_from_unimported_namespaces = true,
@@ -152,6 +151,9 @@ vim.lsp.config("roslyn", {
         },
         ["csharp|formatting"] = {
             dotnet_organize_imports_on_format = true
+        },
+        ["csharp|projects"] = {
+            dotnet_enable_automatic_restore = false,
         }
     },
     handlers = {
