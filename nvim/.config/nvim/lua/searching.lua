@@ -6,7 +6,7 @@ vim.pack.add({
 })
 
 local fzf = require("fzf-lua")
-fzf.setup({
+local fzf_opts = {
     keymap = {
         fzf = {
             ["ctrl-q"] = "select-all+accept",
@@ -45,11 +45,26 @@ fzf.setup({
         ["query"]   = { "fg", "Normal" },
         ["gutter"]  = "-1",
     },
-})
+}
+fzf.setup(fzf_opts)
 
 local s = vim.keymap.set
 
 s("n", "<leader>ff", fzf.files, { desc = "[F]ind [f]iles" })
+s("v", "<leader>ff", function()
+    local saved_reg = vim.fn.getreg("v")
+    vim.cmd [[noautocmd sil norm! "vy]]
+    local selection = vim.fn.getreg("v")
+    vim.fn.setreg("v", saved_reg)
+    local word = vim.F.if_nil(nil, selection) -- vim.F is deprecated. Use something else.
+
+    local fd_opts = string.format("%s %s",
+        fzf_opts.files.fd_opts,
+        word)
+
+    fzf.files({ fd_opts = fd_opts })
+end, { desc = "[F]ind [f]iles using selection" })
+
 s("n", "<leader>fb", fzf.buffers, { desc = "[F]ind [b]uffers" })
 s("n", "<leader>fw", fzf.live_grep_native, { desc = "[F]ind [w]ord" })
 s({ "n" }, "<leader>fW", fzf.grep_cword, { desc = "[F]ind [w]ord under cursor" })
