@@ -22,7 +22,7 @@ keymap.set({ "n", "v" }, "<leader>s", function()
     else
         word = vim.F.if_nil(nil, vim.fn.expand("<cword>"))
     end
-    vim.api.nvim_feedkeys(string.format(":%%s/%s/", word), "n", false)
+    vim.api.nvim_feedkeys(string.format(":%%s/%s/%s", word, word), "n", false)
 end, { desc = "Substitute word under cursor or selection" })
 keymap.set("n", "q", "<Nop>",
     { desc = "I never use complex repeats so it's more convenient to just disable it. Se :h q" })
