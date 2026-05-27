@@ -25,7 +25,7 @@ fzf.setup({
         fd_opts = [[--color=never --type f --type l --exclude .git --exclude .jj --no-require-git]],
     },
     lsp = {
-        async_or_timeout = 20000,
+        async_or_timeout = 3000,
     },
     fzf_colors = {
         true, -- inherit fzf colors that aren't specified below from

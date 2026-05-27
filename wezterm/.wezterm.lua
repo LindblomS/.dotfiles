@@ -181,11 +181,10 @@ local colorscheme_kanagawa_lotus = {
 }
 
 local function get_appearance()
-    return "Dark"
-    -- if wezterm.gui then
-    --     return wezterm.gui.get_appearance()
-    -- end
-    -- return 'Dark'
+    if wezterm.gui then
+        return wezterm.gui.get_appearance()
+    end
+    return 'Dark'
 end
 
 local function scheme_for_appearance(appearance)
