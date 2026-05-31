@@ -105,13 +105,15 @@ local function inner_setup(palette)
 
         -- language syntax
         Function                          = { fg = palette.orange_2 },
-        Parameter                         = { fg = palette.red_2 },
+        Parameter                         = { fg = palette.fg },
         String                            = { fg = palette.green },
         Number                            = { fg = palette.blue },
         Float                             = { fg = palette.orange },
         Boolean                           = { link = "Number" },
+        Keyword                           = { fg = palette.red_2 },
 
         ["@variable.member"]              = { link = "Normal" },
+        ["@keyword"]                      = { link = "Keyword" },
         ["@number"]                       = { link = "Number" },
         ["@number.float"]                 = { link = "Number" },
         ["@boolean"]                      = { link = "Boolean" },
@@ -140,6 +142,7 @@ local function inner_setup(palette)
         ["@function.macro.rust"]          = { link = "Normal" },
         ["@variable.parameter.rust"]      = { link = "Parameter" },
         ["@variable.rust"]                = { link = "Normal" },
+        ["@keyword.exception.rust"]       = { link = "Normal" },
         ["rustFuncCall"]                  = { link = "Normal" },
 
         -- typescript
