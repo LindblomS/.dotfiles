@@ -41,3 +41,14 @@ vim.diagnostic.config({
 
 vim.o.bg = "dark"
 vim.cmd("colorscheme mycolorscheme")
+
+-- Custom filetype for note taking
+vim.filetype.add({
+    extension = {
+        notes = function()
+            return "notes", function(buf)
+                vim.bo[buf].textwidth = 100
+            end
+        end
+    }
+})

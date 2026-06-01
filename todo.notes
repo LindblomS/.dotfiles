@@ -1,0 +1,19 @@
+wezterm
+- fix colors to that they match colorscheme in nvim
+
+nvim
+
+- Trim filepath in fzf-lua. 
+- Have a single .editorconfig for repo.
+- Add code action float at cursor.
+- Add user command for building the current project in dotnet (if you're in a solution with many
+  projects). 
+- Add relative numbers in Terminal
+- Include files such as appsettings.* in fzf file searching which are now ignored because of
+  .gitignore.
+- Idea. The issue is that I regularly overwrite my mark (m-a) and can't keep track of different
+  marks. The idea is to keep an appendable log of marks so I can always mark with the same key but
+  still keep any "overwritten" ones. 
+- Catch errors when trying to load plugins
+- Add install script for eslint_ls and document how eslint works with it and everything.
+- dotnet solution finding function can be very slow. 
