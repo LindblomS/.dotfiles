@@ -14,3 +14,4 @@ The idea is to keep an appendable log of marks so I can always mark with the sam
 "overwritten" ones. 
 - Catch errors when trying to load plugins
 - Add install script for eslint_ls and document how eslint works with it and everything.
+- Implement filetype with for notes where e.g. text width is set to 100. (todo.notes)
