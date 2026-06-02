@@ -28,12 +28,25 @@ local function get_solution(buffer)
     end)
 
     if not directory then
+        vim.notify("No root directory for finding dotnet solution", vim.log.levels.INFO)
         return nil
     end
 
-    local solutions = vim.fs.find(function(name, _)
-        return name:match("%.sln[x]?$")
-    end, { type = "file", limit = math.huge, path = directory })
+    local tmp_filename = "fd_dotnet_sln_temp"
+
+    local cmd = string.format("fd --type f --extension slnx --extension sln > %s", tmp_filename)
+    local ok, _, _ = os.execute(cmd)
+
+    if not ok then
+        vim.notify("Error finding dotnet solution", vim.log.levels.WARN)
+    end
+
+    local solutions = {}
+    for l in io.lines(tmp_filename) do
+        table.insert(solutions, l)
+    end
+
+    vim.fs.rm(tmp_filename)
 
     return choose_solution(solutions)
 end
@@ -109,6 +122,7 @@ local function setup_test_cmd()
     end)
 end
 
+-- todo: try setting dynamicRegistration to true for filewatching.
 vim.lsp.config("roslyn", {
     filetypes = { "cs" },
     cmd = {

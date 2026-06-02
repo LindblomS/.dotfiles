@@ -16,4 +16,3 @@ nvim
   still keep any "overwritten" ones. 
 - Catch errors when trying to load plugins
 - Add install script for eslint_ls and document how eslint works with it and everything.
-- dotnet solution finding function can be very slow. 
