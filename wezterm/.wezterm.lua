@@ -77,7 +77,12 @@ config.keys = {
         key = "UpArrow",
         mods = "CTRL|SHIFT",
         action = wezterm.action.ScrollByPage(-0.5),
-    }
+    },
+    {
+        key = 'Tab',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.ActivateLastTab,
+    },
 }
 
 
