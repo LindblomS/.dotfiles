@@ -34,7 +34,7 @@ local function get_solution(buffer)
 
     local tmp_filename = "fd_dotnet_sln_temp"
 
-    local cmd = string.format("fd --type f --extension slnx --extension sln > %s", tmp_filename)
+    local cmd = string.format("fd --type f --extension slnx --extension sln --absolute-path > %s", tmp_filename)
     local ok, _, _ = os.execute(cmd)
 
     if not ok then
@@ -109,6 +109,9 @@ local function setup_test_cmd()
             table.insert(cmd_params, string.format("--filter=\"%s\"", word))
         end
 
+        table.insert(cmd_params,
+            "-p:RunAnalyzers=false -p:EnableNETAnalyzers=false -p:AnalysisMode=None -p:WarningLevel=0")
+
         -- Sometimes it's necessary to exclude this param. Inserting it last
         -- makes it easier to remove.
         table.insert(cmd_params, "--no-restore")
@@ -122,7 +125,6 @@ local function setup_test_cmd()
     end)
 end
 
--- todo: try setting dynamicRegistration to true for filewatching.
 vim.lsp.config("roslyn", {
     filetypes = { "cs" },
     cmd = {
@@ -130,6 +132,13 @@ vim.lsp.config("roslyn", {
         "--logLevel",
         "Information",
         "--stdio",
+    },
+    capabilities = {
+        workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
+            },
+        },
     },
     on_init = {
         function(client, _)
