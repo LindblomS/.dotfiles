@@ -114,7 +114,7 @@ local colorscheme_kanagawa_wave = {
 
 local colorscheme_kanagawa_lotus = {
     foreground = "#16161D",
-    background = "#F4F3F2",
+    background = "#e6e6e6",
 
     cursor_bg = "#43436c",
     cursor_fg = "#43436c",
