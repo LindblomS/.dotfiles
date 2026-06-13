@@ -144,6 +144,7 @@ local function inner_setup(palette)
         ["@variable.parameter.rust"]             = { link = "Parameter" },
         ["@variable.rust"]                       = { link = "Normal" },
         ["@keyword.exception.rust"]              = { link = "Normal" },
+        ["@keyword.debug.rust"]                  = { link = "Normal" },
         ["rustFuncCall"]                         = { link = "Normal" },
 
         -- typescript

@@ -23,6 +23,7 @@ o.hlsearch = true
 o.incsearch = true
 o.ignorecase = true
 o.smartcase = true
+o.wrapscan = false
 
 o.scrolloff = 8
 
