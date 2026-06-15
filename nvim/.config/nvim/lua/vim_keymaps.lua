@@ -10,7 +10,7 @@ keymap.set('v', '<leader>y', '\"+y')
 keymap.set('n', '<ESC>', ':noh <CR>', { silent = true })
 keymap.set('n', '<C-y>', '<C-y><C-y><C-y>')
 keymap.set('n', '<C-e>', '<C-e><C-e><C-e>')
-keymap.set({ "n", "v" }, "<leader>s", function()
+local function substitute_word(use_word_boundary)
     local word
     local visual = vim.fn.mode() == "v"
     if visual then
@@ -22,8 +22,21 @@ keymap.set({ "n", "v" }, "<leader>s", function()
     else
         word = vim.F.if_nil(nil, vim.fn.expand("<cword>"))
     end
-    vim.api.nvim_feedkeys(string.format(":%%s/%s/%s", word, word), "n", false)
-end, { desc = "Substitute word under cursor or selection" })
+
+    local pattern
+    if use_word_boundary then
+        pattern = string.format("\\<%s\\>", word)
+    else
+        pattern = word
+    end
+
+    vim.api.nvim_feedkeys(string.format(":%%s/%s/%s", pattern, word), "n", false)
+end
+keymap.set({ "n", "v" }, "<leader>s", function() substitute_word(false) end,
+    { desc = "Substitute word under cursor or selection" })
+keymap.set({ "n", "v" }, "<leader>S", function() substitute_word(true) end,
+    { desc = "Substitute word under cursor or selection using word bounderies" })
+
 keymap.set("n", "q", "<Nop>",
     { desc = "I never use complex repeats so it's more convenient to just disable it. Se :h q" })
 

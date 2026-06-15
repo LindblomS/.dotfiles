@@ -16,4 +16,5 @@ nvim
   still keep any "overwritten" ones. 
 - Catch errors when trying to load plugins
 - Add install script for eslint_ls and document how eslint works with it and everything.
-- Add word bounderies \<\> for custom search and replace <leader>s
+- Add keymap for visual selection <leader>fW which works like normal <leader>fW, i.e. uses word
+  boundary \bSomeWord\b
