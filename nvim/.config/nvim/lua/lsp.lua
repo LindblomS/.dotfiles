@@ -8,22 +8,7 @@ vim.lsp.config.html = require("lsp.html")
 -- Does not currently work
 -- vim.lsp.enable("html")
 
-vim.lsp.config.rust_analyzer = {
-    cmd = { 'rust-analyzer' },
-    filetypes = { 'rust' },
-    root_markers = { "Cargo.toml" },
-    capabilities = {
-        textDocument = {
-            completion = {
-                completionItem = {
-                    snippetSupport = false
-                }
-            }
-        }
-    },
-}
-vim.lsp.enable("rust_analyzer")
-
+require("lsp.rust")
 require("lsp.roslyn")
 
 vim.lsp.config.lua_ls = {

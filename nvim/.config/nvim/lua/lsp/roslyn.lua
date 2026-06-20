@@ -187,3 +187,11 @@ vim.lsp.config("roslyn", {
     },
     commands = require("lsp.roslyn.commands")
 })
+
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { "cs" },
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "ia", "print@", "Console.WriteLine();<esc>T(i", {});
+    end,
+})
