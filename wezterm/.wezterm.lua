@@ -129,7 +129,7 @@ local colorscheme_kanagawa_lotus = {
     ansi = {
         "#1F1F28",
         "#c84053",
-        "#6f894e",
+        "#008311",
         "#77713f",
         "#4d699b",
         "#b35b79",

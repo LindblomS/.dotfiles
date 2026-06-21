@@ -23,7 +23,7 @@ local light_palette = {
     bg = "#e6e6e6",
     bg_1 = "#d1cfcf",
 
-    green = "#6f894e",
+    green = "#008311",
     light_green = "#c0e396",
 
     blue = "#3c31b2",
@@ -121,6 +121,7 @@ local function inner_setup(palette)
         ["@string.escape"]                       = { link = "String" },
         ["@markup.link"]                         = { underline = true },
         ["@comment"]                             = { link = "Comment" },
+        ["@string"]                              = { link = "String" },
 
         -- lua
         ["@function.call.lua"]                   = {},
