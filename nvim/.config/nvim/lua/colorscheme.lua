@@ -6,10 +6,10 @@ vim.pack.add({
 })
 
 require("nvim-treesitter").setup()
-require("nvim-treesitter").install({ "c_sharp", "lua", "rust" })
+require("nvim-treesitter").install({ "c_sharp", "lua", "rust", "javascript", "typescript" })
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { "cs", "lua", "rust" },
+    pattern = { "cs", "lua", "rust", "javascript", "typescript" },
     callback = function()
         vim.treesitter.start()
     end,
@@ -152,6 +152,8 @@ local function inner_setup(palette)
         ["typescriptBraces"]                     = { link = "Normal" },
         ["typescriptNull"]                       = { link = "Normal" },
         ["typescriptSpecial"]                    = {},
+        ["@function.call.typescript"]            = { link = "Normal" },
+        ["@function.method.call.typescript"]     = { link = "Normal" },
 
         -- javascript
         ["javaScriptBraces"]                     = { link = "Normal" },
