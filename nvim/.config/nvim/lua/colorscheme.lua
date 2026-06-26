@@ -122,6 +122,7 @@ local function inner_setup(palette)
         ["@markup.link"]                         = { underline = true },
         ["@comment"]                             = { link = "Comment" },
         ["@string"]                              = { link = "String" },
+        ["@character"]                           = { link = "String" },
 
         -- lua
         ["@function.call.lua"]                   = {},
@@ -157,6 +158,7 @@ local function inner_setup(palette)
 
         -- javascript
         ["javaScriptBraces"]                     = { link = "Normal" },
+        ["javaScriptCommentTodo"]                = { link = "Normal" },
 
         -- syntax
         DiagnosticUnnecessary                    = { fg = "none", bg = "none" },
