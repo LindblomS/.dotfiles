@@ -31,3 +31,11 @@ o.cursorline = true
 o.cursorlineopt = "number"
 o.signcolumn = "no"
 o.guicursor = "a:block,t:block-blinkon500-blinkoff500-TermCursor"
+
+-- Override on filetype
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { "help" },
+    callback = function()
+        vim.o.relativenumber = true
+    end,
+})
