@@ -5,12 +5,6 @@ vim.pack.add({
     }
 })
 
--- todo: check if we want these settings
--- watch_for_changes = true,
--- view_options = {
---  show_hidden = true,
---}
-
 require("oil").setup({
     buf_options = {
         bufhidden = "hide",
