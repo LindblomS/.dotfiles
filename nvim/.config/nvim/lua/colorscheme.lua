@@ -23,7 +23,7 @@ local light_palette = {
     bg = "#e6e6e6",
     bg_1 = "#d1cfcf",
 
-    green = "#008311",
+    green = "#137220",
     light_green = "#c0e396",
 
     blue = "#3c31b2",
