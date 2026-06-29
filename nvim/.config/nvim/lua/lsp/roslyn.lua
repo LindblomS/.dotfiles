@@ -193,5 +193,6 @@ vim.api.nvim_create_autocmd('FileType', {
     pattern = { "cs" },
     callback = function()
         vim.api.nvim_buf_set_keymap(0, "ia", "print@", "Console.WriteLine();<esc>T(i", {});
+        vim.api.nvim_buf_set_keymap(0, "ia", "aaa@", "// arrange\n// act\n// assert", {});
     end,
 })
