@@ -16,5 +16,4 @@ nvim
 - Add install script for eslint_ls and document how eslint works with it and everything.
 - Add keymap for visual selection <leader>fW which works like normal <leader>fW, i.e. uses word
   boundary \bSomeWord\b
-- Add keymap for substituting the word under the cursor in the last visual selection.
 
