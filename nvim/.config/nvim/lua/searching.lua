@@ -21,8 +21,8 @@ local fzf_opts = {
         }
     },
     files = {
-        -- options copied from source but extended with --no-require-git.
-        fd_opts = [[--color=never --type f --type l --exclude .git --exclude .jj --no-require-git]],
+        fd_opts =
+        "--color=never --type f --type l --exclude .git --no-require-git --no-ignore-vcs",
     },
     lsp = {
         async_or_timeout = 6000,
