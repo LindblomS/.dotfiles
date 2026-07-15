@@ -22,7 +22,7 @@ local fzf_opts = {
     },
     files = {
         fd_opts =
-        "--color=never --type f --type l --exclude .git --no-require-git --no-ignore-vcs",
+        "--color=never --type f --type l --exclude .git --no-require-git --hidden",
     },
     lsp = {
         async_or_timeout = 6000,
@@ -70,7 +70,8 @@ s("n", "<leader>fw", fzf.live_grep_native, { desc = "[F]ind [w]ord" })
 s({ "n" }, "<leader>fW", fzf.grep_cword, { desc = "[F]ind [w]ord under cursor" })
 s({ "v" }, "<leader>fw", fzf.grep_visual, { desc = "[F]ind [w]ord under selection" })
 s("n", "<leader>faf", function()
-    fzf.files({ no_ignore = true })
+    -- using --no-ignore-vcs lets me use .ignore files where needed. E.g. if node_modules exist.
+    fzf.files({ fd_opts = "--color=never --type f --type l --exclude .git --no-ignore-vcs --hidden" })
 end, { desc = "[F]ind [a]ll [f]iles" })
 s("n", "<leader>q", fzf.quickfix, { desc = "Quickfix list" })
 s("n", "<leader>j", fzf.jumps, { desc = "[J]umplist" })
