@@ -1,14 +1,10 @@
 wezterm
-- fix colors to that they match colorscheme in nvim
+- fix colors so that they match colorscheme in nvim
 
 nvim
 
 - Have a single .editorconfig for repo.
 - Add code action float at cursor.
-- Add user command for building the current project in dotnet (if you're in a solution with many
-  projects). 
-- Include files such as appsettings.* in fzf file searching which are now ignored because of
-  .gitignore.
 - Idea. The issue is that I regularly overwrite my mark (m-a) and can't keep track of different
   marks. The idea is to keep an appendable log of marks so I can always mark with the same key but
   still keep any "overwritten" ones. 
