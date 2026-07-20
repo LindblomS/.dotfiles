@@ -25,7 +25,7 @@ local fzf_opts = {
         "--color=never --type f --type l --exclude .git --no-require-git --hidden",
     },
     lsp = {
-        async_or_timeout = 6000,
+        async_or_timeout = true,
     },
     fzf_colors = {
         true, -- inherit fzf colors that aren't specified below from
