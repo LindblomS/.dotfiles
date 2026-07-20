@@ -102,16 +102,18 @@ local function inner_setup(palette)
         WildMenu     = { link = "Pmenu" },
         LineNrAbove  = { fg = palette.fg_1, bg = palette.bg_1 },
         LineNrBelow  = { fg = palette.fg_1, bg = palette.bg_1 },
+        CursorLineNr = { fg = palette.fg_1, bg = palette.bg_1 },
         MatchParen   = { bg = palette.light_blue },
 
+
         -- language syntax
-        Function     = { fg = palette.orange_2 },
-        Parameter    = { fg = palette.fg },
-        String       = { fg = palette.green },
-        Number       = { fg = palette.blue },
-        Float        = { fg = palette.orange },
-        Boolean      = { link = "Number" },
-        Keyword      = { fg = palette.red_2 },
+        Function  = { fg = palette.orange_2 },
+        Parameter = { fg = palette.fg },
+        String    = { fg = palette.green },
+        Number    = { fg = palette.blue },
+        Float     = { fg = palette.orange },
+        Boolean   = { link = "Number" },
+        Keyword   = { fg = palette.red_2 },
         -- Conditional  = { link = "Keyword" },
         -- Statement    = { link = "Keyword" },
 
