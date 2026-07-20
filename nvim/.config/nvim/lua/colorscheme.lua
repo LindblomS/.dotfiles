@@ -100,8 +100,9 @@ local function inner_setup(palette)
         WinBar       = { fg = palette.fg, bg = palette.fg },
         WinBarNC     = { fg = palette.fg },
         WildMenu     = { link = "Pmenu" },
-        LineNrAbove  = { fg = palette.fg_1 },
-        LineNrBelow  = { fg = palette.fg_1 },
+        LineNrAbove  = { fg = palette.fg_1, bg = palette.bg_1 },
+        LineNrBelow  = { fg = palette.fg_1, bg = palette.bg_1 },
+        MatchParen   = { bg = palette.light_blue },
 
         -- language syntax
         Function     = { fg = palette.orange_2 },
