@@ -6,6 +6,7 @@ vim.opt.diffopt:append({ "algorithm:histogram" })
 vim.o.winborder = "rounded"
 o.nu = true
 o.relativenumber = true
+o.numberwidth = 8
 o.wrap = false
 
 o.tabstop = 4
