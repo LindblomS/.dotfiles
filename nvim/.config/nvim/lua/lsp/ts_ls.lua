@@ -11,7 +11,7 @@ end
 
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { "typescript", "javascript" },
+    pattern = { "typescript", "javascript", "vue" },
     callback = function()
         -- In .cs files we can add "<esc>T(i" at the end to go back into (). But for some reason it just won't
         -- work for .ts files.)
