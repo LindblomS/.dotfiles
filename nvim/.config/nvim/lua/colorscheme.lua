@@ -9,7 +9,7 @@ require("nvim-treesitter").setup()
 require("nvim-treesitter").install({ "c_sharp", "lua", "rust", "javascript", "typescript" })
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { "cs", "lua", "rust", "javascript", "typescript" },
+    pattern = { "cs", "lua", "rust", "javascript", "typescript", "vue" },
     callback = function()
         vim.treesitter.start()
     end,
@@ -22,6 +22,7 @@ local light_palette = {
 
     bg = "#e6e6e6",
     bg_1 = "#d1cfcf",
+    bg_2 = "#dedede",
 
     green = "#137220",
     light_green = "#c0e396",
@@ -44,6 +45,8 @@ local dark_palette = {
 
     bg = "#1F1F28",
     bg_1 = "#2A2A37",
+    -- TODO: Should be similar to bg but darker. Like how it's done in the light theme.
+    bg_2 = "#2A2A37",
 
     green = "#98BB6C",
     light_green = "#2B3328",
@@ -100,9 +103,10 @@ local function inner_setup(palette)
         WinBar       = { fg = palette.fg, bg = palette.fg },
         WinBarNC     = { fg = palette.fg },
         WildMenu     = { link = "Pmenu" },
-        LineNrAbove  = { fg = palette.fg_1, bg = palette.bg_1 },
-        LineNrBelow  = { fg = palette.fg_1, bg = palette.bg_1 },
-        CursorLineNr = { fg = palette.fg_1, bg = palette.bg_1 },
+        LineNrAbove  = { fg = palette.fg_1, bg = palette.bg_2 },
+        LineNrBelow  = { fg = palette.fg_1, bg = palette.bg_2 },
+        LineNr       = { fg = palette.fg_1, bg = palette.bg_2 },
+        CursorLineNr = { fg = palette.fg_1, bg = palette.bg_2 },
         MatchParen   = { bg = palette.light_blue },
 
 
