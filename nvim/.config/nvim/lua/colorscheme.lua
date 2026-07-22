@@ -6,7 +6,7 @@ vim.pack.add({
 })
 
 require("nvim-treesitter").setup()
-require("nvim-treesitter").install({ "c_sharp", "lua", "rust", "javascript", "typescript" })
+require("nvim-treesitter").install({ "c_sharp", "lua", "rust", "javascript", "typescript", "vue" })
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { "cs", "lua", "rust", "javascript", "typescript", "vue" },
