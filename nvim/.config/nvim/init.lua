@@ -27,7 +27,6 @@ vim.diagnostic.config({
     virtual_text = true,
 })
 
-vim.o.bg = "light"
 vim.cmd("colorscheme mycolorscheme")
 
 -- Custom filetype for note taking

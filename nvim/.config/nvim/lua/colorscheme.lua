@@ -249,7 +249,20 @@ local function inner_setup(palette)
     for hl, spec in pairs(highlights) do
         vim.api.nvim_set_hl(0, hl, spec)
     end
+
+    vim.api.nvim_create_autocmd("InsertEnter", {
+        callback = function()
+            vim.cmd(string.format("hi CursorLineNr guifg=%s", palette.red_2))
+        end,
+    })
+
+    vim.api.nvim_create_autocmd("InsertLeave", {
+        callback = function()
+            vim.cmd(string.format("hi CursorLineNr guifg=%s", palette.fg_1))
+        end,
+    })
 end
+
 
 return {
     setup = function()
