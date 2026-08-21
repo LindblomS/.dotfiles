@@ -87,11 +87,11 @@ s("n", "<leader>fld", fzf.lsp_document_diagnostics, { desc = "[F]ind [l]ocal [d]
 s("n", "<leader>fgd", fzf.lsp_workspace_diagnostics, { desc = "[F]ind [g]lobal [d]iagnostics" })
 
 s("n", "<leader>fgwd",
-    function() fzf.lsp_workspace_diagnostics({ severity_only = vim.diagnostic.WARN }) end,
+    function() fzf.lsp_workspace_diagnostics({ severity_only = vim.diagnostic.severity.WARN }) end,
     { desc = "[F]ind [g]lobal [w]arning [d]iagnostics" })
 
 s("n", "<leader>fged",
-    function() fzf.lsp_workspace_diagnostics({ severity_only = vim.diagnostic.ERROR }) end,
+    function() fzf.lsp_workspace_diagnostics({ severity_only = vim.diagnostic.severity.ERROR }) end,
     { desc = "[F]ind [g]lobal [e]rror [d]iagnostics" })
 
 s("n", "<leader>flwd",
