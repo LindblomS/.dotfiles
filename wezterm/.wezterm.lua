@@ -30,8 +30,13 @@ config.keys = {
     },
     {
         key = "w",
-        mods = "CTRL|SHIFT",
+        mods = "CTRL|SHIFT|ALT",
         action = wezterm.action.CloseCurrentPane { confirm = false }
+    },
+    {
+        key = "w",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.DisableDefaultAssignment,
     },
     {
         key = "v",
