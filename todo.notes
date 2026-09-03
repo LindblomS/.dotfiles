@@ -13,3 +13,4 @@ nvim
 - Add keymap for visual selection <leader>fW which works like normal <leader>fW, i.e. uses word
   boundary \bSomeWord\b
 - Implement a fzf-like ui for selecting the yank-register. See :reg 
+- Add <leader>/ to live grep in buffer
