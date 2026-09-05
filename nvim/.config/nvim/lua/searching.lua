@@ -1,7 +1,7 @@
 vim.pack.add({
     {
         src = "https://github.com/ibhagwan/fzf-lua",
-        version = "cebf88881a4fab2c20a2a950269953417af1c3e8",
+        version = "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
     }
 })
 

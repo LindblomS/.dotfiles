@@ -6,24 +6,24 @@
       "version": "'78336bc89ee5365633bcf754d93df01678b5c08f'"
     },
     "fzf-lua": {
-      "rev": "cebf88881a4fab2c20a2a950269953417af1c3e8",
+      "rev": "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
       "src": "https://github.com/ibhagwan/fzf-lua",
-      "version": "'cebf88881a4fab2c20a2a950269953417af1c3e8'"
+      "version": "'05e44d38de0a79c11fba5f7bf8138791b1dbdd1e'"
     },
     "nvim-autopairs": {
-      "rev": "3d02855468f94bf435db41b661b58ec4f48a06b7",
+      "rev": "430522f95fe4fb7c511ec64f8c1a90cc6a66c05c",
       "src": "https://github.com/windwp/nvim-autopairs",
-      "version": "'3d02855468f94bf435db41b661b58ec4f48a06b7'"
+      "version": "'430522f95fe4fb7c511ec64f8c1a90cc6a66c05c'"
     },
     "nvim-surround": {
-      "rev": "caf6f633d4d77a29b6e265b560c5a035d171a913",
+      "rev": "8b47db616ef658b8fc27e61db2896aa2f40134de",
       "src": "https://github.com/kylechui/nvim-surround",
-      "version": "'caf6f633d4d77a29b6e265b560c5a035d171a913'"
+      "version": "'8b47db616ef658b8fc27e61db2896aa2f40134de'"
     },
     "nvim-treesitter": {
-      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "rev": "427e9222363d07c32d6db6169e4049c28d58d141",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
-      "version": "'4916d6592ede8c07973490d9322f187e07dfefac'"
+      "version": "'427e9222363d07c32d6db6169e4049c28d58d141'"
     },
     "nvim-web-devicons": {
       "rev": "4c3a5848ee0b09ecdea73adcd2a689190aeb728c",
@@ -31,9 +31,9 @@
       "version": "'4c3a5848ee0b09ecdea73adcd2a689190aeb728c'"
     },
     "oil.nvim": {
-      "rev": "add50252b5e9147c0a09d36480d418c7e2737472",
+      "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim",
-      "version": "'add50252b5e9147c0a09d36480d418c7e2737472'"
+      "version": "'b73018b75affd13fa38e2fc94ef753b465f770d7'"
     }
   }
 }

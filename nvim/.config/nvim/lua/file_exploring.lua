@@ -1,7 +1,7 @@
 vim.pack.add({
     {
         src = "https://github.com/stevearc/oil.nvim",
-        version = "add50252b5e9147c0a09d36480d418c7e2737472",
+        version = "b73018b75affd13fa38e2fc94ef753b465f770d7",
     }
 })
 

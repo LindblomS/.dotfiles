@@ -1,7 +1,7 @@
 vim.pack.add({
     {
         src = "https://github.com/windwp/nvim-autopairs",
-        version = "3d02855468f94bf435db41b661b58ec4f48a06b7",
+        version = "430522f95fe4fb7c511ec64f8c1a90cc6a66c05c",
     },
     {
         src = "https://github.com/saghen/blink.cmp",

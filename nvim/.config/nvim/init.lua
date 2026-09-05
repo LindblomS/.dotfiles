@@ -1,7 +1,7 @@
 vim.pack.add({
     {
         src = "https://github.com/kylechui/nvim-surround",
-        version = "caf6f633d4d77a29b6e265b560c5a035d171a913",
+        version = "8b47db616ef658b8fc27e61db2896aa2f40134de",
     },
     {
         src = "https://github.com/nvim-tree/nvim-web-devicons",
