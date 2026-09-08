@@ -15,3 +15,4 @@ nvim
 - Implement a fzf-like ui for selecting the yank-register. See :reg 
 - Add <leader>/ to live grep in buffer
 - Investigate whether to remove the built in documentation window from popping up.
+- Implement custom wrap arguments function. Lsp one is always so slow.
