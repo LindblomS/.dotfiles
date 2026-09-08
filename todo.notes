@@ -16,3 +16,4 @@ nvim
 - Add <leader>/ to live grep in buffer
 - Investigate whether to remove the built in documentation window from popping up.
 - Implement custom wrap arguments function. Lsp one is always so slow.
+- Set numberwidth to 0 for harpun buffer.
